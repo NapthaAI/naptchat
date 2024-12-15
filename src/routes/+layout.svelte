@@ -9,6 +9,6 @@
 
 <ModeWatcher />
 
-<main class="flex flex-col min-h-screen dark">
+<main flex="~ col" w="full" class="min-h-screen">
 	{@render children()}
 </main>

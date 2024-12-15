@@ -6,6 +6,7 @@ import svelte from "eslint-plugin-svelte";
 import globals from "globals";
 import { fileURLToPath } from "node:url";
 import stylistic from "@stylistic/eslint-plugin";
+import importPlugin from "eslint-plugin-import";
 import ts from "typescript-eslint";
 const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
 
@@ -19,6 +20,13 @@ export default ts.config(
 
 	{
 		languageOptions: {
+			parserOptions: {
+				// Eslint doesn't supply ecmaVersion in `parser.js` `context.parserOptions`
+				// This is required to avoid ecmaVersion < 2015 error or 'import' / 'export' error
+				ecmaVersion: "latest",
+				sourceType: "module",
+			},
+
 			globals: {
 				...globals.browser,
 				...globals.node,
@@ -28,13 +36,26 @@ export default ts.config(
 
 	{
 		plugins: {
+			import: importPlugin,
 			"@stylistic": stylistic,
 			prettier: prettierPlugin,
 		},
 
+		// settings: {
+		// 	"import/parsers": {
+		// 		espree: [".js", ".ts", ".svelte"],
+		// 	},
+		// 	"import/resolver": {
+		// 		typescript: true,
+		// 		node: true,
+		// 	},
+		// },
+
 		rules: {
+			...importPlugin.configs["recommended"].rules,
 			"prettier/prettier": "error",
 			"no-unused-vars": "off",
+			// "import/no-default-export": ["warn"],
 
 			"@typescript-eslint/no-unused-vars": [
 				"warn",
@@ -59,6 +80,17 @@ export default ts.config(
 			],
 		},
 	},
+
+	// {
+	// 	overrides: [
+	// 		{
+	// 			files: ["./*"],
+	// 			rules: {
+	// 				"import/no-default-export": "off",
+	// 			},
+	// 		},
+	// 	],
+	// },
 
 	{
 		files: ["**/*.svelte"],
