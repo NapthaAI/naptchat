@@ -3,6 +3,6 @@
 		"dbaeumer.vscode-eslint",
 		"streetsidesoftware.code-spell-checker",
 		"svelte.svelte-vscode",
-		"bradlc.vscode-tailwindcss"
+		"antfu.unocss"
 	]
 }

@@ -11,8 +11,11 @@
 		"editor.defaultFormatter": "svelte.svelte-vscode"
 	},
 	"cSpell.words": [
+		"attributify",
+		"kubb",
 		"Napchat",
 		"Naptha",
-		"surrealdb"
+		"surrealdb",
+		"unocss"
 	]
 }
