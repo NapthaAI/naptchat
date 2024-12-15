@@ -64,7 +64,7 @@
 							on:click={() => handleSort(column.key)}
 							class={cn(
 								"inline-flex h-12 items-center justify-center rounded-lg",
-								"px-[21px] text-[15px] font-semibold bg-primary",
+								"px-5 text-lg font-semibold bg-primary text-primary-foreground",
 								"hover:bg-dark/95 active:scale-98 active:transition-all",
 							)}
 						>
