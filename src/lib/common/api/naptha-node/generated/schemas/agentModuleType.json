@@ -1,0 +1,1 @@
+{"type":"string","enum":["package","docker"],"title":"AgentModuleType","x-readme-ref-name":"AgentModuleType"}

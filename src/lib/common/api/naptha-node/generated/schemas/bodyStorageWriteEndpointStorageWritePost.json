@@ -1,0 +1,1 @@
+{"properties":{"file":{"type":"string","format":"binary","title":"File"}},"type":"object","required":["file"],"title":"Body_storage_write_endpoint_storage_write_post","x-readme-ref-name":"Body_storage_write_endpoint_storage_write_post"}

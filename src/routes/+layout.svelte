@@ -1,6 +1,14 @@
 <script lang="ts">
+	import { ModeWatcher } from "mode-watcher";
+	import "uno.css";
+	import "@unocss/reset/tailwind-compat.css";
 	import "../app.css";
-	let { children } = $props();
+
+	let { children, data } = $props();
 </script>
 
-{@render children()}
+<ModeWatcher />
+
+<main flex="~ col" w="full" class="min-h-screen">
+	{@render children()}
+</main>
