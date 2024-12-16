@@ -13,13 +13,13 @@
 		columns,
 		initialSortKey = "id",
 		initialSortDirection = "asc" as SortDirection,
-		rootClass,
+		class: customClass,
 	} = $props<{
 		data: Record<string, any>[];
 		columns: Column[];
 		initialSortKey?: string;
 		initialSortDirection?: SortDirection;
-		rootClass?: string;
+		class?: string;
 	}>();
 
 	// Sorting state
@@ -55,7 +55,7 @@
 	}
 </script>
 
-<div overflow="x-auto" rounded="~" border="border" class={rootClass}>
+<div overflow="x-auto" rounded="lg" border="border" pb="4" class={customClass}>
 	<table w="full">
 		<thead>
 			<tr>
@@ -68,6 +68,7 @@
 						font="medium"
 					>
 						<Button
+							borderless
 							onClick={() => handleSort(column.key)}
 							class="bg-secondary text-primary-foreground hover:bg-dark/95"
 						>

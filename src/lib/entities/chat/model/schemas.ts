@@ -1,12 +1,12 @@
 import type { FromSchema } from "$lib/common/types";
 import { number, object, string } from "zod";
 
-export const topicSchema = object({
+export const chatSchema = object({
 	id: number(),
-	name: string(),
+	topic: string(),
 	groupSize: number(),
 	maxRounds: number(),
 	subRounds: number(),
 });
 
-export type Topic = FromSchema<typeof topicSchema>;
+export type Chat = FromSchema<typeof chatSchema>;

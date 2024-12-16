@@ -3,24 +3,32 @@
 	import { cn } from "$lib/common/ui/utils";
 
 	let {
-		class: className,
+		borderless = false,
+		disabled,
 		onClick,
+		class: customClass,
 		children,
 	} = $props<{
-		class?: string;
+		borderless?: boolean;
+		disabled?: boolean;
 		onClick?: () => void;
+		class?: string;
 		children?: any;
 	}>();
 </script>
 
 <Button.Root
-	class={cn(
-		"inline-flex h-12 items-center justify-center rounded border-foreground",
-		"px-5 text-lg font-semibold bg-background text-foreground hover:bg-white/10",
-		"active:scale-98 active:transition-all",
-		className,
-	)}
+	bind:disabled
 	on:click={onClick}
+	class={cn(
+		"inline-flex h-12 items-center justify-center border-2 rounded-lg border-foreground",
+		"px-5 text-lg font-semibold bg-background text-foreground",
+		"disabled:cursor-not-allowed disabled:bg-op-50 disabled:border-op-50",
+		"disabled:text-muted-foreground active:scale-98 active:transition-all",
+		{ "hover:bg-white/10": !disabled },
+		{ "border-0": borderless },
+		customClass,
+	)}
 >
 	{@render children()}
 </Button.Root>
