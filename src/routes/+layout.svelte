@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { ModeWatcher } from "mode-watcher";
-	import "uno.css";
 	import "@unocss/reset/tailwind-compat.css";
+	import "uno.css";
 	import "../app.css";
-	import Button from "$lib/common/ui/components/button.svelte";
+	import { ModeWatcher } from "mode-watcher";
+	import { Button } from "$common/ui/components";
 
-	let { children, data } = $props();
+	let { children, data: _ } = $props();
 </script>
 
 <ModeWatcher />
@@ -20,7 +20,7 @@
 	p="6"
 	gap="4"
 >
-	<Button borderless><a href="/">🏠 Discover</a></Button>
+	<Button borderless href="/">🏠 Discover</Button>
 
 	<div flex="~ wrap" gap="4">
 		<Button class="bg-secondary text-secondary-foreground">💬 New Chat</Button>

@@ -16,6 +16,8 @@ const config = {
 		},
 
 		alias: {
+			"$common/*": "./src/lib/common/*",
+			"$entities/*": "./src/lib/entities/*",
 			$lib: "./src/lib",
 			"$lib/*": "./src/lib/*",
 		},

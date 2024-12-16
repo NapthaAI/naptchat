@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Table from "$lib/common/ui/components/table.svelte";
-	import { chatsTableColumns } from "$lib/entities/chat";
+	import { Table } from "$common/ui/components";
+	import { ChatLink, chatsTableColumns, type Chat } from "$entities/chat";
 	import type { PageData } from "./$types";
 
 	const { data }: { data: PageData } = $props();
@@ -46,6 +46,14 @@
 			<p text="muted-foreground lg" font="400">Group Chats -- {filteredChats.length} Total</p>
 		</div>
 
-		<Table data={filteredChats} columns={chatsTableColumns} class="bg-dark/10" />
+		{#snippet tableCell({ item, key }: { item: Chat; key: keyof Chat })}
+			{#if key === "topic"}
+				<ChatLink {...item} />
+			{:else}
+				{item[key]}
+			{/if}
+		{/snippet}
+
+		<Table data={filteredChats} columns={chatsTableColumns} cell={tableCell} class="bg-dark/10" />
 	</section>
 </div>
