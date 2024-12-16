@@ -20,5 +20,6 @@
 		"Naptha",
 		"surrealdb",
 		"unocss"
-	]
+	],
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,0 +1,1 @@
+{"properties":{"config_name":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Config Name","default":"orchestrator_config"},"max_rounds":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Max Rounds","default":5}},"type":"object","title":"OrchestratorConfig","x-readme-ref-name":"OrchestratorConfig"}

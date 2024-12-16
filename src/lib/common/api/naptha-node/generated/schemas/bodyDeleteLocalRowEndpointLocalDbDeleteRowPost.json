@@ -1,0 +1,1 @@
+{"properties":{"table_name":{"type":"string","title":"Table Name"},"condition":{"type":"object","title":"Condition"}},"type":"object","required":["table_name","condition"],"title":"Body_delete_local_row_endpoint_local_db_delete_row_post","x-readme-ref-name":"Body_delete_local_row_endpoint_local_db_delete_row_post"}

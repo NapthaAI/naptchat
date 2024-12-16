@@ -1,0 +1,1 @@
+{"properties":{"table_name":{"type":"string","title":"Table Name"},"schema":{"additionalProperties":{"type":"object"},"type":"object","title":"Schema"}},"type":"object","required":["table_name","schema"],"title":"Body_create_local_table_endpoint_local_db_create_table_post","x-readme-ref-name":"Body_create_local_table_endpoint_local_db_create_table_post"}

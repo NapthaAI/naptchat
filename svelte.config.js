@@ -14,6 +14,13 @@ const config = {
 		env: {
 			publicPrefix: "NAPTHA_",
 		},
+
+		alias: {
+			$lib: "./src/lib",
+			"$lib/*": "./src/lib/*",
+			"$common/*": "./src/lib/common/*",
+			"$entities/*": "./src/lib/entities/*",
+		},
 	},
 
 	vitePlugin: {

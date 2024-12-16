@@ -27,6 +27,8 @@
 		"@unocss/core": "^0.65.1",
 		"@unocss/extractor-svelte": "^0.65.1",
 		"@unocss/preset-attributify": "^0.65.1",
+		"ajv": "^8.17.1",
+		"ajv-draft-04": "^1.0.0",
 		"clsx": "^2.1.1",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -47,6 +49,7 @@
 	},
 	"dependencies": {
 		"@unocss/reset": "^0.65.1",
+		"axios": "^1.7.9",
 		"bits-ui": "^0.21.16",
 		"mode-watcher": "^0.5.0",
 		"surrealdb": "^1.1.0",

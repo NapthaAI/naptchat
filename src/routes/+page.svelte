@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { topicsTableColumns } from "$lib/entities/topic";
+	import { topicsTableColumns } from "$entities/topic";
 	import type { PageData } from "./$types";
-	import { Table, Button } from "$lib/common/ui/components";
+	import { Table, Button } from "$common/ui/components";
 
-	let { data }: { data: PageData } = $props();
+	const { data }: { data: PageData } = $props();
 
 	let searchTerm = $state("");
 
-	// Filter topics based on search query
-	let filteredTopics = $derived(
+	const filteredTopics = $derived(
 		searchTerm
 			? data.topics.filter((topic) => topic.name.toLowerCase().includes(searchTerm.toLowerCase()))
 			: data.topics,

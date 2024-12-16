@@ -52,7 +52,6 @@ export default ts.config(
 		// },
 
 		rules: {
-			...importPlugin.configs["recommended"].rules,
 			"prettier/prettier": "error",
 			"no-unused-vars": "off",
 			// "import/no-default-export": ["warn"],
