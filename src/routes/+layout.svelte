@@ -3,7 +3,7 @@
 	import "uno.css";
 	import "@unocss/reset/tailwind-compat.css";
 	import "../app.css";
-	import { Button } from "$lib/common/ui/components";
+	import Button from "$lib/common/ui/components/button.svelte";
 
 	let { children, data } = $props();
 </script>

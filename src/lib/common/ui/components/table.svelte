@@ -14,12 +14,14 @@
 		initialSortKey = "id",
 		initialSortDirection = "asc" as SortDirection,
 		class: customClass,
+		rowSlot = undefined,
 	} = $props<{
 		data: Record<string, any>[];
 		columns: Column[];
 		initialSortKey?: string;
 		initialSortDirection?: SortDirection;
 		class?: string;
+		rowSlot?: (props: { item: Record<string, any>; columns: Column[] }) => any;
 	}>();
 
 	// Sorting state
@@ -87,11 +89,15 @@
 
 		<tbody>
 			{#each sortedItems as item (item.id)}
-				<tr bg="hover:muted/50" transition="colors">
-					{#each columns as column}
-						<td p="x-9 y-3" border="b border">{item[column.key]}</td>
-					{/each}
-				</tr>
+				{#if rowSlot}
+					{@render rowSlot({ item, columns })}
+				{:else}
+					<tr bg="hover:muted/50" transition="colors">
+						{#each columns as column}
+							<td p="x-9 y-3" border="b border">{item[column.key]}</td>
+						{/each}
+					</tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>

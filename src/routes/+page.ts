@@ -1,4 +1,4 @@
-import { napthaNodeClient } from "$common/api/naptha-node";
+import { napthaNodeClient } from "$lib/common/api/naptha-node";
 import { getChats } from "$lib/entities/chat";
 import type { PageLoad } from "./$types";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { chatsTableColumns } from "$entities/chat";
+	import Table from "$lib/common/ui/components/table.svelte";
+	import { chatsTableColumns } from "$lib/entities/chat";
 	import type { PageData } from "./$types";
-	import { Table } from "$common/ui/components";
 
 	const { data }: { data: PageData } = $props();
 
@@ -29,6 +29,7 @@
 			<h1 text="3xl" font="bold">Napchat</h1>
 
 			<input
+				bind:value={chatSearchTerm}
 				type="text"
 				placeholder="Search Chats"
 				bg="transparent"
@@ -36,7 +37,6 @@
 				p="x-4 y-2"
 				w="full"
 				class="placeholder:text-gray-400 min-w-96 max-w-120"
-				bind:value={chatSearchTerm}
 			/>
 		</div>
 	</header>
