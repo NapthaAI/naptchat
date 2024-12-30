@@ -1,4 +1,4 @@
-# Naptha AI Napchat
+# Naptchat
 
 ## Development
 

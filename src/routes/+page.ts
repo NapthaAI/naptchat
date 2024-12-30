@@ -1,15 +1,20 @@
-import { napthaNodeClient } from "$common/api/naptha-node";
-import { getTopics } from "$entities/topic";
+import { napthaNodeClient } from "$lib/common/api/naptha-node";
+import { getChats } from "$lib/entities/chat";
 import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({ params: _ }) => {
-	const topicsResponse = await getTopics();
+	const chatsResponse = await getChats();
 
-	napthaNodeClient.orchestratorCheck().then((response) => {
-		console.log(response);
-	});
+	// napthaNodeClient
+	// 	.orchestratorCheck()
+	// 	.then((response) => {
+	// 		console.log(response);
+	// 	})
+	// 	.catch((error) => {
+	// 		console.error(error.message);
+	// 	});
 
 	return {
-		topics: topicsResponse,
+		chats: chatsResponse,
 	};
 };

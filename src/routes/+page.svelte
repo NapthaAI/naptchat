@@ -1,57 +1,59 @@
 <script lang="ts">
-	import { topicsTableColumns } from "$entities/topic";
+	import { Table } from "$common/ui/components";
+	import { ChatLink, chatsTableColumns, type Chat } from "$entities/chat";
 	import type { PageData } from "./$types";
-	import { Table, Button } from "$common/ui/components";
 
 	const { data }: { data: PageData } = $props();
 
-	let searchTerm = $state("");
+	let chatSearchTerm = $state("");
 
-	const filteredTopics = $derived(
-		searchTerm
-			? data.topics.filter((topic) => topic.name.toLowerCase().includes(searchTerm.toLowerCase()))
-			: data.topics,
+	const filteredChats = $derived(
+		chatSearchTerm
+			? data.chats.filter(({ topic }) => topic.toLowerCase().includes(chatSearchTerm.toLowerCase()))
+			: data.chats,
 	);
 </script>
 
-<section flex="~ col" items="center" gap="8">
+<div flex="~ col" items="center" gap="8">
 	<header
 		flex="~ row"
 		w="full"
 		items="start"
-		justify="between"
+		justify="center"
 		bg="black"
 		text="white"
 		p="6"
 		gap="4"
 	>
-		<div flex="~ col" gap="2">
-			<h2 text="2xl" font="bold">Discover</h2>
-			<p text="muted-foreground lg" font="400">Group Chats -- {filteredTopics.length} Total</p>
-		</div>
-
 		<div flex="~ col" gap="4" items="center">
-			<h1 text="3xl" font="bold">Napchat</h1>
+			<h1 text="3xl" font="bold">Naptchat</h1>
 
-			<div class="w-96">
-				<input
-					type="text"
-					placeholder="Search Topics"
-					bg="transparent"
-					border="2 white rounded"
-					p="x-4 y-2"
-					w="full"
-					class="placeholder:text-gray-400"
-					bind:value={searchTerm}
-				/>
-			</div>
-		</div>
-
-		<div flex="~ wrap" gap="4">
-			<Button class="border-2">Create</Button>
-			<Button class="border-2">Sign Up</Button>
+			<input
+				bind:value={chatSearchTerm}
+				type="text"
+				placeholder="Search Chats"
+				bg="transparent"
+				border="2 white rounded-lg"
+				p="x-4 y-2"
+				w="full"
+				class="placeholder:text-gray-400 min-w-96 max-w-120"
+			/>
 		</div>
 	</header>
 
-	<Table data={filteredTopics} columns={topicsTableColumns} rootClass="max-w-6xl" />
-</section>
+	<section flex="~ col" w="full" gap="4" class="max-w-6xl">
+		<div flex="~ col" gap="2">
+			<p text="muted-foreground lg" font="400">Group Chats -- {filteredChats.length} Total</p>
+		</div>
+
+		{#snippet tableCell({ item, key }: { item: Chat; key: keyof Chat })}
+			{#if key === "topic"}
+				<ChatLink {...item} />
+			{:else}
+				{item[key]}
+			{/if}
+		{/snippet}
+
+		<Table data={filteredChats} columns={chatsTableColumns} cell={tableCell} class="bg-dark/10" />
+	</section>
+</div>

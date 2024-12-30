@@ -1,4 +1,5 @@
-<script lang="ts">
+<script lang="ts" generics="Item">
+	import type { Snippet } from "svelte";
 	import Button from "./button.svelte";
 
 	type Column = {
@@ -13,13 +14,15 @@
 		columns,
 		initialSortKey = "id",
 		initialSortDirection = "asc" as SortDirection,
-		rootClass,
+		class: customClass,
+		cell,
 	} = $props<{
-		data: Record<string, any>[];
+		data: Item[];
 		columns: Column[];
 		initialSortKey?: string;
 		initialSortDirection?: SortDirection;
-		rootClass?: string;
+		class?: string;
+		cell?: Snippet<[{ item: Item; key: keyof Item }]>;
 	}>();
 
 	// Sorting state
@@ -55,7 +58,7 @@
 	}
 </script>
 
-<div overflow="x-auto" rounded="~" border="border" class={rootClass}>
+<div overflow="x-auto" rounded="lg" border="border" pb="4" class={customClass}>
 	<table w="full">
 		<thead>
 			<tr>
@@ -68,6 +71,7 @@
 						font="medium"
 					>
 						<Button
+							borderless
 							onClick={() => handleSort(column.key)}
 							class="bg-secondary text-primary-foreground hover:bg-dark/95"
 						>
@@ -88,7 +92,13 @@
 			{#each sortedItems as item (item.id)}
 				<tr bg="hover:muted/50" transition="colors">
 					{#each columns as column}
-						<td p="x-9 y-3" border="b border">{item[column.key]}</td>
+						<td p="x-9 y-3" border="b border">
+							{#if cell}
+								{@render cell({ item, key: column.key })}
+							{:else}
+								{item[column.key]}
+							{/if}
+						</td>
 					{/each}
 				</tr>
 			{/each}

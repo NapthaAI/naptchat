@@ -97,5 +97,9 @@ export default defineConfig({
 	},
 
 	// Shortcuts for common utility combinations
-	shortcuts: [["container", "mx-auto px-8 w-full max-w-full 2xl:max-w-[1400px]"]],
+	shortcuts: [
+		["container", "mx-auto px-8 w-full max-w-full 2xl:max-w-[1400px]"],
+		["shadow-mini", "shadow-[0_1px_2px_0_rgb(0_0_0_/_0.05)]"],
+		["shadow-mini-inset", "shadow-[inset_0_1px_2px_0_rgb(0_0_0_/_0.05)]"],
+	],
 });
