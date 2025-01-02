@@ -7,15 +7,22 @@
 	import { fade } from "svelte/transition";
 
 	let { children, data } = $props();
+	let userId = $state<string | null>(null);
 	let isAuthModalOpen = $state(false);
 	let copySuccess = $state(false);
 	let newUserId = $state("");
 
-	$effect(() => {
-		if (data.userId) {
-			isAuthModalOpen = false;
-		}
-	});
+	$effect(() =>
+		data.userId.subscribe((id) => {
+			if (id === null) {
+				userId = null;
+				isAuthModalOpen = true;
+			} else {
+				userId = id;
+			}
+			console.log("userId is", id);
+		}),
+	);
 
 	async function handleSignUp() {
 		try {
@@ -27,21 +34,29 @@
 
 	function handleSignIn() {
 		data.actions.signIn(newUserId);
+		isAuthModalOpen = false;
 	}
 
 	function handleSignOut() {
 		data.actions.signOut();
 	}
 
-	async function copyToClipboard() {
-		try {
-			await navigator.clipboard.writeText(newUserId);
-			copySuccess = true;
-			setTimeout(() => {
-				copySuccess = false;
-			}, 3000);
-		} catch (error) {
-			console.error("Failed to copy:", error);
+	function copyToClipboard() {
+		if (navigator.clipboard) {
+			void navigator.clipboard
+				.writeText(newUserId)
+				.then(() => {
+					copySuccess = true;
+				})
+				.catch((error) => {
+					copySuccess = false;
+					console.error("Failed to copy:", error);
+				})
+				.finally(() =>
+					setTimeout(() => {
+						copySuccess = false;
+					}, 3000),
+				);
 		}
 	}
 </script>
@@ -63,8 +78,8 @@
 	<div flex="~ wrap" gap="4" items="center">
 		<Button class="bg-secondary text-secondary-foreground">💬 New Chat</Button>
 
-		{#if data.userId}
-			<span class="text-sm opacity-75">@{data.userId}</span>
+		{#if userId}
+			<span class="text-sm opacity-75">@{userId}</span>
 			<Button onClick={handleSignOut}>Sign Out</Button>
 		{:else}
 			<Button onClick={() => (isAuthModalOpen = true)}>Sign Up</Button>

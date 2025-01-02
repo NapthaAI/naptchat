@@ -1,44 +1,46 @@
-import { userRegisterEndpointUserRegisterPost } from "$lib/common/api/naptha-node/generated";
-import { env } from "$env/dynamic/public";
 import type { LayoutLoad } from "./$types";
-import { writable, type Writable } from "svelte/store";
+import { browser } from "$app/environment";
+import { writable } from "svelte/store";
+import { napthaNodeClient, type User } from "$common/api/naptha-node";
 
 export const load: LayoutLoad = () => {
-	const userId: Writable<string | undefined> = writable<string | undefined>(
-		localStorage !== undefined ? (localStorage.getItem("userId") ?? undefined) : undefined,
+	const session = writable<User | null>(
+		browser ? (localStorage.getItem("user") as User | null) : null,
 	);
 
-	userId.subscribe((id) => {
-		if (typeof localStorage !== "undefined") {
-			if (id) {
-				localStorage.setItem("userId", id);
+	session.subscribe((user) => {
+		if (browser) {
+			if (user !== null) {
+				const persistedId = localStorage.getItem("user:id");
+				const persistedPublicKey = localStorage.getItem("user:public_key");
+
+				if (user.id !== persistedId || user.public_key !== persistedPublicKey) {
+					localStorage.setItem("user:id", user.id);
+					localStorage.setItem("user:public_key", user.public_key);
+				}
 			} else {
-				localStorage.removeItem("userId");
+				localStorage.removeItem("user:id");
+				localStorage.removeItem("user:public_key");
 			}
 		}
 	});
 
 	return {
-		userId,
+		session,
 
 		actions: {
-			async signUp() {
-				const response = await userRegisterEndpointUserRegisterPost(
-					{ public_key: crypto.randomUUID() },
-					{ baseURL: env.NAPTHA_NODE_URL },
-				);
-
-				return response.data.id;
+			signUp() {
+				napthaNodeClient.userRegister().then(({ data }) => {
+					session.set(data);
+				});
 			},
 
 			signIn(id: string) {
 				userId.set(id);
-				return id;
 			},
 
 			signOut() {
-				userId.set(undefined);
-				return undefined;
+				userId.set(null);
 			},
 		},
 	};
