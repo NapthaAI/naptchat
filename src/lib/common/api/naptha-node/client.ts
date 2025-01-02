@@ -1,14 +1,21 @@
 import { env } from "$env/dynamic/public";
 import {
 	orchestratorCheckEndpointOrchestratorCheckPost,
+	userCheckEndpointUserCheckPost,
 	userRegisterEndpointUserRegisterPost,
 } from "./generated/index.ts";
 import { v4 as uuidv4 } from "uuid";
 import type { User } from "./types";
 import type { ResponseConfig } from "@kubb/plugin-client/clients/axios";
+import type { ByPublicKey } from "$common/types";
 
 export const userRegister = (): Promise<ResponseConfig<User>> =>
 	userRegisterEndpointUserRegisterPost({ public_key: uuidv4() }, { baseURL: env.NAPTHA_NODE_URL });
+
+export const userCheck = ({
+	publicKey,
+}: ByPublicKey): Promise<ResponseConfig<User & { is_registered: boolean }>> =>
+	userCheckEndpointUserCheckPost({ public_key: publicKey }, { baseURL: env.NAPTHA_NODE_URL });
 
 export const orchestratorCheck = () =>
 	orchestratorCheckEndpointOrchestratorCheckPost(

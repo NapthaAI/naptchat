@@ -5,46 +5,52 @@
 	import { ModeWatcher } from "mode-watcher";
 	import { Button } from "$common/ui/components";
 	import { fade } from "svelte/transition";
+	import type { User } from "$common/api/naptha-node";
 
 	let { children, data } = $props();
-	let userId = $state<string | null>(null);
+	let authenticatedUser = $state<User | null>(null);
 	let isAuthModalOpen = $state(false);
 	let copySuccess = $state(false);
-	let newUserId = $state("");
+	let publicKeyFieldValue = $state<string | undefined>();
 
-	$effect(() =>
-		data.userId.subscribe((id) => {
-			if (id === null) {
-				userId = null;
+	$effect(() => {
+		return data.session.subscribe((sessionData) => {
+			if (sessionData === null) {
+				authenticatedUser = null;
 				isAuthModalOpen = true;
 			} else {
-				userId = id;
+				if (sessionData.public_key !== authenticatedUser?.public_key) {
+					authenticatedUser = sessionData;
+				}
+
+				if (publicKeyFieldValue === undefined) {
+					publicKeyFieldValue = sessionData.public_key;
+				}
 			}
-			console.log("userId is", id);
-		}),
-	);
 
-	async function handleSignUp() {
-		try {
-			newUserId = await data.actions.signUp();
-		} catch (error) {
-			console.error("Failed to sign up:", error);
+			console.log("authenticatedUser is", authenticatedUser);
+		});
+	});
+
+	const handleSignUp = () => {
+		data.actions.signUp();
+	};
+
+	const handleSignIn = () => {
+		if (publicKeyFieldValue !== undefined) {
+			data.actions.signIn({ publicKey: publicKeyFieldValue });
+			isAuthModalOpen = false;
 		}
-	}
+	};
 
-	function handleSignIn() {
-		data.actions.signIn(newUserId);
-		isAuthModalOpen = false;
-	}
-
-	function handleSignOut() {
+	const handleSignOut = () => {
 		data.actions.signOut();
-	}
+	};
 
 	function copyToClipboard() {
-		if (navigator.clipboard) {
+		if (navigator.clipboard && publicKeyFieldValue) {
 			void navigator.clipboard
-				.writeText(newUserId)
+				.writeText(publicKeyFieldValue)
 				.then(() => {
 					copySuccess = true;
 				})
@@ -78,8 +84,8 @@
 	<div flex="~ wrap" gap="4" items="center">
 		<Button class="bg-secondary text-secondary-foreground">💬 New Chat</Button>
 
-		{#if userId}
-			<span class="text-sm opacity-75">@{userId}</span>
+		{#if authenticatedUser?.id}
+			<span class="text-sm opacity-75">@{authenticatedUser.id}</span>
 			<Button onClick={handleSignOut}>Sign Out</Button>
 		{:else}
 			<Button onClick={() => (isAuthModalOpen = true)}>Sign Up</Button>
@@ -97,11 +103,11 @@
 		<div class="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
 			<h2 class="text-xl font-bold mb-4">Authentication</h2>
 
-			{#if newUserId}
+			{#if authenticatedUser}
 				<div class="space-y-4">
 					<div class="flex items-center gap-2">
-						<span class="text-sm opacity-75">Your User ID:</span>
-						<code class="bg-muted p-1 rounded text-sm">{newUserId}</code>
+						<span class="text-sm opacity-75">Your public key:</span>
+						<input value={publicKeyFieldValue} class="bg-muted p-1 rounded text-sm" />
 
 						<Button class="ml-auto" onClick={copyToClipboard} disabled={copySuccess}>
 							{#if copySuccess}
@@ -113,7 +119,7 @@
 					</div>
 
 					<Button class="w-full" onClick={handleSignIn}>
-						Sign In as @{newUserId}
+						Sign In as @{authenticatedUser.id}
 					</Button>
 				</div>
 			{:else}

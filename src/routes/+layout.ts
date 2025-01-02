@@ -2,25 +2,27 @@ import type { LayoutLoad } from "./$types";
 import { browser } from "$app/environment";
 import { writable } from "svelte/store";
 import { napthaNodeClient, type User } from "$common/api/naptha-node";
+import type { ByPublicKey } from "$common/types";
 
 export const load: LayoutLoad = () => {
-	const session = writable<User | null>(
-		browser ? (localStorage.getItem("user") as User | null) : null,
-	);
+	const session = writable<User | null>(null);
 
-	session.subscribe((user) => {
+	session.subscribe((sessionData) => {
 		if (browser) {
-			if (user !== null) {
-				const persistedId = localStorage.getItem("user:id");
-				const persistedPublicKey = localStorage.getItem("user:public_key");
+			const persistedId = localStorage.getItem("user:id");
+			const persistedPublicKey = localStorage.getItem("user:public_key");
 
-				if (user.id !== persistedId || user.public_key !== persistedPublicKey) {
-					localStorage.setItem("user:id", user.id);
-					localStorage.setItem("user:public_key", user.public_key);
-				}
-			} else {
-				localStorage.removeItem("user:id");
-				localStorage.removeItem("user:public_key");
+			if (sessionData === null && persistedId !== null && persistedPublicKey !== null) {
+				localStorage.setItem("user:id", persistedId);
+				localStorage.setItem("user:public_key", persistedPublicKey);
+			}
+
+			if (
+				sessionData !== null &&
+				(sessionData.id !== persistedId || sessionData.public_key !== persistedPublicKey)
+			) {
+				localStorage.setItem("user:id", sessionData.id);
+				localStorage.setItem("user:public_key", sessionData.public_key);
 			}
 		}
 	});
@@ -30,17 +32,29 @@ export const load: LayoutLoad = () => {
 
 		actions: {
 			signUp() {
-				napthaNodeClient.userRegister().then(({ data }) => {
-					session.set(data);
-				});
+				void napthaNodeClient
+					.userRegister()
+					.then(({ data }) => {
+						session.set(data);
+					})
+					.catch(console.error);
 			},
 
-			signIn(id: string) {
-				userId.set(id);
+			signIn({ publicKey }: ByPublicKey) {
+				void napthaNodeClient
+					.userCheck({ publicKey })
+					.then(({ data: { is_registered, ...sessionData } }) => {
+						console.log(is_registered);
+
+						if (is_registered) {
+							session.set(sessionData);
+						}
+					})
+					.catch(console.error);
 			},
 
 			signOut() {
-				userId.set(null);
+				session.set(null);
 			},
 		},
 	};
