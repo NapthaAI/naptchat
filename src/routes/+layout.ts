@@ -13,8 +13,10 @@ export const load: LayoutLoad = () => {
 			const persistedPublicKey = localStorage.getItem("user:public_key");
 
 			if (sessionData === null && persistedId !== null && persistedPublicKey !== null) {
-				localStorage.setItem("user:id", persistedId);
-				localStorage.setItem("user:public_key", persistedPublicKey);
+				session.set({
+					id: persistedId,
+					public_key: persistedPublicKey,
+				});
 			}
 
 			if (
@@ -44,8 +46,6 @@ export const load: LayoutLoad = () => {
 				void napthaNodeClient
 					.userCheck({ publicKey })
 					.then(({ data: { is_registered, ...sessionData } }) => {
-						console.log(is_registered);
-
 						if (is_registered) {
 							session.set(sessionData);
 						}
