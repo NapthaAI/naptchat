@@ -51,6 +51,7 @@
 		"@unocss/reset": "^0.65.1",
 		"axios": "^1.7.9",
 		"bits-ui": "^0.21.16",
+		"dark-runes": "^0.1.6",
 		"mode-watcher": "^0.5.0",
 		"surrealdb": "^1.1.0",
 		"uuid": "^11.0.3",

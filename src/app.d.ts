@@ -1,3 +1,5 @@
+/// <reference types="dark-runes" />
+
 import type { AttributifyAttributes } from "@unocss/preset-attributify";
 
 // See https://svelte.dev/docs/kit/types#app.d.ts

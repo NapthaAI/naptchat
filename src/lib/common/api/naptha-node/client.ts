@@ -17,21 +17,22 @@ export const userCheck = ({
 }: ByPublicKey): Promise<ResponseConfig<User & { is_registered: boolean }>> =>
 	userCheckEndpointUserCheckPost({ public_key: publicKey }, { baseURL: env.NAPTHA_NODE_URL });
 
-export const orchestratorCheck = () =>
+export const multiagentChatOrchestratorCheck = ({ publicKey }: ByPublicKey) =>
 	orchestratorCheckEndpointOrchestratorCheckPost(
 		{
-			// What consumer ID do I use?
-			consumer_id: "unknown",
+			consumer_id: publicKey,
 
 			orchestrator_deployment: {
-				name: "orchestrator_1",
+				name: "multiagent_chat",
 				module: { name: "multiagent_chat" },
 				orchestrator_node_url: "http://localhost:7001",
 
-				orchestrator_config: {
-					config_name: "orchestrator_config_1",
-					max_rounds: 10,
-				},
+				// agent_deployments: [
+				// 	{ worker_node_url: "ws://localhost:7002" },
+				// 	{ worker_node_url: "ws://localhost:7002" },
+				// ],
+
+				// environment_deployments: [{ environment_node_url: "http://localhost:7001" }],
 			},
 
 			// Is this really mandatory?

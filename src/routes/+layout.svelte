@@ -8,6 +8,10 @@
 	import type { User } from "$common/api/naptha-node";
 
 	let { children, data } = $props();
+	const test = $wrap({ status: data.orchestratorStatus });
+
+	$inspect(test.status);
+
 	let authenticatedUser = $state<User | null>(null);
 	let isAuthModalOpen = $state(false);
 	let copySuccess = $state(false);
@@ -45,6 +49,7 @@
 
 	const handleSignOut = () => {
 		data.actions.signOut();
+		authenticatedUser = null;
 	};
 
 	function copyToClipboard() {
