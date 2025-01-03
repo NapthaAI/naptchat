@@ -26,17 +26,14 @@ export const multiagentChatOrchestratorCheck = ({ publicKey }: ByPublicKey) =>
 				name: "multiagent_chat",
 				module: { name: "multiagent_chat" },
 				orchestrator_node_url: "http://localhost:7001",
-
-				// agent_deployments: [
-				// 	{ worker_node_url: "ws://localhost:7002" },
-				// 	{ worker_node_url: "ws://localhost:7002" },
-				// ],
-
-				// environment_deployments: [{ environment_node_url: "http://localhost:7001" }],
 			},
 
-			// Is this really mandatory?
-			agent_deployments: [],
+			environment_deployments: [{ environment_node_url: "http://localhost:7001" }],
+
+			agent_deployments: [
+				{ worker_node_url: "ws://localhost:7002" },
+				{ worker_node_url: "ws://localhost:7002" },
+			],
 		},
 
 		{ baseURL: env.NAPTHA_NODE_URL },
