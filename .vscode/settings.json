@@ -18,10 +18,11 @@
 	"cSpell.words": [
 		"attributify",
 		"kubb",
-		"Napchat",
+		"Naptchat",
 		"Naptha",
 		"surrealdb",
-		"unocss"
+		"unocss",
+		"uuidv"
 	],
 	"typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -26,7 +26,7 @@
 		gap="4"
 	>
 		<div flex="~ col" gap="4" items="center">
-			<h1 text="3xl" font="bold">Napchat</h1>
+			<h1 text="3xl" font="bold">Naptchat</h1>
 
 			<input
 				bind:value={chatSearchTerm}
