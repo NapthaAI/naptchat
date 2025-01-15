@@ -29,7 +29,7 @@
 				}
 			}
 
-			console.log("authenticatedUser is", authenticatedUser);
+			console.log("SESSION DATA", authenticatedUser);
 		});
 	});
 
