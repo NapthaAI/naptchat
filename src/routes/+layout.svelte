@@ -93,7 +93,7 @@
 			<span class="text-sm opacity-75">@{authenticatedUser.id}</span>
 			<Button onClick={handleSignOut}>Sign Out</Button>
 		{:else}
-			<Button onClick={() => (isAuthModalOpen = true)}>Sign Up</Button>
+			<Button onClick={() => (isAuthModalOpen = true)}>Sign In</Button>
 		{/if}
 	</div>
 </nav>
@@ -127,9 +127,9 @@
 						Sign In as @{authenticatedUser.id}
 					</Button>
 				</div>
-			{:else}
-				<Button class="w-full" onClick={handleSignUp}>Sign Up</Button>
 			{/if}
+
+			<Button class="w-full" onClick={handleSignUp}>Sign Up as new user</Button>
 		</div>
 	</dialog>
 {/if}
