@@ -35,25 +35,44 @@ export const load: LayoutLoad = async () => {
 
 	session.subscribe((sessionData) => {
 		if (sessionData !== null) {
-			const storedPrivKey = browser ? localStorage.getItem("user:private_key") : null;
+			// Try to get stored private key from IndexedDB
+			void new Promise<IDBDatabase>((resolve, reject) => {
+				const request = indexedDB.open("auth", 1);
+				request.onerror = () => reject(request.error);
+				request.onsuccess = () => resolve(request.result);
 
-			if (storedPrivKey) {
-				const privKeyBytes = new Uint8Array(
-					storedPrivKey.match(/.{1,2}/g)?.map((byte) => parseInt(byte, 16)) ?? [],
-				);
+				request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+					const db = (event.target as IDBOpenDBRequest).result;
 
-				void sign(sessionData.id, privKeyBytes)
-					.then((signature) => {
-						napthaNodeClient
-							.multiagentChatOrchestratorCheck({
-								userId: sessionData.id,
-								signature,
-							})
-							.then(({ data }) => orchestratorStatus.set(data))
-							.catch(console.error);
-					})
-					.catch(console.error);
-			}
+					if (!db.objectStoreNames.contains("keys")) {
+						db.createObjectStore("keys");
+					}
+				};
+			})
+				.then((db: IDBDatabase) => {
+					return new Promise<ArrayBuffer>((resolve, reject) => {
+						const transaction = db.transaction(["keys"], "readonly");
+						const request = transaction.objectStore("keys").get("private_key");
+						request.onsuccess = () => resolve(request.result);
+						request.onerror = () => reject(request.error);
+					});
+				})
+				.then((privKeyData) => {
+					if (!privKeyData) return;
+
+					return crypto.subtle
+						.importKey("raw", privKeyData, { name: "ECDSA", namedCurve: "P-256K1" }, true, ["sign"])
+						.then(() => sign(sessionData.id, new Uint8Array(privKeyData)))
+						.then((signature) =>
+							napthaNodeClient
+								.multiagentChatOrchestratorCheck({
+									userId: sessionData.id,
+									signature,
+								})
+								.then(({ data }) => orchestratorStatus.set(data)),
+						);
+				})
+				.catch((error) => console.error("Failed to access secure storage:", error));
 		}
 	});
 
@@ -71,14 +90,26 @@ export const load: LayoutLoad = async () => {
 
 				void napthaNodeClient
 					.userRegister(publicKey)
-					.then(({ data }) => {
+					.then(async ({ data }) => {
 						if (browser) {
-							localStorage.setItem(
-								"user:private_key",
-								Array.from(privKey)
-									.map((b) => b.toString(16).padStart(2, "0"))
-									.join(""),
-							);
+							void new Promise<IDBDatabase>((resolve, reject) => {
+								const request = indexedDB.open("auth", 1);
+								request.onerror = () => reject(request.error);
+								request.onsuccess = () => resolve(request.result);
+
+								request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+									const db = (event.target as IDBOpenDBRequest).result;
+
+									if (!db.objectStoreNames.contains("keys")) {
+										db.createObjectStore("keys");
+									}
+								};
+							})
+								.then((db: IDBDatabase) => {
+									const transaction = db.transaction(["keys"], "readwrite");
+									transaction.objectStore("keys").put(privKey, "private_key");
+								})
+								.catch((error: Error) => console.error("Failed to store private key:", error));
 						}
 
 						session.set(data);
@@ -89,24 +120,48 @@ export const load: LayoutLoad = async () => {
 			async signIn({ publicKey }: ByPublicKey) {
 				// Try stored private key first
 				if (browser) {
-					const storedPrivKey = localStorage.getItem("user:private_key");
+					return new Promise<IDBDatabase>((resolve, reject) => {
+						const request = indexedDB.open("auth", 1);
+						request.onerror = () => reject(request.error);
+						request.onsuccess = () => resolve(request.result);
 
-					if (storedPrivKey) {
-						const privKeyBytes = new Uint8Array(
-							storedPrivKey.match(/.{1,2}/g)?.map((byte) => parseInt(byte, 16)) ?? [],
-						);
+						request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+							const db = (event.target as IDBOpenDBRequest).result;
 
-						void napthaNodeClient
-							.userCheck({ publicKey })
-							.then(async ({ data: { is_registered, ...sessionData } }) => {
-								if (is_registered) {
-									session.set(sessionData);
-								}
-							})
-							.catch(console.error);
+							if (!db.objectStoreNames.contains("keys")) {
+								db.createObjectStore("keys");
+							}
+						};
+					})
+						.then((db: IDBDatabase) => {
+							return new Promise<ArrayBuffer>((resolve, reject) => {
+								const transaction = db.transaction(["keys"], "readonly");
+								const request = transaction.objectStore("keys").get("private_key");
+								request.onsuccess = () => resolve(request.result);
+								request.onerror = () => reject(request.error);
+							});
+						})
+						.then((privKeyData) => {
+							if (!privKeyData) return false;
 
-						return;
-					}
+							return crypto.subtle
+								.importKey("raw", privKeyData, { name: "ECDSA", namedCurve: "P-256K1" }, true, [
+									"sign",
+								])
+								.then(() =>
+									napthaNodeClient
+										.userCheck({ publicKey })
+										.then(({ data: { is_registered, ...sessionData } }) => {
+											if (is_registered) session.set(sessionData);
+
+											return is_registered;
+										}),
+								);
+						})
+						.catch((error: Error) => {
+							console.error("Failed to access secure storage:", error);
+							return false;
+						});
 				}
 
 				// Fallback to manual public key check
@@ -120,13 +175,21 @@ export const load: LayoutLoad = async () => {
 					.catch(console.error);
 			},
 
-			signOut() {
+			async signOut() {
 				session.set(null);
 
 				if (browser) {
 					localStorage.removeItem("user:id");
 					localStorage.removeItem("user:public_key");
-					localStorage.removeItem("user:private_key");
+
+					try {
+						// Clear private key from IndexedDB
+						const db = await indexedDB.open("auth", 1);
+						const transaction = db.result.transaction(["keys"], "readwrite");
+						transaction.objectStore("keys").delete("private_key");
+					} catch (error: unknown) {
+						console.error("Failed to clear secure storage:", error);
+					}
 				}
 			},
 		},
