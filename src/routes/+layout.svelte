@@ -33,7 +33,11 @@
 		});
 	});
 
-	$inspect(data.orchestratorStatus);
+	$effect(
+		data.orchestratorStatus.subscribe((orchestratorStatus) =>
+			console.log("ORCHESTRATOR STATUS IS", orchestratorStatus),
+		),
+	);
 
 	const handleSignUp = () => {
 		data.actions.signUp();

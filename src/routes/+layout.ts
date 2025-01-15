@@ -10,7 +10,6 @@ import { generateKeyPair, sign } from "$common/utils/crypto";
 
 export const load: LayoutLoad = async () => {
 	const session = writable<User | null>(null);
-
 	const orchestratorStatus = writable<OrchestratorRunOutput | null>(null);
 
 	if (browser) {
@@ -60,17 +59,18 @@ export const load: LayoutLoad = async () => {
 							request.onerror = () => reject(request.error);
 						});
 					})
-					.then((privKeyData) => {
-						if (!privKeyData) return;
-
-						return sign(sessionData.id, new Uint8Array(privKeyData)).then((signature) =>
-							napthaNodeClient
-								.multiagentChatOrchestratorCheck({
-									userId: sessionData.id,
-									signature,
-								})
-								.then(({ data }) => orchestratorStatus.set(data)),
-						);
+					.then((privKeyArrayBuffer) => {
+						if (privKeyArrayBuffer) {
+							return sign(sessionData.id, new Uint8Array(privKeyArrayBuffer)).then((signature) =>
+								napthaNodeClient
+									.multiagentChatOrchestratorCheck({
+										userId: sessionData.id,
+										signature,
+									})
+									.then(({ data }) => orchestratorStatus.set(data))
+									.catch((error) => console.error(error)),
+							);
+						}
 					})
 					.catch((error) => console.error("Failed to access secure storage:", error));
 			}
