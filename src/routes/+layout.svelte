@@ -9,7 +9,6 @@
 
 	let { children, data } = $props();
 
-	const orchestratorStatus = $wrap(data.orchestratorStatus);
 	let authenticatedUser = $state<User | null>(null);
 	let isAuthModalOpen = $state(false);
 	let copySuccess = $state(false);
@@ -34,7 +33,7 @@
 		});
 	});
 
-	$inspect(orchestratorStatus);
+	$inspect(data.orchestratorStatus);
 
 	const handleSignUp = () => {
 		data.actions.signUp();

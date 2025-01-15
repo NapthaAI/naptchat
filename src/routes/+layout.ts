@@ -182,14 +182,32 @@ export const load: LayoutLoad = async () => {
 					localStorage.removeItem("user:id");
 					localStorage.removeItem("user:public_key");
 
-					try {
-						// Clear private key from IndexedDB
-						const db = await indexedDB.open("auth", 1);
-						const transaction = db.result.transaction(["keys"], "readwrite");
-						transaction.objectStore("keys").delete("private_key");
-					} catch (error: unknown) {
-						console.error("Failed to clear secure storage:", error);
-					}
+					// Clear private key from IndexedDB
+					void new Promise<IDBDatabase>((resolve, reject) => {
+						const request = indexedDB.open("auth", 1);
+						request.onerror = () => reject(request.error);
+						request.onsuccess = () => resolve(request.result);
+
+						request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+							const db = (event.target as IDBOpenDBRequest).result;
+
+							if (!db.objectStoreNames.contains("keys")) {
+								db.createObjectStore("keys");
+							}
+						};
+					})
+						.then((db: IDBDatabase) => {
+							const transaction = db.transaction(["keys"], "readwrite");
+							const objectStore = transaction.objectStore("keys");
+							return new Promise<void>((resolve, reject) => {
+								const request = objectStore.delete("private_key");
+								request.onsuccess = () => resolve();
+								request.onerror = () => reject(request.error);
+							});
+						})
+						.catch((error: unknown) => {
+							console.error("Failed to clear secure storage:", error);
+						});
 				}
 			},
 		},
