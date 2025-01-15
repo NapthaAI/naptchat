@@ -1,0 +1,1 @@
+{"type":"string","enum":["agent","tool","environment","kb","orchestrator","persona"],"title":"ModuleType","x-readme-ref-name":"ModuleType"}

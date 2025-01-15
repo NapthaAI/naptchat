@@ -1,0 +1,1 @@
+{"properties":{"ip":{"type":"string","title":"Ip"},"http_port":{"anyOf":[{"type":"integer"},{"type":"null"}],"title":"Http Port"},"server_type":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Server Type"}},"type":"object","required":["ip"],"title":"NodeConfigInput","x-readme-ref-name":"NodeConfigInput"}

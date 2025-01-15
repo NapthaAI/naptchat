@@ -1,1 +1,1 @@
-{"type":"string","enum":["openai","azure_openai","anthropic","vllm","litellm","ollama"],"title":"LLMClientType","x-readme-ref-name":"LLMClientType"}
+{"type":"string","enum":["openai","azure_openai","anthropic","vllm","litellm","ollama","stability"],"title":"LLMClientType","x-readme-ref-name":"LLMClientType"}

@@ -8,9 +8,6 @@
 	import type { User } from "$common/api/naptha-node";
 
 	let { children, data } = $props();
-	const test = $wrap({ status: data.orchestratorStatus });
-
-	$inspect(test.status);
 
 	let authenticatedUser = $state<User | null>(null);
 	let isAuthModalOpen = $state(false);
@@ -32,9 +29,15 @@
 				}
 			}
 
-			console.log("authenticatedUser is", authenticatedUser);
+			console.log("SESSION DATA", authenticatedUser);
 		});
 	});
+
+	$effect(
+		data.orchestratorStatus.subscribe((orchestratorStatus) =>
+			console.log("ORCHESTRATOR STATUS IS", orchestratorStatus),
+		),
+	);
 
 	const handleSignUp = () => {
 		data.actions.signUp();
@@ -93,7 +96,7 @@
 			<span class="text-sm opacity-75">@{authenticatedUser.id}</span>
 			<Button onClick={handleSignOut}>Sign Out</Button>
 		{:else}
-			<Button onClick={() => (isAuthModalOpen = true)}>Sign Up</Button>
+			<Button onClick={() => (isAuthModalOpen = true)}>Sign In</Button>
 		{/if}
 	</div>
 </nav>
@@ -127,9 +130,9 @@
 						Sign In as @{authenticatedUser.id}
 					</Button>
 				</div>
-			{:else}
-				<Button class="w-full" onClick={handleSignUp}>Sign Up</Button>
 			{/if}
+
+			<Button class="w-full" onClick={handleSignUp}>Sign Up as new user</Button>
 		</div>
 	</dialog>
 {/if}

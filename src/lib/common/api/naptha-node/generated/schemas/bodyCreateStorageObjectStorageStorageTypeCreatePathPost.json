@@ -1,0 +1,1 @@
+{"properties":{"file":{"anyOf":[{"type":"string","format":"binary"},{"type":"null"}],"title":"File"},"request_data":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Request Data"}},"type":"object","title":"Body_create_storage_object_storage__storage_type__create__path__post","x-readme-ref-name":"Body_create_storage_object_storage__storage_type__create__path__post"}

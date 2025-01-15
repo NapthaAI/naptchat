@@ -1,20 +1,23 @@
-import type { AgentConfigInput } from "./AgentConfigInput.ts";
-import type { AgentModule } from "./AgentModule.ts";
-import type { DataGenerationConfig } from "./DataGenerationConfig.ts";
+import type { AgentConfigInput } from './AgentConfigInput.ts'
+import type { DataGenerationConfig } from './DataGenerationConfig.ts'
+import type { EnvironmentDeploymentInput } from './EnvironmentDeploymentInput.ts'
+import type { KbDeploymentInput } from './KbDeploymentInput.ts'
+import type { Module } from './Module.ts'
+import type { NodeConfig } from './NodeConfig.ts'
+import type { NodeConfigInput } from './NodeConfigInput.ts'
+import type { ToolDeploymentInput } from './ToolDeploymentInput.ts'
 
 export type AgentDeploymentInput = {
-	/**
-	 * @default "agent_deployment"
-	 */
-	name?: string | null;
-	module?: object | AgentModule | null;
-	worker_node_url?: string | null;
-	/**
-	 * @default [object Object]
-	 */
-	agent_config?: AgentConfigInput | null;
-	/**
-	 * @default [object Object]
-	 */
-	data_generation_config?: DataGenerationConfig | null;
-};
+  node: NodeConfig | NodeConfigInput
+  name?: string | null
+  module?: object | Module | null
+  config?: AgentConfigInput | null
+  data_generation_config?: DataGenerationConfig | null
+  tool_deployments?: ToolDeploymentInput[] | null
+  kb_deployments?: KbDeploymentInput[] | null
+  environment_deployments?: EnvironmentDeploymentInput[] | null
+  /**
+   * @default false
+   */
+  initialized?: boolean | null
+}

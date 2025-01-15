@@ -1,0 +1,1 @@
+{"type":"string","enum":["package","docker"],"title":"ModuleExecutionType","x-readme-ref-name":"ModuleExecutionType"}

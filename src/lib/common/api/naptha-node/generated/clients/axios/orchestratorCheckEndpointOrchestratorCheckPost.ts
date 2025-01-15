@@ -1,10 +1,11 @@
-import client from "@kubb/plugin-client/clients/axios";
+/* eslint-disable no-alert, no-console */
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-	OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest,
-	OrchestratorCheckEndpointOrchestratorCheckPostMutationResponse,
-	OrchestratorCheckEndpointOrchestratorCheckPost422,
-} from "../../types/OrchestratorCheckEndpointOrchestratorCheckPost.ts";
-import type { RequestConfig } from "@kubb/plugin-client/clients/axios";
+  OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest,
+  OrchestratorCheckEndpointOrchestratorCheckPostMutationResponse,
+  OrchestratorCheckEndpointOrchestratorCheckPost422,
+} from '../../types/OrchestratorCheckEndpointOrchestratorCheckPost.ts'
+import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
 
 /**
  * @description Check an orchestrator:param orchestrator_run: OrchestratorRun details:return: Status
@@ -12,16 +13,13 @@ import type { RequestConfig } from "@kubb/plugin-client/clients/axios";
  * {@link /orchestrator/check}
  */
 export async function orchestratorCheckEndpointOrchestratorCheckPost(
-	data: OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest,
-	config: Partial<
-		RequestConfig<OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest>
-	> = {},
+  data: OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest,
+  config: Partial<RequestConfig<OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest>> = {},
 ) {
-	const res = await client<
-		OrchestratorCheckEndpointOrchestratorCheckPostMutationResponse,
-		OrchestratorCheckEndpointOrchestratorCheckPost422,
-		OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest
-	>({ method: "POST", url: `/orchestrator/check`, data, ...config });
-
-	return res;
+  const res = await client<
+    OrchestratorCheckEndpointOrchestratorCheckPostMutationResponse,
+    OrchestratorCheckEndpointOrchestratorCheckPost422,
+    OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest
+  >({ method: 'POST', url: `/orchestrator/check`, data, ...config })
+  return res
 }

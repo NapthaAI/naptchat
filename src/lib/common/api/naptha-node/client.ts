@@ -1,40 +1,71 @@
-import { env } from "$env/dynamic/public";
 import {
 	orchestratorCheckEndpointOrchestratorCheckPost,
+	orchestratorRunEndpointOrchestratorRunPost,
 	userCheckEndpointUserCheckPost,
 	userRegisterEndpointUserRegisterPost,
+	type OrchestratorDeploymentInput,
 } from "./generated/index.ts";
-import { v4 as uuidv4 } from "uuid";
-import type { User } from "./types";
+import type { BySignature, ByUserId, User } from "./types";
 import type { ResponseConfig } from "@kubb/plugin-client/clients/axios";
 import type { ByPublicKey } from "$common/types";
+import {
+	NAPTHA_NODE_HTTP_PORT,
+	NAPTHA_NODE_HOSTNAME,
+	MULTIAGENT_CHAT_MODULE_NAME,
+	MULTIAGENT_CHAT_MODULE_ID,
+	MULTIAGENT_CHAT_DEPLOYMENT_NAME,
+	MULTIAGENT_CHAT_MODULE_TYPE,
+} from "$common/constants";
 
-export const userRegister = (): Promise<ResponseConfig<User>> =>
-	userRegisterEndpointUserRegisterPost({ public_key: uuidv4() }, { baseURL: env.NAPTHA_NODE_URL });
+// TODO: Use https:// once TLS in available
+const REQUEST_CONFIG = {
+	baseURL: "http://" + [NAPTHA_NODE_HOSTNAME, NAPTHA_NODE_HTTP_PORT].join(":"),
+};
+
+export const ORCHESTRATOR_DEPLOYMENT_CONFIG: OrchestratorDeploymentInput = {
+	name: MULTIAGENT_CHAT_DEPLOYMENT_NAME,
+	node: { ip: NAPTHA_NODE_HOSTNAME },
+
+	module: {
+		id: MULTIAGENT_CHAT_MODULE_ID,
+		module_type: MULTIAGENT_CHAT_MODULE_TYPE,
+		name: MULTIAGENT_CHAT_MODULE_NAME,
+	},
+
+	agent_deployments: [
+		{ node: { ip: NAPTHA_NODE_HOSTNAME } },
+		{ node: { ip: NAPTHA_NODE_HOSTNAME } },
+	],
+
+	kb_deployments: [{ node: { ip: NAPTHA_NODE_HOSTNAME } }],
+};
+
+export const userRegister = (public_key: string): Promise<ResponseConfig<User>> =>
+	userRegisterEndpointUserRegisterPost({ public_key }, REQUEST_CONFIG);
 
 export const userCheck = ({
 	publicKey,
 }: ByPublicKey): Promise<ResponseConfig<User & { is_registered: boolean }>> =>
-	userCheckEndpointUserCheckPost({ public_key: publicKey }, { baseURL: env.NAPTHA_NODE_URL });
+	userCheckEndpointUserCheckPost({ public_key: publicKey }, REQUEST_CONFIG);
 
-export const multiagentChatOrchestratorCheck = ({ publicKey }: ByPublicKey) =>
+export const multiagentChatOrchestratorCheck = ({ userId, signature }: ByUserId & BySignature) =>
 	orchestratorCheckEndpointOrchestratorCheckPost(
 		{
-			consumer_id: publicKey,
-
-			orchestrator_deployment: {
-				name: "multiagent_chat",
-				module: { name: "multiagent_chat" },
-				orchestrator_node_url: "http://localhost:7001",
-			},
-
-			environment_deployments: [{ environment_node_url: "http://localhost:7001" }],
-
-			agent_deployments: [
-				{ worker_node_url: "ws://localhost:7002" },
-				{ worker_node_url: "ws://localhost:7002" },
-			],
+			consumer_id: userId,
+			deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
+			signature,
 		},
 
-		{ baseURL: env.NAPTHA_NODE_URL },
+		REQUEST_CONFIG,
+	);
+
+export const multiagentChatOrchestratorRun = ({ userId, signature }: ByUserId & BySignature) =>
+	orchestratorRunEndpointOrchestratorRunPost(
+		{
+			consumer_id: userId,
+			deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
+			signature,
+		},
+
+		REQUEST_CONFIG,
 	);

@@ -1,0 +1,1 @@
+{"type":"string","enum":["db","fs","ipfs"],"title":"StorageType","x-readme-ref-name":"StorageType"}
