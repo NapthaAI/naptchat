@@ -1,26 +1,26 @@
 import {
 	orchestratorCheckEndpointOrchestratorCheckPost,
+	orchestratorRunEndpointOrchestratorRunPost,
 	userCheckEndpointUserCheckPost,
 	userRegisterEndpointUserRegisterPost,
-	type NodeConfig,
 } from "./generated/index.ts";
-import { v4 as uuidv4 } from "uuid";
 import type { User } from "./types";
 import type { ResponseConfig } from "@kubb/plugin-client/clients/axios";
 import type { ByPublicKey } from "$common/types";
-import { NAPTHA_NODE_HTTP_PORT, NAPTHA_NODE_HOSTNAME } from "$common/constants";
+import {
+	NAPTHA_NODE_HTTP_PORT,
+	NAPTHA_NODE_HOSTNAME,
+	MULTIAGENT_CHAT_MODULE_NAME,
+	MULTIAGENT_CHAT_MODULE_ID,
+	MULTIAGENT_CHAT_DEPLOYMENT_NAME,
+} from "$common/constants";
 
 const REQUEST_CONFIG = {
 	baseURL: "http://" + [NAPTHA_NODE_HOSTNAME, NAPTHA_NODE_HTTP_PORT].join(":"),
 };
 
-const NODE_CONFIG: Pick<NodeConfig, "ip" | "http_port"> = {
-	ip: NAPTHA_NODE_HOSTNAME,
-	http_port: parseInt(NAPTHA_NODE_HTTP_PORT),
-};
-
-export const userRegister = (): Promise<ResponseConfig<User>> =>
-	userRegisterEndpointUserRegisterPost({ public_key: uuidv4() }, REQUEST_CONFIG);
+export const userRegister = (public_key: string): Promise<ResponseConfig<User>> =>
+	userRegisterEndpointUserRegisterPost({ public_key }, REQUEST_CONFIG);
 
 export const userCheck = ({
 	publicKey,
@@ -33,17 +33,43 @@ export const multiagentChatOrchestratorCheck = ({ publicKey }: ByPublicKey) =>
 			consumer_id: publicKey,
 
 			deployment: {
-				name: "multiagent_chat",
-				module: { id: "orchestrator:multiagent_chat", name: "multiagent_chat" },
-				orchestrator_node_url: "http://localhost:7001",
+				node: { ip: NAPTHA_NODE_HOSTNAME },
+				name: MULTIAGENT_CHAT_DEPLOYMENT_NAME,
+
+				module: {
+					id: MULTIAGENT_CHAT_MODULE_ID,
+					name: MULTIAGENT_CHAT_MODULE_NAME,
+				},
 			},
 
 			agent_deployments: [
-				{ worker_node_url: "ws://localhost:7002" },
-				{ worker_node_url: "ws://localhost:7002" },
+				{ node: { ip: NAPTHA_NODE_HOSTNAME } },
+				{ node: { ip: NAPTHA_NODE_HOSTNAME } },
 			],
+		},
 
-			environment_deployments: [{ environment_node_url: "http://localhost:7001" }],
+		REQUEST_CONFIG,
+	);
+
+export const multiagentChatOrchestratorRun = ({ publicKey }: ByPublicKey) =>
+	orchestratorRunEndpointOrchestratorRunPost(
+		{
+			consumer_id: publicKey,
+
+			deployment: {
+				node: { ip: NAPTHA_NODE_HOSTNAME },
+				name: MULTIAGENT_CHAT_DEPLOYMENT_NAME,
+
+				module: {
+					id: MULTIAGENT_CHAT_MODULE_ID,
+					name: MULTIAGENT_CHAT_MODULE_NAME,
+				},
+			},
+
+			agent_deployments: [
+				{ node: { ip: NAPTHA_NODE_HOSTNAME } },
+				{ node: { ip: NAPTHA_NODE_HOSTNAME } },
+			],
 		},
 
 		REQUEST_CONFIG,
