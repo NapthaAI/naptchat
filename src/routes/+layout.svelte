@@ -8,10 +8,8 @@
 	import type { User } from "$common/api/naptha-node";
 
 	let { children, data } = $props();
-	const test = $wrap({ status: data.orchestratorStatus });
 
-	$inspect(test.status);
-
+	const orchestratorStatus = $wrap(data.orchestratorStatus);
 	let authenticatedUser = $state<User | null>(null);
 	let isAuthModalOpen = $state(false);
 	let copySuccess = $state(false);
@@ -35,6 +33,8 @@
 			console.log("authenticatedUser is", authenticatedUser);
 		});
 	});
+
+	$inspect(orchestratorStatus);
 
 	const handleSignUp = () => {
 		data.actions.signUp();

@@ -1,0 +1,1 @@
+{"properties":{"config_name":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Config Name"},"config_schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Config Schema"},"environment_type":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Environment Type"}},"type":"object","title":"EnvironmentConfig","x-readme-ref-name":"EnvironmentConfig"}

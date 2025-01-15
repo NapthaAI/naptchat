@@ -1,1 +1,1 @@
-export type BaseModel = object;
+export type BaseModel = object
