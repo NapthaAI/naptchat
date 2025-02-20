@@ -5,7 +5,11 @@ import type {
   KbRunEndpointKbRunPostMutationResponse,
   KbRunEndpointKbRunPost422,
 } from '../../types/KbRunEndpointKbRunPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getKbRunEndpointKbRunPostUrl() {
+  return `/kb/run` as const
+}
 
 /**
  * @description Run a knowledge base:param kb_run_input: KBRunInput:return: KBRun
@@ -16,9 +20,9 @@ export async function kbRunEndpointKbRunPost(
   data: KbRunEndpointKbRunPostMutationRequest,
   config: Partial<RequestConfig<KbRunEndpointKbRunPostMutationRequest>> = {},
 ) {
-  const res = await client<KbRunEndpointKbRunPostMutationResponse, KbRunEndpointKbRunPost422, KbRunEndpointKbRunPostMutationRequest>({
+  const res = await client<KbRunEndpointKbRunPostMutationResponse, ResponseErrorConfig<KbRunEndpointKbRunPost422>, KbRunEndpointKbRunPostMutationRequest>({
     method: 'POST',
-    url: `/kb/run`,
+    url: getKbRunEndpointKbRunPostUrl().toString(),
     data,
     ...config,
   })

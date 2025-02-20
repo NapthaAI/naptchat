@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { MemoryRunInput } from './MemoryRunInput.ts'
 import type { MemoryRunOutput } from './MemoryRunOutput.ts'
 
@@ -10,7 +10,7 @@ export type MemoryCheckEndpointMemoryCheckPost200 = MemoryRunOutput
 /**
  * @description Validation Error
  */
-export type MemoryCheckEndpointMemoryCheckPost422 = HttpValidationError
+export type MemoryCheckEndpointMemoryCheckPost422 = HTTPValidationError
 
 export type MemoryCheckEndpointMemoryCheckPostMutationRequest = MemoryRunInput
 

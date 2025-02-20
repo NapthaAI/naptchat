@@ -6,7 +6,17 @@ import type {
   ListStorageObjectsStorageStorageTypeListPathGetQueryParams,
   ListStorageObjectsStorageStorageTypeListPathGet422,
 } from '../../types/ListStorageObjectsStorageStorageTypeListPathGet.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getListStorageObjectsStorageStorageTypeListPathGetUrl({
+  storage_type,
+  path,
+}: {
+  storage_type: ListStorageObjectsStorageStorageTypeListPathGetPathParams['storage_type']
+  path: ListStorageObjectsStorageStorageTypeListPathGetPathParams['path']
+}) {
+  return `/storage/${storage_type}/list/${path}` as const
+}
 
 /**
  * @description List storage objects (DB tables/rows, directory contents, IPFS directory)
@@ -24,11 +34,10 @@ export async function listStorageObjectsStorageStorageTypeListPathGet(
   params?: ListStorageObjectsStorageStorageTypeListPathGetQueryParams,
   config: Partial<RequestConfig> = {},
 ) {
-  const res = await client<ListStorageObjectsStorageStorageTypeListPathGetQueryResponse, ListStorageObjectsStorageStorageTypeListPathGet422, unknown>({
-    method: 'GET',
-    url: `/storage/${storage_type}/list/${path}`,
-    params,
-    ...config,
-  })
+  const res = await client<
+    ListStorageObjectsStorageStorageTypeListPathGetQueryResponse,
+    ResponseErrorConfig<ListStorageObjectsStorageStorageTypeListPathGet422>,
+    unknown
+  >({ method: 'GET', url: getListStorageObjectsStorageStorageTypeListPathGetUrl({ storage_type, path }).toString(), params, ...config })
   return res
 }

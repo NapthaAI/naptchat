@@ -5,7 +5,11 @@ import type {
   MemoryRunEndpointMemoryRunPostMutationResponse,
   MemoryRunEndpointMemoryRunPost422,
 } from '../../types/MemoryRunEndpointMemoryRunPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getMemoryRunEndpointMemoryRunPostUrl() {
+  return `/memory/run` as const
+}
 
 /**
  * @description Run a memory module:param memory_run_input: Memory run specifications:return: Status
@@ -16,11 +20,10 @@ export async function memoryRunEndpointMemoryRunPost(
   data: MemoryRunEndpointMemoryRunPostMutationRequest,
   config: Partial<RequestConfig<MemoryRunEndpointMemoryRunPostMutationRequest>> = {},
 ) {
-  const res = await client<MemoryRunEndpointMemoryRunPostMutationResponse, MemoryRunEndpointMemoryRunPost422, MemoryRunEndpointMemoryRunPostMutationRequest>({
-    method: 'POST',
-    url: `/memory/run`,
-    data,
-    ...config,
-  })
+  const res = await client<
+    MemoryRunEndpointMemoryRunPostMutationResponse,
+    ResponseErrorConfig<MemoryRunEndpointMemoryRunPost422>,
+    MemoryRunEndpointMemoryRunPostMutationRequest
+  >({ method: 'POST', url: getMemoryRunEndpointMemoryRunPostUrl().toString(), data, ...config })
   return res
 }

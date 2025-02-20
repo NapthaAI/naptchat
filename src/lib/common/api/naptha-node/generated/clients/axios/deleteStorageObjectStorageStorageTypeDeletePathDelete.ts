@@ -6,7 +6,17 @@ import type {
   DeleteStorageObjectStorageStorageTypeDeletePathDeleteQueryParams,
   DeleteStorageObjectStorageStorageTypeDeletePathDelete422,
 } from '../../types/DeleteStorageObjectStorageStorageTypeDeletePathDelete.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getDeleteStorageObjectStorageStorageTypeDeletePathDeleteUrl({
+  storage_type,
+  path,
+}: {
+  storage_type: DeleteStorageObjectStorageStorageTypeDeletePathDeletePathParams['storage_type']
+  path: DeleteStorageObjectStorageStorageTypeDeletePathDeletePathParams['path']
+}) {
+  return `/storage/${storage_type}/delete/${path}` as const
+}
 
 /**
  * @description Delete storage objects
@@ -26,8 +36,8 @@ export async function deleteStorageObjectStorageStorageTypeDeletePathDelete(
 ) {
   const res = await client<
     DeleteStorageObjectStorageStorageTypeDeletePathDeleteMutationResponse,
-    DeleteStorageObjectStorageStorageTypeDeletePathDelete422,
+    ResponseErrorConfig<DeleteStorageObjectStorageStorageTypeDeletePathDelete422>,
     unknown
-  >({ method: 'DELETE', url: `/storage/${storage_type}/delete/${path}`, params, ...config })
+  >({ method: 'DELETE', url: getDeleteStorageObjectStorageStorageTypeDeletePathDeleteUrl({ storage_type, path }).toString(), params, ...config })
   return res
 }

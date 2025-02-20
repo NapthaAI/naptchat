@@ -19,20 +19,25 @@ export type NodeConfig = {
    */
   ip?: string
   /**
+   * @default "http"
+   * @type string | undefined
+   */
+  user_communication_protocol?: string
+  /**
    * @default "ws"
    * @type string | undefined
    */
-  server_type?: string
+  node_communication_protocol?: string
   /**
    * @default 7001
    * @type integer | undefined
    */
-  http_port?: number
+  user_communication_port?: number
   /**
    * @default 1
    * @type integer | undefined
    */
-  num_servers?: number
+  num_node_communication_servers?: number
   /**
    * @type array | undefined
    */

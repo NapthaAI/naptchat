@@ -5,7 +5,11 @@ import type {
   EnvironmentCreateEndpointEnvironmentCreatePostMutationResponse,
   EnvironmentCreateEndpointEnvironmentCreatePost422,
 } from '../../types/EnvironmentCreateEndpointEnvironmentCreatePost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getEnvironmentCreateEndpointEnvironmentCreatePostUrl() {
+  return `/environment/create` as const
+}
 
 /**
  * @description Create an environment:param environment_input: EnvironmentDeployment:return: EnvironmentDeployment
@@ -18,8 +22,8 @@ export async function environmentCreateEndpointEnvironmentCreatePost(
 ) {
   const res = await client<
     EnvironmentCreateEndpointEnvironmentCreatePostMutationResponse,
-    EnvironmentCreateEndpointEnvironmentCreatePost422,
+    ResponseErrorConfig<EnvironmentCreateEndpointEnvironmentCreatePost422>,
     EnvironmentCreateEndpointEnvironmentCreatePostMutationRequest
-  >({ method: 'POST', url: `/environment/create`, data, ...config })
+  >({ method: 'POST', url: getEnvironmentCreateEndpointEnvironmentCreatePostUrl().toString(), data, ...config })
   return res
 }

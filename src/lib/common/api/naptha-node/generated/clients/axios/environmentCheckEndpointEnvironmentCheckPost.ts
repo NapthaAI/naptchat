@@ -5,7 +5,11 @@ import type {
   EnvironmentCheckEndpointEnvironmentCheckPostMutationResponse,
   EnvironmentCheckEndpointEnvironmentCheckPost422,
 } from '../../types/EnvironmentCheckEndpointEnvironmentCheckPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getEnvironmentCheckEndpointEnvironmentCheckPostUrl() {
+  return `/environment/check` as const
+}
 
 /**
  * @description Check an environment:param environment_run: EnvironmentRun details:return: Status
@@ -18,8 +22,8 @@ export async function environmentCheckEndpointEnvironmentCheckPost(
 ) {
   const res = await client<
     EnvironmentCheckEndpointEnvironmentCheckPostMutationResponse,
-    EnvironmentCheckEndpointEnvironmentCheckPost422,
+    ResponseErrorConfig<EnvironmentCheckEndpointEnvironmentCheckPost422>,
     EnvironmentCheckEndpointEnvironmentCheckPostMutationRequest
-  >({ method: 'POST', url: `/environment/check`, data, ...config })
+  >({ method: 'POST', url: getEnvironmentCheckEndpointEnvironmentCheckPostUrl().toString(), data, ...config })
   return res
 }

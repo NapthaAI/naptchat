@@ -1,6 +1,6 @@
 import type { EnvironmentDeploymentInput } from './EnvironmentDeploymentInput.ts'
 import type { EnvironmentDeploymentOutput } from './EnvironmentDeploymentOutput.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 
 /**
  * @description Successful Response
@@ -10,7 +10,7 @@ export type EnvironmentCreateEndpointEnvironmentCreatePost200 = EnvironmentDeplo
 /**
  * @description Validation Error
  */
-export type EnvironmentCreateEndpointEnvironmentCreatePost422 = HttpValidationError
+export type EnvironmentCreateEndpointEnvironmentCreatePost422 = HTTPValidationError
 
 export type EnvironmentCreateEndpointEnvironmentCreatePostMutationRequest = EnvironmentDeploymentInput
 

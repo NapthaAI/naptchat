@@ -1,5 +1,5 @@
 import type { BodySearchStorageObjectsStorageStorageTypeSearchPost } from './BodySearchStorageObjectsStorageStorageTypeSearchPost.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { StorageType } from './StorageType.ts'
 
 export type SearchStorageObjectsStorageStorageTypeSearchPostPathParams = {
@@ -24,7 +24,7 @@ export type SearchStorageObjectsStorageStorageTypeSearchPost200 = any
 /**
  * @description Validation Error
  */
-export type SearchStorageObjectsStorageStorageTypeSearchPost422 = HttpValidationError
+export type SearchStorageObjectsStorageStorageTypeSearchPost422 = HTTPValidationError
 
 export type SearchStorageObjectsStorageStorageTypeSearchPostMutationRequest = BodySearchStorageObjectsStorageStorageTypeSearchPost
 

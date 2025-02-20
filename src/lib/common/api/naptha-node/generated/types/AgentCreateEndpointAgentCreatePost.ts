@@ -1,6 +1,6 @@
 import type { AgentDeploymentInput } from './AgentDeploymentInput.ts'
 import type { AgentDeploymentOutput } from './AgentDeploymentOutput.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 
 /**
  * @description Successful Response
@@ -10,7 +10,7 @@ export type AgentCreateEndpointAgentCreatePost200 = AgentDeploymentOutput
 /**
  * @description Validation Error
  */
-export type AgentCreateEndpointAgentCreatePost422 = HttpValidationError
+export type AgentCreateEndpointAgentCreatePost422 = HTTPValidationError
 
 export type AgentCreateEndpointAgentCreatePostMutationRequest = AgentDeploymentInput
 

@@ -3,6 +3,7 @@ export const moduleTypeEnum = {
   tool: 'tool',
   environment: 'environment',
   kb: 'kb',
+  memory: 'memory',
   orchestrator: 'orchestrator',
   persona: 'persona',
 } as const

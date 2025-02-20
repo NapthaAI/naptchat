@@ -5,7 +5,11 @@ import type {
   KbCheckEndpointKbCheckPostMutationResponse,
   KbCheckEndpointKbCheckPost422,
 } from '../../types/KbCheckEndpointKbCheckPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getKbCheckEndpointKbCheckPostUrl() {
+  return `/kb/check` as const
+}
 
 /**
  * @description Check a knowledge base:param kb_run: KBRun details:return: Status
@@ -16,11 +20,10 @@ export async function kbCheckEndpointKbCheckPost(
   data: KbCheckEndpointKbCheckPostMutationRequest,
   config: Partial<RequestConfig<KbCheckEndpointKbCheckPostMutationRequest>> = {},
 ) {
-  const res = await client<KbCheckEndpointKbCheckPostMutationResponse, KbCheckEndpointKbCheckPost422, KbCheckEndpointKbCheckPostMutationRequest>({
-    method: 'POST',
-    url: `/kb/check`,
-    data,
-    ...config,
-  })
+  const res = await client<
+    KbCheckEndpointKbCheckPostMutationResponse,
+    ResponseErrorConfig<KbCheckEndpointKbCheckPost422>,
+    KbCheckEndpointKbCheckPostMutationRequest
+  >({ method: 'POST', url: getKbCheckEndpointKbCheckPostUrl().toString(), data, ...config })
   return res
 }

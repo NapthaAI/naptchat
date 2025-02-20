@@ -7,7 +7,7 @@ export default defineConfig({
 	root: ".",
 
 	input: {
-		path: "http://node1.naptha.ai:7001/openapi.json",
+		path: "https://node.naptha.ai/openapi.json",
 	},
 
 	output: {

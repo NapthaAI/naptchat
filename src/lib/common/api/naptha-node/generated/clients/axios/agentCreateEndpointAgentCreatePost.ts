@@ -5,7 +5,11 @@ import type {
   AgentCreateEndpointAgentCreatePostMutationResponse,
   AgentCreateEndpointAgentCreatePost422,
 } from '../../types/AgentCreateEndpointAgentCreatePost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getAgentCreateEndpointAgentCreatePostUrl() {
+  return `/agent/create` as const
+}
 
 /**
  * @description Create an agent:param agent_input: AgentDeployment:return: AgentDeployment
@@ -18,8 +22,8 @@ export async function agentCreateEndpointAgentCreatePost(
 ) {
   const res = await client<
     AgentCreateEndpointAgentCreatePostMutationResponse,
-    AgentCreateEndpointAgentCreatePost422,
+    ResponseErrorConfig<AgentCreateEndpointAgentCreatePost422>,
     AgentCreateEndpointAgentCreatePostMutationRequest
-  >({ method: 'POST', url: `/agent/create`, data, ...config })
+  >({ method: 'POST', url: getAgentCreateEndpointAgentCreatePostUrl().toString(), data, ...config })
   return res
 }

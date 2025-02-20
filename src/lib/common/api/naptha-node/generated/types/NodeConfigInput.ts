@@ -3,6 +3,6 @@ export type NodeConfigInput = {
    * @type string
    */
   ip: string
-  http_port?: number | null
-  server_type?: string | null
+  user_communication_port?: number | null
+  user_communication_protocol?: string | null
 }

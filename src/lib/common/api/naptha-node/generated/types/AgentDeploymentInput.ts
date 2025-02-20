@@ -1,7 +1,8 @@
 import type { AgentConfigInput } from './AgentConfigInput.ts'
 import type { DataGenerationConfig } from './DataGenerationConfig.ts'
 import type { EnvironmentDeploymentInput } from './EnvironmentDeploymentInput.ts'
-import type { KbDeploymentInput } from './KbDeploymentInput.ts'
+import type { KBDeploymentInput } from './KBDeploymentInput.ts'
+import type { MemoryDeploymentInput } from './MemoryDeploymentInput.ts'
 import type { Module } from './Module.ts'
 import type { NodeConfig } from './NodeConfig.ts'
 import type { NodeConfigInput } from './NodeConfigInput.ts'
@@ -14,7 +15,8 @@ export type AgentDeploymentInput = {
   config?: AgentConfigInput | null
   data_generation_config?: DataGenerationConfig | null
   tool_deployments?: ToolDeploymentInput[] | null
-  kb_deployments?: KbDeploymentInput[] | null
+  kb_deployments?: KBDeploymentInput[] | null
+  memory_deployments?: MemoryDeploymentInput[] | null
   environment_deployments?: EnvironmentDeploymentInput[] | null
   /**
    * @default false

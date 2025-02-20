@@ -1,18 +1,18 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
-import type { KbRunInput } from './KbRunInput.ts'
-import type { KbRunOutput } from './KbRunOutput.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
+import type { KBRunInput } from './KBRunInput.ts'
+import type { KBRunOutput } from './KBRunOutput.ts'
 
 /**
  * @description Successful Response
  */
-export type KbCheckEndpointKbCheckPost200 = KbRunOutput
+export type KbCheckEndpointKbCheckPost200 = KBRunOutput
 
 /**
  * @description Validation Error
  */
-export type KbCheckEndpointKbCheckPost422 = HttpValidationError
+export type KbCheckEndpointKbCheckPost422 = HTTPValidationError
 
-export type KbCheckEndpointKbCheckPostMutationRequest = KbRunInput
+export type KbCheckEndpointKbCheckPostMutationRequest = KBRunInput
 
 export type KbCheckEndpointKbCheckPostMutationResponse = KbCheckEndpointKbCheckPost200
 

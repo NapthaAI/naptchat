@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { StorageType } from './StorageType.ts'
 
 export type ListStorageObjectsStorageStorageTypeListPathGetPathParams = {
@@ -28,7 +28,7 @@ export type ListStorageObjectsStorageStorageTypeListPathGet200 = any
 /**
  * @description Validation Error
  */
-export type ListStorageObjectsStorageStorageTypeListPathGet422 = HttpValidationError
+export type ListStorageObjectsStorageStorageTypeListPathGet422 = HTTPValidationError
 
 export type ListStorageObjectsStorageStorageTypeListPathGetQueryResponse = ListStorageObjectsStorageStorageTypeListPathGet200
 

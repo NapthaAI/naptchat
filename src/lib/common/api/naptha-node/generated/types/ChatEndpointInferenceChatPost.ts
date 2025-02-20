@@ -1,5 +1,5 @@
 import type { ChatCompletionRequest } from './ChatCompletionRequest.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 
 /**
  * @description Successful Response
@@ -9,7 +9,7 @@ export type ChatEndpointInferenceChatPost200 = any
 /**
  * @description Validation Error
  */
-export type ChatEndpointInferenceChatPost422 = HttpValidationError
+export type ChatEndpointInferenceChatPost422 = HTTPValidationError
 
 export type ChatEndpointInferenceChatPostMutationRequest = ChatCompletionRequest
 

@@ -1,18 +1,18 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
-import type { KbDeploymentInput } from './KbDeploymentInput.ts'
-import type { KbDeploymentOutput } from './KbDeploymentOutput.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
+import type { KBDeploymentInput } from './KBDeploymentInput.ts'
+import type { KBDeploymentOutput } from './KBDeploymentOutput.ts'
 
 /**
  * @description Successful Response
  */
-export type KbCreateEndpointKbCreatePost200 = KbDeploymentOutput
+export type KbCreateEndpointKbCreatePost200 = KBDeploymentOutput
 
 /**
  * @description Validation Error
  */
-export type KbCreateEndpointKbCreatePost422 = HttpValidationError
+export type KbCreateEndpointKbCreatePost422 = HTTPValidationError
 
-export type KbCreateEndpointKbCreatePostMutationRequest = KbDeploymentInput
+export type KbCreateEndpointKbCreatePostMutationRequest = KBDeploymentInput
 
 export type KbCreateEndpointKbCreatePostMutationResponse = KbCreateEndpointKbCreatePost200
 

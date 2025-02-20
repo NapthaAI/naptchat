@@ -7,7 +7,17 @@ import type {
   UpdateStorageObjectStorageStorageTypeUpdatePathPutQueryParams,
   UpdateStorageObjectStorageStorageTypeUpdatePathPut422,
 } from '../../types/UpdateStorageObjectStorageStorageTypeUpdatePathPut.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getUpdateStorageObjectStorageStorageTypeUpdatePathPutUrl({
+  storage_type,
+  path,
+}: {
+  storage_type: UpdateStorageObjectStorageStorageTypeUpdatePathPutPathParams['storage_type']
+  path: UpdateStorageObjectStorageStorageTypeUpdatePathPutPathParams['path']
+}) {
+  return `/storage/${storage_type}/update/${path}` as const
+}
 
 /**
  * @description Update storage objects (currently only supports database)
@@ -28,11 +38,11 @@ export async function updateStorageObjectStorageStorageTypeUpdatePathPut(
 ) {
   const res = await client<
     UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationResponse,
-    UpdateStorageObjectStorageStorageTypeUpdatePathPut422,
+    ResponseErrorConfig<UpdateStorageObjectStorageStorageTypeUpdatePathPut422>,
     UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationRequest
   >({
     method: 'PUT',
-    url: `/storage/${storage_type}/update/${path}`,
+    url: getUpdateStorageObjectStorageStorageTypeUpdatePathPutUrl({ storage_type, path }).toString(),
     params,
     data,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...config.headers },

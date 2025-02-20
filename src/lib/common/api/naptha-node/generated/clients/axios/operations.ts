@@ -17,18 +17,6 @@ export const operations = {
     path: '/agent/check',
     method: 'post',
   },
-  memory_create_endpoint_memory_create_post: {
-    path: '/memory/create',
-    method: 'post',
-  },
-  memory_run_endpoint_memory_run_post: {
-    path: '/memory/run',
-    method: 'post',
-  },
-  memory_check_endpoint_memory_check_post: {
-    path: '/memory/check',
-    method: 'post',
-  },
   tool_create_endpoint_tool_create_post: {
     path: '/tool/create',
     method: 'post',
@@ -75,6 +63,18 @@ export const operations = {
   },
   kb_check_endpoint_kb_check_post: {
     path: '/kb/check',
+    method: 'post',
+  },
+  memory_create_endpoint_memory_create_post: {
+    path: '/memory/create',
+    method: 'post',
+  },
+  memory_run_endpoint_memory_run_post: {
+    path: '/memory/run',
+    method: 'post',
+  },
+  memory_check_endpoint_memory_check_post: {
+    path: '/memory/check',
     method: 'post',
   },
   user_check_endpoint_user_check_post: {

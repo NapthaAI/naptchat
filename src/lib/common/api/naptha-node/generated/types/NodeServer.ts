@@ -2,7 +2,7 @@ export type NodeServer = {
   /**
    * @type string
    */
-  server_type: string
+  communication_protocol: string
   /**
    * @type integer
    */

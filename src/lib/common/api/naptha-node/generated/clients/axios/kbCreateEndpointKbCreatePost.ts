@@ -5,7 +5,11 @@ import type {
   KbCreateEndpointKbCreatePostMutationResponse,
   KbCreateEndpointKbCreatePost422,
 } from '../../types/KbCreateEndpointKbCreatePost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getKbCreateEndpointKbCreatePostUrl() {
+  return `/kb/create` as const
+}
 
 /**
  * @description Create a knowledge base:param kb_input: KBDeployment:return: KBDeployment
@@ -16,11 +20,10 @@ export async function kbCreateEndpointKbCreatePost(
   data: KbCreateEndpointKbCreatePostMutationRequest,
   config: Partial<RequestConfig<KbCreateEndpointKbCreatePostMutationRequest>> = {},
 ) {
-  const res = await client<KbCreateEndpointKbCreatePostMutationResponse, KbCreateEndpointKbCreatePost422, KbCreateEndpointKbCreatePostMutationRequest>({
-    method: 'POST',
-    url: `/kb/create`,
-    data,
-    ...config,
-  })
+  const res = await client<
+    KbCreateEndpointKbCreatePostMutationResponse,
+    ResponseErrorConfig<KbCreateEndpointKbCreatePost422>,
+    KbCreateEndpointKbCreatePostMutationRequest
+  >({ method: 'POST', url: getKbCreateEndpointKbCreatePostUrl().toString(), data, ...config })
   return res
 }

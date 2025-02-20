@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { MemoryDeploymentInput } from './MemoryDeploymentInput.ts'
 import type { MemoryDeploymentOutput } from './MemoryDeploymentOutput.ts'
 
@@ -10,7 +10,7 @@ export type MemoryCreateEndpointMemoryCreatePost200 = MemoryDeploymentOutput
 /**
  * @description Validation Error
  */
-export type MemoryCreateEndpointMemoryCreatePost422 = HttpValidationError
+export type MemoryCreateEndpointMemoryCreatePost422 = HTTPValidationError
 
 export type MemoryCreateEndpointMemoryCreatePostMutationRequest = MemoryDeploymentInput
 

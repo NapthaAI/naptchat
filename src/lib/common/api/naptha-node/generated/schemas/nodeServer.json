@@ -1,1 +1,1 @@
-{"properties":{"server_type":{"type":"string","title":"Server Type"},"port":{"type":"integer","title":"Port"},"node_id":{"type":"string","title":"Node Id"}},"type":"object","required":["server_type","port","node_id"],"title":"NodeServer","x-readme-ref-name":"NodeServer"}
+{"properties":{"communication_protocol":{"type":"string","title":"Communication Protocol"},"port":{"type":"integer","title":"Port"},"node_id":{"type":"string","title":"Node Id"}},"type":"object","required":["communication_protocol","port","node_id"],"title":"NodeServer","x-readme-ref-name":"NodeServer"}

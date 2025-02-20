@@ -5,7 +5,11 @@ import type {
   MemoryCreateEndpointMemoryCreatePostMutationResponse,
   MemoryCreateEndpointMemoryCreatePost422,
 } from '../../types/MemoryCreateEndpointMemoryCreatePost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getMemoryCreateEndpointMemoryCreatePostUrl() {
+  return `/memory/create` as const
+}
 
 /**
  * @description Create a memory module:param memory_input: MemoryDeployment:return: MemoryDeployment
@@ -18,8 +22,8 @@ export async function memoryCreateEndpointMemoryCreatePost(
 ) {
   const res = await client<
     MemoryCreateEndpointMemoryCreatePostMutationResponse,
-    MemoryCreateEndpointMemoryCreatePost422,
+    ResponseErrorConfig<MemoryCreateEndpointMemoryCreatePost422>,
     MemoryCreateEndpointMemoryCreatePostMutationRequest
-  >({ method: 'POST', url: `/memory/create`, data, ...config })
+  >({ method: 'POST', url: getMemoryCreateEndpointMemoryCreatePostUrl().toString(), data, ...config })
   return res
 }

@@ -6,7 +6,17 @@ import type {
   ReadStorageObjectStorageStorageTypeReadPathGetQueryParams,
   ReadStorageObjectStorageStorageTypeReadPathGet422,
 } from '../../types/ReadStorageObjectStorageStorageTypeReadPathGet.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getReadStorageObjectStorageStorageTypeReadPathGetUrl({
+  storage_type,
+  path,
+}: {
+  storage_type: ReadStorageObjectStorageStorageTypeReadPathGetPathParams['storage_type']
+  path: ReadStorageObjectStorageStorageTypeReadPathGetPathParams['path']
+}) {
+  return `/storage/${storage_type}/read/${path}` as const
+}
 
 /**
  * @description Read from storage (query DB, read file, or fetch IPFS content)
@@ -24,11 +34,10 @@ export async function readStorageObjectStorageStorageTypeReadPathGet(
   params?: ReadStorageObjectStorageStorageTypeReadPathGetQueryParams,
   config: Partial<RequestConfig> = {},
 ) {
-  const res = await client<ReadStorageObjectStorageStorageTypeReadPathGetQueryResponse, ReadStorageObjectStorageStorageTypeReadPathGet422, unknown>({
-    method: 'GET',
-    url: `/storage/${storage_type}/read/${path}`,
-    params,
-    ...config,
-  })
+  const res = await client<
+    ReadStorageObjectStorageStorageTypeReadPathGetQueryResponse,
+    ResponseErrorConfig<ReadStorageObjectStorageStorageTypeReadPathGet422>,
+    unknown
+  >({ method: 'GET', url: getReadStorageObjectStorageStorageTypeReadPathGetUrl({ storage_type, path }).toString(), params, ...config })
   return res
 }

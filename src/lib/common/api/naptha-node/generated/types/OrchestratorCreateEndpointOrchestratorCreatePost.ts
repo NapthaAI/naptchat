@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { OrchestratorDeploymentInput } from './OrchestratorDeploymentInput.ts'
 import type { OrchestratorDeploymentOutput } from './OrchestratorDeploymentOutput.ts'
 
@@ -10,7 +10,7 @@ export type OrchestratorCreateEndpointOrchestratorCreatePost200 = OrchestratorDe
 /**
  * @description Validation Error
  */
-export type OrchestratorCreateEndpointOrchestratorCreatePost422 = HttpValidationError
+export type OrchestratorCreateEndpointOrchestratorCreatePost422 = HTTPValidationError
 
 export type OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest = OrchestratorDeploymentInput
 

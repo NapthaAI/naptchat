@@ -7,8 +7,7 @@ import mkcert from "vite-plugin-mkcert";
 
 export default defineConfig({
 	plugins: [
-		// TODO: Uncomment once TLS is available on the API endpoint
-		// mkcert(),
+		mkcert(),
 
 		UnoCSS({
 			extractors: [extractorSvelte()],

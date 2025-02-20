@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { ToolDeploymentInput } from './ToolDeploymentInput.ts'
 import type { ToolDeploymentOutput } from './ToolDeploymentOutput.ts'
 
@@ -10,7 +10,7 @@ export type ToolCreateEndpointToolCreatePost200 = ToolDeploymentOutput
 /**
  * @description Validation Error
  */
-export type ToolCreateEndpointToolCreatePost422 = HttpValidationError
+export type ToolCreateEndpointToolCreatePost422 = HTTPValidationError
 
 export type ToolCreateEndpointToolCreatePostMutationRequest = ToolDeploymentInput
 

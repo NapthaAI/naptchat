@@ -1,6 +1,6 @@
 import type { EnvironmentRunInput } from './EnvironmentRunInput.ts'
 import type { EnvironmentRunOutput } from './EnvironmentRunOutput.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 
 /**
  * @description Successful Response
@@ -10,7 +10,7 @@ export type EnvironmentCheckEndpointEnvironmentCheckPost200 = EnvironmentRunOutp
 /**
  * @description Validation Error
  */
-export type EnvironmentCheckEndpointEnvironmentCheckPost422 = HttpValidationError
+export type EnvironmentCheckEndpointEnvironmentCheckPost422 = HTTPValidationError
 
 export type EnvironmentCheckEndpointEnvironmentCheckPostMutationRequest = EnvironmentRunInput
 

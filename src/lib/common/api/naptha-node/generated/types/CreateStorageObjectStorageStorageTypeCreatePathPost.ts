@@ -1,5 +1,5 @@
 import type { BodyCreateStorageObjectStorageStorageTypeCreatePathPost } from './BodyCreateStorageObjectStorageStorageTypeCreatePathPost.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { StorageType } from './StorageType.ts'
 
 export type CreateStorageObjectStorageStorageTypeCreatePathPostPathParams = {
@@ -22,7 +22,7 @@ export type CreateStorageObjectStorageStorageTypeCreatePathPost200 = any
 /**
  * @description Validation Error
  */
-export type CreateStorageObjectStorageStorageTypeCreatePathPost422 = HttpValidationError
+export type CreateStorageObjectStorageStorageTypeCreatePathPost422 = HTTPValidationError
 
 export type CreateStorageObjectStorageStorageTypeCreatePathPostMutationRequest = BodyCreateStorageObjectStorageStorageTypeCreatePathPost
 

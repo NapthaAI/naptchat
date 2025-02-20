@@ -5,7 +5,11 @@ import type {
   ToolCreateEndpointToolCreatePostMutationResponse,
   ToolCreateEndpointToolCreatePost422,
 } from '../../types/ToolCreateEndpointToolCreatePost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getToolCreateEndpointToolCreatePostUrl() {
+  return `/tool/create` as const
+}
 
 /**
  * @description Create a tool:param tool_input: ToolDeployment :return: ToolDeployment
@@ -18,8 +22,8 @@ export async function toolCreateEndpointToolCreatePost(
 ) {
   const res = await client<
     ToolCreateEndpointToolCreatePostMutationResponse,
-    ToolCreateEndpointToolCreatePost422,
+    ResponseErrorConfig<ToolCreateEndpointToolCreatePost422>,
     ToolCreateEndpointToolCreatePostMutationRequest
-  >({ method: 'POST', url: `/tool/create`, data, ...config })
+  >({ method: 'POST', url: getToolCreateEndpointToolCreatePostUrl().toString(), data, ...config })
   return res
 }

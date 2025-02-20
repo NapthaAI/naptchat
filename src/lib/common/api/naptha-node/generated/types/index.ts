@@ -63,7 +63,8 @@ export type {
   EnvironmentCheckEndpointEnvironmentCheckPostMutationResponse,
   EnvironmentCheckEndpointEnvironmentCheckPostMutation,
 } from './EnvironmentCheckEndpointEnvironmentCheckPost.ts'
-export type { EnvironmentConfig } from './EnvironmentConfig.ts'
+export type { EnvironmentConfigInput } from './EnvironmentConfigInput.ts'
+export type { EnvironmentConfigOutput } from './EnvironmentConfigOutput.ts'
 export type {
   EnvironmentCreateEndpointEnvironmentCreatePost200,
   EnvironmentCreateEndpointEnvironmentCreatePost422,
@@ -83,7 +84,7 @@ export type {
 export type { EnvironmentRunInput } from './EnvironmentRunInput.ts'
 export type { EnvironmentRunOutput } from './EnvironmentRunOutput.ts'
 export type { HealthCheckHealthGet200, HealthCheckHealthGetQueryResponse, HealthCheckHealthGetQuery } from './HealthCheckHealthGet.ts'
-export type { HttpValidationError } from './HttpValidationError.ts'
+export type { HTTPValidationError } from './HTTPValidationError.ts'
 export type {
   KbCheckEndpointKbCheckPost200,
   KbCheckEndpointKbCheckPost422,
@@ -91,7 +92,8 @@ export type {
   KbCheckEndpointKbCheckPostMutationResponse,
   KbCheckEndpointKbCheckPostMutation,
 } from './KbCheckEndpointKbCheckPost.ts'
-export type { KbConfig } from './KbConfig.ts'
+export type { KBConfigInput } from './KBConfigInput.ts'
+export type { KBConfigOutput } from './KBConfigOutput.ts'
 export type {
   KbCreateEndpointKbCreatePost200,
   KbCreateEndpointKbCreatePost422,
@@ -99,8 +101,8 @@ export type {
   KbCreateEndpointKbCreatePostMutationResponse,
   KbCreateEndpointKbCreatePostMutation,
 } from './KbCreateEndpointKbCreatePost.ts'
-export type { KbDeploymentInput } from './KbDeploymentInput.ts'
-export type { KbDeploymentOutput } from './KbDeploymentOutput.ts'
+export type { KBDeploymentInput } from './KBDeploymentInput.ts'
+export type { KBDeploymentOutput } from './KBDeploymentOutput.ts'
 export type {
   KbRunEndpointKbRunPost200,
   KbRunEndpointKbRunPost422,
@@ -108,8 +110,8 @@ export type {
   KbRunEndpointKbRunPostMutationResponse,
   KbRunEndpointKbRunPostMutation,
 } from './KbRunEndpointKbRunPost.ts'
-export type { KbRunInput } from './KbRunInput.ts'
-export type { KbRunOutput } from './KbRunOutput.ts'
+export type { KBRunInput } from './KBRunInput.ts'
+export type { KBRunOutput } from './KBRunOutput.ts'
 export type {
   ListStorageObjectsStorageStorageTypeListPathGetPathParams,
   ListStorageObjectsStorageStorageTypeListPathGetQueryParams,
@@ -118,8 +120,8 @@ export type {
   ListStorageObjectsStorageStorageTypeListPathGetQueryResponse,
   ListStorageObjectsStorageStorageTypeListPathGetQuery,
 } from './ListStorageObjectsStorageStorageTypeListPathGet.ts'
-export type { LlmClientTypeEnum, LlmClientType } from './LlmClientType.ts'
-export type { LlmConfig } from './LlmConfig.ts'
+export type { LLMClientTypeEnum, LLMClientType } from './LLMClientType.ts'
+export type { LLMConfig } from './LLMConfig.ts'
 export type {
   MemoryCheckEndpointMemoryCheckPost200,
   MemoryCheckEndpointMemoryCheckPost422,
@@ -127,7 +129,8 @@ export type {
   MemoryCheckEndpointMemoryCheckPostMutationResponse,
   MemoryCheckEndpointMemoryCheckPostMutation,
 } from './MemoryCheckEndpointMemoryCheckPost.ts'
-export type { MemoryConfig } from './MemoryConfig.ts'
+export type { MemoryConfigInput } from './MemoryConfigInput.ts'
+export type { MemoryConfigOutput } from './MemoryConfigOutput.ts'
 export type {
   MemoryCreateEndpointMemoryCreatePost200,
   MemoryCreateEndpointMemoryCreatePost422,
@@ -195,6 +198,7 @@ export type {
   SearchStorageObjectsStorageStorageTypeSearchPostMutationResponse,
   SearchStorageObjectsStorageStorageTypeSearchPostMutation,
 } from './SearchStorageObjectsStorageStorageTypeSearchPost.ts'
+export type { StorageConfig } from './StorageConfig.ts'
 export type { StorageTypeEnum, StorageType } from './StorageType.ts'
 export type {
   ToolCheckEndpointToolCheckPost200,
@@ -247,7 +251,7 @@ export type {
   UserRegisterEndpointUserRegisterPostMutation,
 } from './UserRegisterEndpointUserRegisterPost.ts'
 export type { ValidationError } from './ValidationError.ts'
-export { llmClientTypeEnum } from './LlmClientType.ts'
+export { LLMClientTypeEnum } from './LLMClientType.ts'
 export { moduleExecutionTypeEnum } from './ModuleExecutionType.ts'
 export { moduleTypeEnum } from './ModuleType.ts'
 export { storageTypeEnum } from './StorageType.ts'

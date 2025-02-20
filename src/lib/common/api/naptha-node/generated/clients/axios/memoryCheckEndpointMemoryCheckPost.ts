@@ -5,7 +5,11 @@ import type {
   MemoryCheckEndpointMemoryCheckPostMutationResponse,
   MemoryCheckEndpointMemoryCheckPost422,
 } from '../../types/MemoryCheckEndpointMemoryCheckPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getMemoryCheckEndpointMemoryCheckPostUrl() {
+  return `/memory/check` as const
+}
 
 /**
  * @description Check a memory module:param memory_run: MemoryRun details:return: Status
@@ -18,8 +22,8 @@ export async function memoryCheckEndpointMemoryCheckPost(
 ) {
   const res = await client<
     MemoryCheckEndpointMemoryCheckPostMutationResponse,
-    MemoryCheckEndpointMemoryCheckPost422,
+    ResponseErrorConfig<MemoryCheckEndpointMemoryCheckPost422>,
     MemoryCheckEndpointMemoryCheckPostMutationRequest
-  >({ method: 'POST', url: `/memory/check`, data, ...config })
+  >({ method: 'POST', url: getMemoryCheckEndpointMemoryCheckPostUrl().toString(), data, ...config })
   return res
 }

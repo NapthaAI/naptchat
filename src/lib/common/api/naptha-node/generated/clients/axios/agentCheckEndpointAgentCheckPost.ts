@@ -5,7 +5,11 @@ import type {
   AgentCheckEndpointAgentCheckPostMutationResponse,
   AgentCheckEndpointAgentCheckPost422,
 } from '../../types/AgentCheckEndpointAgentCheckPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getAgentCheckEndpointAgentCheckPostUrl() {
+  return `/agent/check` as const
+}
 
 /**
  * @description Check an agent:param agent_run: AgentRun details:return: Status
@@ -18,8 +22,8 @@ export async function agentCheckEndpointAgentCheckPost(
 ) {
   const res = await client<
     AgentCheckEndpointAgentCheckPostMutationResponse,
-    AgentCheckEndpointAgentCheckPost422,
+    ResponseErrorConfig<AgentCheckEndpointAgentCheckPost422>,
     AgentCheckEndpointAgentCheckPostMutationRequest
-  >({ method: 'POST', url: `/agent/check`, data, ...config })
+  >({ method: 'POST', url: getAgentCheckEndpointAgentCheckPostUrl().toString(), data, ...config })
   return res
 }

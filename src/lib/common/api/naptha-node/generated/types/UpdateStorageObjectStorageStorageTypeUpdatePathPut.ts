@@ -1,5 +1,5 @@
 import type { BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut } from './BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut.ts'
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { StorageType } from './StorageType.ts'
 
 export type UpdateStorageObjectStorageStorageTypeUpdatePathPutPathParams = {
@@ -29,7 +29,7 @@ export type UpdateStorageObjectStorageStorageTypeUpdatePathPut200 = any
 /**
  * @description Validation Error
  */
-export type UpdateStorageObjectStorageStorageTypeUpdatePathPut422 = HttpValidationError
+export type UpdateStorageObjectStorageStorageTypeUpdatePathPut422 = HTTPValidationError
 
 export type UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationRequest = BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut
 

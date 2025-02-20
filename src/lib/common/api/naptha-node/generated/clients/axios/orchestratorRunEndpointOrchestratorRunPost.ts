@@ -5,7 +5,11 @@ import type {
   OrchestratorRunEndpointOrchestratorRunPostMutationResponse,
   OrchestratorRunEndpointOrchestratorRunPost422,
 } from '../../types/OrchestratorRunEndpointOrchestratorRunPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getOrchestratorRunEndpointOrchestratorRunPostUrl() {
+  return `/orchestrator/run` as const
+}
 
 /**
  * @description Run an agent orchestrator:param orchestrator_run_input: Orchestrator run specifications:return: Status
@@ -18,8 +22,8 @@ export async function orchestratorRunEndpointOrchestratorRunPost(
 ) {
   const res = await client<
     OrchestratorRunEndpointOrchestratorRunPostMutationResponse,
-    OrchestratorRunEndpointOrchestratorRunPost422,
+    ResponseErrorConfig<OrchestratorRunEndpointOrchestratorRunPost422>,
     OrchestratorRunEndpointOrchestratorRunPostMutationRequest
-  >({ method: 'POST', url: `/orchestrator/run`, data, ...config })
+  >({ method: 'POST', url: getOrchestratorRunEndpointOrchestratorRunPostUrl().toString(), data, ...config })
   return res
 }

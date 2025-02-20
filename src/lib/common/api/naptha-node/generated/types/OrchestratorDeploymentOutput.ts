@@ -1,6 +1,7 @@
 import type { AgentDeploymentOutput } from './AgentDeploymentOutput.ts'
 import type { EnvironmentDeploymentOutput } from './EnvironmentDeploymentOutput.ts'
-import type { KbDeploymentOutput } from './KbDeploymentOutput.ts'
+import type { KBDeploymentOutput } from './KBDeploymentOutput.ts'
+import type { MemoryDeploymentOutput } from './MemoryDeploymentOutput.ts'
 import type { Module } from './Module.ts'
 import type { NodeConfig } from './NodeConfig.ts'
 import type { NodeConfigInput } from './NodeConfigInput.ts'
@@ -13,7 +14,8 @@ export type OrchestratorDeploymentOutput = {
   config?: OrchestratorConfig | null
   agent_deployments?: AgentDeploymentOutput[] | null
   environment_deployments?: EnvironmentDeploymentOutput[] | null
-  kb_deployments?: KbDeploymentOutput[] | null
+  kb_deployments?: KBDeploymentOutput[] | null
+  memory_deployments?: MemoryDeploymentOutput[] | null
   /**
    * @default false
    */

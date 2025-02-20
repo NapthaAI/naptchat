@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { OrchestratorRunInput } from './OrchestratorRunInput.ts'
 import type { OrchestratorRunOutput } from './OrchestratorRunOutput.ts'
 
@@ -10,7 +10,7 @@ export type OrchestratorCheckEndpointOrchestratorCheckPost200 = OrchestratorRunO
 /**
  * @description Validation Error
  */
-export type OrchestratorCheckEndpointOrchestratorCheckPost422 = HttpValidationError
+export type OrchestratorCheckEndpointOrchestratorCheckPost422 = HTTPValidationError
 
 export type OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest = OrchestratorRunInput
 

@@ -6,7 +6,17 @@ import type {
   CreateStorageObjectStorageStorageTypeCreatePathPostPathParams,
   CreateStorageObjectStorageStorageTypeCreatePathPost422,
 } from '../../types/CreateStorageObjectStorageStorageTypeCreatePathPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getCreateStorageObjectStorageStorageTypeCreatePathPostUrl({
+  storage_type,
+  path,
+}: {
+  storage_type: CreateStorageObjectStorageStorageTypeCreatePathPostPathParams['storage_type']
+  path: CreateStorageObjectStorageStorageTypeCreatePathPostPathParams['path']
+}) {
+  return `/storage/${storage_type}/create/${path}` as const
+}
 
 /**
  * @description Create new storage objects (table, file, or IPFS content)
@@ -35,11 +45,11 @@ export async function createStorageObjectStorageStorageTypeCreatePathPost(
   }
   const res = await client<
     CreateStorageObjectStorageStorageTypeCreatePathPostMutationResponse,
-    CreateStorageObjectStorageStorageTypeCreatePathPost422,
+    ResponseErrorConfig<CreateStorageObjectStorageStorageTypeCreatePathPost422>,
     CreateStorageObjectStorageStorageTypeCreatePathPostMutationRequest
   >({
     method: 'POST',
-    url: `/storage/${storage_type}/create/${path}`,
+    url: getCreateStorageObjectStorageStorageTypeCreatePathPostUrl({ storage_type, path }).toString(),
     data: formData,
     headers: { 'Content-Type': 'multipart/form-data', ...config.headers },
     ...config,

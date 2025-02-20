@@ -17,9 +17,8 @@ import {
 	MULTIAGENT_CHAT_MODULE_TYPE,
 } from "$common/constants";
 
-// TODO: Use https:// once TLS in available
 const REQUEST_CONFIG = {
-	baseURL: "http://" + [NAPTHA_NODE_HOSTNAME, NAPTHA_NODE_HTTP_PORT].join(":"),
+	baseURL: "https://" + [NAPTHA_NODE_HOSTNAME, NAPTHA_NODE_HTTP_PORT].join(":"),
 };
 
 export const ORCHESTRATOR_DEPLOYMENT_CONFIG: OrchestratorDeploymentInput = {

@@ -5,7 +5,11 @@ import type {
   UserRegisterEndpointUserRegisterPostMutationResponse,
   UserRegisterEndpointUserRegisterPost422,
 } from '../../types/UserRegisterEndpointUserRegisterPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getUserRegisterEndpointUserRegisterPostUrl() {
+  return `/user/register` as const
+}
 
 /**
  * @description Register a new user.
@@ -18,8 +22,8 @@ export async function userRegisterEndpointUserRegisterPost(
 ) {
   const res = await client<
     UserRegisterEndpointUserRegisterPostMutationResponse,
-    UserRegisterEndpointUserRegisterPost422,
+    ResponseErrorConfig<UserRegisterEndpointUserRegisterPost422>,
     UserRegisterEndpointUserRegisterPostMutationRequest
-  >({ method: 'POST', url: `/user/register`, data, ...config })
+  >({ method: 'POST', url: getUserRegisterEndpointUserRegisterPostUrl().toString(), data, ...config })
   return res
 }

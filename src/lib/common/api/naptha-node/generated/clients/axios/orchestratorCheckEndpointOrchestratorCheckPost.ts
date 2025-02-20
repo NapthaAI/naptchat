@@ -5,7 +5,11 @@ import type {
   OrchestratorCheckEndpointOrchestratorCheckPostMutationResponse,
   OrchestratorCheckEndpointOrchestratorCheckPost422,
 } from '../../types/OrchestratorCheckEndpointOrchestratorCheckPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getOrchestratorCheckEndpointOrchestratorCheckPostUrl() {
+  return `/orchestrator/check` as const
+}
 
 /**
  * @description Check an orchestrator:param orchestrator_run: OrchestratorRun details:return: Status
@@ -18,8 +22,8 @@ export async function orchestratorCheckEndpointOrchestratorCheckPost(
 ) {
   const res = await client<
     OrchestratorCheckEndpointOrchestratorCheckPostMutationResponse,
-    OrchestratorCheckEndpointOrchestratorCheckPost422,
+    ResponseErrorConfig<OrchestratorCheckEndpointOrchestratorCheckPost422>,
     OrchestratorCheckEndpointOrchestratorCheckPostMutationRequest
-  >({ method: 'POST', url: `/orchestrator/check`, data, ...config })
+  >({ method: 'POST', url: getOrchestratorCheckEndpointOrchestratorCheckPostUrl().toString(), data, ...config })
   return res
 }

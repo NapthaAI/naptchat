@@ -5,7 +5,11 @@ import type {
   ToolCheckEndpointToolCheckPostMutationResponse,
   ToolCheckEndpointToolCheckPost422,
 } from '../../types/ToolCheckEndpointToolCheckPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getToolCheckEndpointToolCheckPostUrl() {
+  return `/tool/check` as const
+}
 
 /**
  * @description Check a tool:param tool_run: ToolRun details:return: Status
@@ -16,11 +20,10 @@ export async function toolCheckEndpointToolCheckPost(
   data: ToolCheckEndpointToolCheckPostMutationRequest,
   config: Partial<RequestConfig<ToolCheckEndpointToolCheckPostMutationRequest>> = {},
 ) {
-  const res = await client<ToolCheckEndpointToolCheckPostMutationResponse, ToolCheckEndpointToolCheckPost422, ToolCheckEndpointToolCheckPostMutationRequest>({
-    method: 'POST',
-    url: `/tool/check`,
-    data,
-    ...config,
-  })
+  const res = await client<
+    ToolCheckEndpointToolCheckPostMutationResponse,
+    ResponseErrorConfig<ToolCheckEndpointToolCheckPost422>,
+    ToolCheckEndpointToolCheckPostMutationRequest
+  >({ method: 'POST', url: getToolCheckEndpointToolCheckPostUrl().toString(), data, ...config })
   return res
 }

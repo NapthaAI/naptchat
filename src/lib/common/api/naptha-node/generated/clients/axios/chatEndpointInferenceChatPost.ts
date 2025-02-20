@@ -5,7 +5,11 @@ import type {
   ChatEndpointInferenceChatPostMutationResponse,
   ChatEndpointInferenceChatPost422,
 } from '../../types/ChatEndpointInferenceChatPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getChatEndpointInferenceChatPostUrl() {
+  return `/inference/chat` as const
+}
 
 /**
  * @description Forward chat completion requests to litellm proxy
@@ -16,11 +20,10 @@ export async function chatEndpointInferenceChatPost(
   data: ChatEndpointInferenceChatPostMutationRequest,
   config: Partial<RequestConfig<ChatEndpointInferenceChatPostMutationRequest>> = {},
 ) {
-  const res = await client<ChatEndpointInferenceChatPostMutationResponse, ChatEndpointInferenceChatPost422, ChatEndpointInferenceChatPostMutationRequest>({
-    method: 'POST',
-    url: `/inference/chat`,
-    data,
-    ...config,
-  })
+  const res = await client<
+    ChatEndpointInferenceChatPostMutationResponse,
+    ResponseErrorConfig<ChatEndpointInferenceChatPost422>,
+    ChatEndpointInferenceChatPostMutationRequest
+  >({ method: 'POST', url: getChatEndpointInferenceChatPostUrl().toString(), data, ...config })
   return res
 }

@@ -1,4 +1,4 @@
-import type { HttpValidationError } from './HttpValidationError.ts'
+import type { HTTPValidationError } from './HTTPValidationError.ts'
 import type { StorageType } from './StorageType.ts'
 
 export type DeleteStorageObjectStorageStorageTypeDeletePathDeletePathParams = {
@@ -32,7 +32,7 @@ export type DeleteStorageObjectStorageStorageTypeDeletePathDelete200 = any
 /**
  * @description Validation Error
  */
-export type DeleteStorageObjectStorageStorageTypeDeletePathDelete422 = HttpValidationError
+export type DeleteStorageObjectStorageStorageTypeDeletePathDelete422 = HTTPValidationError
 
 export type DeleteStorageObjectStorageStorageTypeDeletePathDeleteMutationResponse = DeleteStorageObjectStorageStorageTypeDeletePathDelete200
 

@@ -1,5 +1,5 @@
 import type { BaseModel } from './BaseModel.ts'
-import type { MemoryConfig } from './MemoryConfig.ts'
+import type { MemoryConfigOutput } from './MemoryConfigOutput.ts'
 import type { Module } from './Module.ts'
 import type { NodeConfig } from './NodeConfig.ts'
 import type { NodeConfigInput } from './NodeConfigInput.ts'
@@ -11,7 +11,7 @@ export type MemoryDeploymentOutput = {
    */
   name?: string | null
   module?: object | Module | null
-  config?: MemoryConfig | BaseModel | null
+  config?: MemoryConfigOutput | BaseModel | null
   /**
    * @default false
    */

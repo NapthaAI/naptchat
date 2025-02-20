@@ -7,7 +7,15 @@ import type {
   SearchStorageObjectsStorageStorageTypeSearchPostQueryParams,
   SearchStorageObjectsStorageStorageTypeSearchPost422,
 } from '../../types/SearchStorageObjectsStorageStorageTypeSearchPost.ts'
-import type { RequestConfig } from '@kubb/plugin-client/clients/axios'
+import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+
+export function getSearchStorageObjectsStorageStorageTypeSearchPostUrl({
+  storage_type,
+}: {
+  storage_type: SearchStorageObjectsStorageStorageTypeSearchPostPathParams['storage_type']
+}) {
+  return `/storage/${storage_type}/search` as const
+}
 
 /**
  * @description Search across storage (DB query, file content search, IPFS search)
@@ -22,8 +30,8 @@ export async function searchStorageObjectsStorageStorageTypeSearchPost(
 ) {
   const res = await client<
     SearchStorageObjectsStorageStorageTypeSearchPostMutationResponse,
-    SearchStorageObjectsStorageStorageTypeSearchPost422,
+    ResponseErrorConfig<SearchStorageObjectsStorageStorageTypeSearchPost422>,
     SearchStorageObjectsStorageStorageTypeSearchPostMutationRequest
-  >({ method: 'POST', url: `/storage/${storage_type}/search`, params, data, ...config })
+  >({ method: 'POST', url: getSearchStorageObjectsStorageStorageTypeSearchPostUrl({ storage_type }).toString(), params, data, ...config })
   return res
 }
