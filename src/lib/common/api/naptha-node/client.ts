@@ -1,4 +1,5 @@
 import {
+	environmentCheckEndpointEnvironmentCheckPost,
 	orchestratorCheckEndpointOrchestratorCheckPost,
 	orchestratorRunEndpointOrchestratorRunPost,
 	userCheckEndpointUserCheckPost,
@@ -51,8 +52,8 @@ export const multiagentChatOrchestratorCheck = ({ userId, signature }: ByUserId 
 	orchestratorCheckEndpointOrchestratorCheckPost(
 		{
 			consumer_id: userId,
-			deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
 			signature,
+			deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
 		},
 
 		REQUEST_CONFIG,
@@ -62,8 +63,8 @@ export const multiagentChatOrchestratorRun = ({ userId, signature }: ByUserId & 
 	orchestratorRunEndpointOrchestratorRunPost(
 		{
 			consumer_id: userId,
-			deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
 			signature,
+			deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
 		},
 
 		REQUEST_CONFIG,

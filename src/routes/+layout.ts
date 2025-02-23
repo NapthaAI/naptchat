@@ -3,10 +3,10 @@ import { browser } from "$app/environment";
 import { writable } from "svelte/store";
 import { napthaNodeClient, type User } from "$common/api/naptha-node";
 import type { ByPublicKey } from "$common/types";
-import type { OrchestratorRunOutput } from "$common/api/naptha-node/generated";
+import type { OrchestratorRunOutput } from "$common/api/naptha-node";
 import { generateKeyPair, sign } from "$common/utils/crypto";
 
-// TODO: Use Web Crypto API for private key storage instead on IndexedDB to mitigate security issues
+// TODO: Use Web Crypto API private key storage instead on IndexedDB to mitigate security issues
 
 export const load: LayoutLoad = async () => {
 	const session = writable<User | null>(null);
@@ -61,15 +61,15 @@ export const load: LayoutLoad = async () => {
 					})
 					.then((privKeyArrayBuffer) => {
 						if (privKeyArrayBuffer) {
-							return sign(sessionData.id, new Uint8Array(privKeyArrayBuffer)).then((signature) =>
+							return sign(sessionData.id, new Uint8Array(privKeyArrayBuffer)).then((signature) => {
 								napthaNodeClient
 									.multiagentChatOrchestratorCheck({
 										userId: sessionData.id,
 										signature,
 									})
 									.then(({ data }) => orchestratorStatus.set(data))
-									.catch((error) => console.error(error)),
-							);
+									.catch((error) => console.error(error));
+							});
 						}
 					})
 					.catch((error) => console.error("Failed to access secure storage:", error));
@@ -119,7 +119,6 @@ export const load: LayoutLoad = async () => {
 			},
 
 			async signIn({ publicKey }: ByPublicKey) {
-				// Try stored private key first
 				if (browser) {
 					return new Promise<IDBDatabase>((resolve, reject) => {
 						const request = indexedDB.open("auth", 1);
