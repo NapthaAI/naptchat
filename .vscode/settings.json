@@ -25,7 +25,9 @@
 		"secp",
 		"surrealdb",
 		"unocss",
-		"uuidv"
+		"uuidv",
+		"vercel",
+		"Vite"
 	],
 	"typescript.tsdk": "node_modules/typescript/lib"
 }

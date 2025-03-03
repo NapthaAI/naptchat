@@ -2,14 +2,12 @@
 	import { Button } from "$common/ui/components";
 	import { createForm } from "felte";
 	import { validator } from "@felte/validator-zod";
-	import { getContext } from "svelte";
 	import { napthaNodeClient } from "$common/api/naptha-node";
 	import { getSecurePrivateKey, sign } from "$common/utils/crypto";
 	import type { User } from "$common/api/naptha-node";
 	import { chatCreationSchema, type ChatCreationData } from "../model/schemas";
 	import { fade } from "svelte/transition";
 
-	// Get session data from the parent component and define events
 	let {
 		data,
 		isOpen = false,
@@ -24,13 +22,11 @@
 		onClose?: () => void;
 	}>();
 
-	// Create state variables
 	let authenticatedUser = $state<User | null>(null);
 	let isCreating = $state(false);
 	let error = $state<string | null>(null);
 	let success = $state<boolean>(false);
 
-	// Subscribe to session changes if data is provided
 	$effect(() => {
 		if (data?.session) {
 			return data.session.subscribe((user: User | null) => {
@@ -39,7 +35,6 @@
 		}
 	});
 
-	// Default values
 	const defaultValues: ChatCreationData = {
 		topic: "",
 		groupSize: 3,
@@ -47,7 +42,6 @@
 		subRounds: 2,
 	};
 
-	// Create the form with type annotation
 	const {
 		form: formAction,
 		errors,
@@ -62,7 +56,6 @@
 			error = null;
 			success = false;
 
-			// Start with getting the private key
 			return getSecurePrivateKey()
 				.then((privateKey) => {
 					// Check authentication first
@@ -79,13 +72,11 @@
 						throw new Error("Failed to access your private key");
 					}
 
-					// Now we can sign with the user ID
 					return sign(authenticatedUser.id, privateKey);
 				})
 				.then((signature) => {
-					// At this point we know authenticatedUser is not null
-					// Call the orchestrator API
 					return napthaNodeClient.multiagentChatOrchestratorRun({
+						// At this point we know authenticatedUser is not null
 						userId: authenticatedUser!.id,
 						signature,
 					});
