@@ -1,5 +1,5 @@
-import type { AgentRunInput } from './AgentRunInput.ts'
 import type { AgentRunOutput } from './AgentRunOutput.ts'
+import type { BodyAgentRunEndpointAgentRunPost } from './BodyAgentRunEndpointAgentRunPost.ts'
 import type { HTTPValidationError } from './HTTPValidationError.ts'
 
 /**
@@ -12,7 +12,7 @@ export type AgentRunEndpointAgentRunPost200 = AgentRunOutput
  */
 export type AgentRunEndpointAgentRunPost422 = HTTPValidationError
 
-export type AgentRunEndpointAgentRunPostMutationRequest = AgentRunInput
+export type AgentRunEndpointAgentRunPostMutationRequest = BodyAgentRunEndpointAgentRunPost
 
 export type AgentRunEndpointAgentRunPostMutationResponse = AgentRunEndpointAgentRunPost200
 

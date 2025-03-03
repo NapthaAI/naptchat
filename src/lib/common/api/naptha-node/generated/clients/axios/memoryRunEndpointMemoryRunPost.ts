@@ -12,7 +12,7 @@ export function getMemoryRunEndpointMemoryRunPostUrl() {
 }
 
 /**
- * @description Run a memory module:param memory_run_input: Memory run specifications:return: Status
+ * @description Run a memory module:param memory_run_input: Memory run specifications:param secrets: Optional list of secrets to pass to the memory:return: Status
  * @summary Memory Run Endpoint
  * {@link /memory/run}
  */

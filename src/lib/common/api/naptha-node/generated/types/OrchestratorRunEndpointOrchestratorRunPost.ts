@@ -1,5 +1,5 @@
+import type { BodyOrchestratorRunEndpointOrchestratorRunPost } from './BodyOrchestratorRunEndpointOrchestratorRunPost.ts'
 import type { HTTPValidationError } from './HTTPValidationError.ts'
-import type { OrchestratorRunInput } from './OrchestratorRunInput.ts'
 import type { OrchestratorRunOutput } from './OrchestratorRunOutput.ts'
 
 /**
@@ -12,7 +12,7 @@ export type OrchestratorRunEndpointOrchestratorRunPost200 = OrchestratorRunOutpu
  */
 export type OrchestratorRunEndpointOrchestratorRunPost422 = HTTPValidationError
 
-export type OrchestratorRunEndpointOrchestratorRunPostMutationRequest = OrchestratorRunInput
+export type OrchestratorRunEndpointOrchestratorRunPostMutationRequest = BodyOrchestratorRunEndpointOrchestratorRunPost
 
 export type OrchestratorRunEndpointOrchestratorRunPostMutationResponse = OrchestratorRunEndpointOrchestratorRunPost200
 

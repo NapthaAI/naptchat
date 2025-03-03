@@ -1,0 +1,1 @@
+{"properties":{"model":{"type":"string","title":"Model"},"input":{"anyOf":[{"type":"string"},{"items":{"type":"string"},"type":"array"}],"title":"Input"}},"type":"object","required":["model","input"],"title":"EmbeddingsRequest","x-readme-ref-name":"EmbeddingsRequest"}

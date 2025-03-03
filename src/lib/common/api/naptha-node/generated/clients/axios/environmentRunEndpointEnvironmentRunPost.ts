@@ -12,7 +12,7 @@ export function getEnvironmentRunEndpointEnvironmentRunPostUrl() {
 }
 
 /**
- * @description Run an environment:param environment_run_input: Environment run specifications :return: Status
+ * @description Run an environment:param environment_run_input: Environment run specifications :param secrets: Optional list of secrets to pass to the environment:return: Status
  * @summary Environment Run Endpoint
  * {@link /environment/run}
  */

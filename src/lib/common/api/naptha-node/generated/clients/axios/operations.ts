@@ -5,6 +5,10 @@ export const operations = {
     path: '/health',
     method: 'get',
   },
+  get_public_key__well_known_jwks_json_get: {
+    path: '/.well-known/jwks.json',
+    method: 'get',
+  },
   agent_create_endpoint_agent_create_post: {
     path: '/agent/create',
     method: 'post',
@@ -85,8 +89,8 @@ export const operations = {
     path: '/user/register',
     method: 'post',
   },
-  chat_endpoint_inference_chat_post: {
-    path: '/inference/chat',
+  user_secret_create_endpoint_user_secret_create_post: {
+    path: '/user/secret/create',
     method: 'post',
   },
   create_storage_object_storage__storage_type__create__path__post: {
@@ -112,5 +116,21 @@ export const operations = {
   update_storage_object_storage__storage_type__update__path__put: {
     path: '/storage/:storage_type/update/:path',
     method: 'put',
+  },
+  models_endpoint_inference_models_get: {
+    path: '/inference/models',
+    method: 'get',
+  },
+  chat_completions_endpoint_inference_chat_completions_post: {
+    path: '/inference/chat/completions',
+    method: 'post',
+  },
+  completions_endpoint_inference_completions_post: {
+    path: '/inference/completions',
+    method: 'post',
+  },
+  embeddings_endpoint_inference_embeddings_post: {
+    path: '/inference/embeddings',
+    method: 'post',
   },
 } as const

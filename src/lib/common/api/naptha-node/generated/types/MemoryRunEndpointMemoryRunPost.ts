@@ -1,5 +1,5 @@
+import type { BodyMemoryRunEndpointMemoryRunPost } from './BodyMemoryRunEndpointMemoryRunPost.ts'
 import type { HTTPValidationError } from './HTTPValidationError.ts'
-import type { MemoryRunInput } from './MemoryRunInput.ts'
 import type { MemoryRunOutput } from './MemoryRunOutput.ts'
 
 /**
@@ -12,7 +12,7 @@ export type MemoryRunEndpointMemoryRunPost200 = MemoryRunOutput
  */
 export type MemoryRunEndpointMemoryRunPost422 = HTTPValidationError
 
-export type MemoryRunEndpointMemoryRunPostMutationRequest = MemoryRunInput
+export type MemoryRunEndpointMemoryRunPostMutationRequest = BodyMemoryRunEndpointMemoryRunPost
 
 export type MemoryRunEndpointMemoryRunPostMutationResponse = MemoryRunEndpointMemoryRunPost200
 

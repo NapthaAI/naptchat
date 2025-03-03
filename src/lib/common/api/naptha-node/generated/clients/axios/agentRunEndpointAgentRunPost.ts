@@ -12,7 +12,7 @@ export function getAgentRunEndpointAgentRunPostUrl() {
 }
 
 /**
- * @description Run an agent:param agent_run_input: Agent run specifications:return: Status
+ * @description Run an agent:param agent_run_input: Agent run specifications:param secrets: Optional list of secrets to pass to the agent:return: Status
  * @summary Agent Run Endpoint
  * {@link /agent/run}
  */

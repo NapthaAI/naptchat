@@ -12,7 +12,7 @@ export function getKbRunEndpointKbRunPostUrl() {
 }
 
 /**
- * @description Run a knowledge base:param kb_run_input: KBRunInput:return: KBRun
+ * @description Run a knowledge base:param kb_run_input: KBRunInput:param secrets: Optional list of secrets to pass to the knowledge base:return: KBRun
  * @summary Kb Run Endpoint
  * {@link /kb/run}
  */

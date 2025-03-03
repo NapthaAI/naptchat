@@ -12,7 +12,7 @@ export function getToolRunEndpointToolRunPostUrl() {
 }
 
 /**
- * @description Run a tool:param tool_run_input: Tool run specifications:return: Status
+ * @description Run a tool:param tool_run_input: Tool run specifications:param secrets: Optional list of secrets to pass to the tool:return: Status
  * @summary Tool Run Endpoint
  * {@link /tool/run}
  */

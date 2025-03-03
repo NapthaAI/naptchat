@@ -26,18 +26,35 @@ export type {
 export type { AgentRunInput } from './types/AgentRunInput.ts'
 export type { AgentRunOutput } from './types/AgentRunOutput.ts'
 export type { BaseModel } from './types/BaseModel.ts'
+export type { BodyAgentRunEndpointAgentRunPost } from './types/BodyAgentRunEndpointAgentRunPost.ts'
 export type { BodyCreateStorageObjectStorageStorageTypeCreatePathPost } from './types/BodyCreateStorageObjectStorageStorageTypeCreatePathPost.ts'
+export type { BodyEnvironmentRunEndpointEnvironmentRunPost } from './types/BodyEnvironmentRunEndpointEnvironmentRunPost.ts'
+export type { BodyKbRunEndpointKbRunPost } from './types/BodyKbRunEndpointKbRunPost.ts'
+export type { BodyMemoryRunEndpointMemoryRunPost } from './types/BodyMemoryRunEndpointMemoryRunPost.ts'
+export type { BodyOrchestratorRunEndpointOrchestratorRunPost } from './types/BodyOrchestratorRunEndpointOrchestratorRunPost.ts'
 export type { BodySearchStorageObjectsStorageStorageTypeSearchPost } from './types/BodySearchStorageObjectsStorageStorageTypeSearchPost.ts'
+export type { BodyToolRunEndpointToolRunPost } from './types/BodyToolRunEndpointToolRunPost.ts'
 export type { BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut } from './types/BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut.ts'
+export type { BodyUserSecretCreateEndpointUserSecretCreatePost } from './types/BodyUserSecretCreateEndpointUserSecretCreatePost.ts'
 export type { ChatCompletionRequest } from './types/ChatCompletionRequest.ts'
 export type {
-  ChatEndpointInferenceChatPost200,
-  ChatEndpointInferenceChatPost422,
-  ChatEndpointInferenceChatPostMutationRequest,
-  ChatEndpointInferenceChatPostMutationResponse,
-  ChatEndpointInferenceChatPostMutation,
-} from './types/ChatEndpointInferenceChatPost.ts'
+  ChatCompletionsEndpointInferenceChatCompletionsPostQueryParams,
+  ChatCompletionsEndpointInferenceChatCompletionsPost200,
+  ChatCompletionsEndpointInferenceChatCompletionsPost422,
+  ChatCompletionsEndpointInferenceChatCompletionsPostMutationRequest,
+  ChatCompletionsEndpointInferenceChatCompletionsPostMutationResponse,
+  ChatCompletionsEndpointInferenceChatCompletionsPostMutation,
+} from './types/ChatCompletionsEndpointInferenceChatCompletionsPost.ts'
 export type { ChatMessage } from './types/ChatMessage.ts'
+export type { CompletionRequest } from './types/CompletionRequest.ts'
+export type {
+  CompletionsEndpointInferenceCompletionsPostQueryParams,
+  CompletionsEndpointInferenceCompletionsPost200,
+  CompletionsEndpointInferenceCompletionsPost422,
+  CompletionsEndpointInferenceCompletionsPostMutationRequest,
+  CompletionsEndpointInferenceCompletionsPostMutationResponse,
+  CompletionsEndpointInferenceCompletionsPostMutation,
+} from './types/CompletionsEndpointInferenceCompletionsPost.ts'
 export type {
   CreateStorageObjectStorageStorageTypeCreatePathPostPathParams,
   CreateStorageObjectStorageStorageTypeCreatePathPost200,
@@ -56,6 +73,15 @@ export type {
   DeleteStorageObjectStorageStorageTypeDeletePathDeleteMutation,
 } from './types/DeleteStorageObjectStorageStorageTypeDeletePathDelete.ts'
 export type { DockerParams } from './types/DockerParams.ts'
+export type {
+  EmbeddingsEndpointInferenceEmbeddingsPostQueryParams,
+  EmbeddingsEndpointInferenceEmbeddingsPost200,
+  EmbeddingsEndpointInferenceEmbeddingsPost422,
+  EmbeddingsEndpointInferenceEmbeddingsPostMutationRequest,
+  EmbeddingsEndpointInferenceEmbeddingsPostMutationResponse,
+  EmbeddingsEndpointInferenceEmbeddingsPostMutation,
+} from './types/EmbeddingsEndpointInferenceEmbeddingsPost.ts'
+export type { EmbeddingsRequest } from './types/EmbeddingsRequest.ts'
 export type {
   EnvironmentCheckEndpointEnvironmentCheckPost200,
   EnvironmentCheckEndpointEnvironmentCheckPost422,
@@ -83,6 +109,11 @@ export type {
 } from './types/EnvironmentRunEndpointEnvironmentRunPost.ts'
 export type { EnvironmentRunInput } from './types/EnvironmentRunInput.ts'
 export type { EnvironmentRunOutput } from './types/EnvironmentRunOutput.ts'
+export type {
+  GetPublicKeyWellKnownJwksJsonGet200,
+  GetPublicKeyWellKnownJwksJsonGetQueryResponse,
+  GetPublicKeyWellKnownJwksJsonGetQuery,
+} from './types/GetPublicKeyWellKnownJwksJsonGet.ts'
 export type { HealthCheckHealthGet200, HealthCheckHealthGetQueryResponse, HealthCheckHealthGetQuery } from './types/HealthCheckHealthGet.ts'
 export type { HTTPValidationError } from './types/HTTPValidationError.ts'
 export type {
@@ -149,6 +180,13 @@ export type {
 } from './types/MemoryRunEndpointMemoryRunPost.ts'
 export type { MemoryRunInput } from './types/MemoryRunInput.ts'
 export type { MemoryRunOutput } from './types/MemoryRunOutput.ts'
+export type {
+  ModelsEndpointInferenceModelsGetQueryParams,
+  ModelsEndpointInferenceModelsGet200,
+  ModelsEndpointInferenceModelsGet422,
+  ModelsEndpointInferenceModelsGetQueryResponse,
+  ModelsEndpointInferenceModelsGetQuery,
+} from './types/ModelsEndpointInferenceModelsGet.ts'
 export type { Module } from './types/Module.ts'
 export type { ModuleExecutionTypeEnum, ModuleExecutionType } from './types/ModuleExecutionType.ts'
 export type { ModuleTypeEnum, ModuleType } from './types/ModuleType.ts'
@@ -198,6 +236,7 @@ export type {
   SearchStorageObjectsStorageStorageTypeSearchPostMutationResponse,
   SearchStorageObjectsStorageStorageTypeSearchPostMutation,
 } from './types/SearchStorageObjectsStorageStorageTypeSearchPost.ts'
+export type { SecretInput } from './types/SecretInput.ts'
 export type { StorageConfig } from './types/StorageConfig.ts'
 export type { StorageTypeEnum, StorageType } from './types/StorageType.ts'
 export type {
@@ -250,11 +289,26 @@ export type {
   UserRegisterEndpointUserRegisterPostMutationResponse,
   UserRegisterEndpointUserRegisterPostMutation,
 } from './types/UserRegisterEndpointUserRegisterPost.ts'
+export type {
+  UserSecretCreateEndpointUserSecretCreatePostQueryParams,
+  UserSecretCreateEndpointUserSecretCreatePost200,
+  UserSecretCreateEndpointUserSecretCreatePost422,
+  UserSecretCreateEndpointUserSecretCreatePostMutationRequest,
+  UserSecretCreateEndpointUserSecretCreatePostMutationResponse,
+  UserSecretCreateEndpointUserSecretCreatePostMutation,
+} from './types/UserSecretCreateEndpointUserSecretCreatePost.ts'
 export type { ValidationError } from './types/ValidationError.ts'
 export { getAgentCheckEndpointAgentCheckPostUrl, agentCheckEndpointAgentCheckPost } from './clients/axios/agentCheckEndpointAgentCheckPost.ts'
 export { getAgentCreateEndpointAgentCreatePostUrl, agentCreateEndpointAgentCreatePost } from './clients/axios/agentCreateEndpointAgentCreatePost.ts'
 export { getAgentRunEndpointAgentRunPostUrl, agentRunEndpointAgentRunPost } from './clients/axios/agentRunEndpointAgentRunPost.ts'
-export { getChatEndpointInferenceChatPostUrl, chatEndpointInferenceChatPost } from './clients/axios/chatEndpointInferenceChatPost.ts'
+export {
+  getChatCompletionsEndpointInferenceChatCompletionsPostUrl,
+  chatCompletionsEndpointInferenceChatCompletionsPost,
+} from './clients/axios/chatCompletionsEndpointInferenceChatCompletionsPost.ts'
+export {
+  getCompletionsEndpointInferenceCompletionsPostUrl,
+  completionsEndpointInferenceCompletionsPost,
+} from './clients/axios/completionsEndpointInferenceCompletionsPost.ts'
 export {
   getCreateStorageObjectStorageStorageTypeCreatePathPostUrl,
   createStorageObjectStorageStorageTypeCreatePathPost,
@@ -263,6 +317,10 @@ export {
   getDeleteStorageObjectStorageStorageTypeDeletePathDeleteUrl,
   deleteStorageObjectStorageStorageTypeDeletePathDelete,
 } from './clients/axios/deleteStorageObjectStorageStorageTypeDeletePathDelete.ts'
+export {
+  getEmbeddingsEndpointInferenceEmbeddingsPostUrl,
+  embeddingsEndpointInferenceEmbeddingsPost,
+} from './clients/axios/embeddingsEndpointInferenceEmbeddingsPost.ts'
 export {
   getEnvironmentCheckEndpointEnvironmentCheckPostUrl,
   environmentCheckEndpointEnvironmentCheckPost,
@@ -275,6 +333,7 @@ export {
   getEnvironmentRunEndpointEnvironmentRunPostUrl,
   environmentRunEndpointEnvironmentRunPost,
 } from './clients/axios/environmentRunEndpointEnvironmentRunPost.ts'
+export { getGetPublicKeyWellKnownJwksJsonGetUrl, getPublicKeyWellKnownJwksJsonGet } from './clients/axios/getPublicKeyWellKnownJwksJsonGet.ts'
 export { getHealthCheckHealthGetUrl, healthCheckHealthGet } from './clients/axios/healthCheckHealthGet.ts'
 export { getKbCheckEndpointKbCheckPostUrl, kbCheckEndpointKbCheckPost } from './clients/axios/kbCheckEndpointKbCheckPost.ts'
 export { getKbCreateEndpointKbCreatePostUrl, kbCreateEndpointKbCreatePost } from './clients/axios/kbCreateEndpointKbCreatePost.ts'
@@ -286,6 +345,7 @@ export {
 export { getMemoryCheckEndpointMemoryCheckPostUrl, memoryCheckEndpointMemoryCheckPost } from './clients/axios/memoryCheckEndpointMemoryCheckPost.ts'
 export { getMemoryCreateEndpointMemoryCreatePostUrl, memoryCreateEndpointMemoryCreatePost } from './clients/axios/memoryCreateEndpointMemoryCreatePost.ts'
 export { getMemoryRunEndpointMemoryRunPostUrl, memoryRunEndpointMemoryRunPost } from './clients/axios/memoryRunEndpointMemoryRunPost.ts'
+export { getModelsEndpointInferenceModelsGetUrl, modelsEndpointInferenceModelsGet } from './clients/axios/modelsEndpointInferenceModelsGet.ts'
 export { operations } from './clients/axios/operations.ts'
 export {
   getOrchestratorCheckEndpointOrchestratorCheckPostUrl,
@@ -316,6 +376,10 @@ export {
 } from './clients/axios/updateStorageObjectStorageStorageTypeUpdatePathPut.ts'
 export { getUserCheckEndpointUserCheckPostUrl, userCheckEndpointUserCheckPost } from './clients/axios/userCheckEndpointUserCheckPost.ts'
 export { getUserRegisterEndpointUserRegisterPostUrl, userRegisterEndpointUserRegisterPost } from './clients/axios/userRegisterEndpointUserRegisterPost.ts'
+export {
+  getUserSecretCreateEndpointUserSecretCreatePostUrl,
+  userSecretCreateEndpointUserSecretCreatePost,
+} from './clients/axios/userSecretCreateEndpointUserSecretCreatePost.ts'
 export { LLMClientTypeEnum } from './types/LLMClientType.ts'
 export { moduleExecutionTypeEnum } from './types/ModuleExecutionType.ts'
 export { moduleTypeEnum } from './types/ModuleType.ts'

@@ -12,7 +12,7 @@ export function getOrchestratorRunEndpointOrchestratorRunPostUrl() {
 }
 
 /**
- * @description Run an agent orchestrator:param orchestrator_run_input: Orchestrator run specifications:return: Status
+ * @description Run an agent orchestrator:param orchestrator_run_input: Orchestrator run specifications:param secrets: Optional list of secrets to pass to the orchestrator:return: Status
  * @summary Orchestrator Run Endpoint
  * {@link /orchestrator/run}
  */

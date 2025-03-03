@@ -1,5 +1,5 @@
+import type { BodyToolRunEndpointToolRunPost } from './BodyToolRunEndpointToolRunPost.ts'
 import type { HTTPValidationError } from './HTTPValidationError.ts'
-import type { ToolRunInput } from './ToolRunInput.ts'
 import type { ToolRunOutput } from './ToolRunOutput.ts'
 
 /**
@@ -12,7 +12,7 @@ export type ToolRunEndpointToolRunPost200 = ToolRunOutput
  */
 export type ToolRunEndpointToolRunPost422 = HTTPValidationError
 
-export type ToolRunEndpointToolRunPostMutationRequest = ToolRunInput
+export type ToolRunEndpointToolRunPostMutationRequest = BodyToolRunEndpointToolRunPost
 
 export type ToolRunEndpointToolRunPostMutationResponse = ToolRunEndpointToolRunPost200
 

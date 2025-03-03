@@ -1,4 +1,4 @@
-import type { EnvironmentRunInput } from './EnvironmentRunInput.ts'
+import type { BodyEnvironmentRunEndpointEnvironmentRunPost } from './BodyEnvironmentRunEndpointEnvironmentRunPost.ts'
 import type { EnvironmentRunOutput } from './EnvironmentRunOutput.ts'
 import type { HTTPValidationError } from './HTTPValidationError.ts'
 
@@ -12,7 +12,7 @@ export type EnvironmentRunEndpointEnvironmentRunPost200 = EnvironmentRunOutput
  */
 export type EnvironmentRunEndpointEnvironmentRunPost422 = HTTPValidationError
 
-export type EnvironmentRunEndpointEnvironmentRunPostMutationRequest = EnvironmentRunInput
+export type EnvironmentRunEndpointEnvironmentRunPostMutationRequest = BodyEnvironmentRunEndpointEnvironmentRunPost
 
 export type EnvironmentRunEndpointEnvironmentRunPostMutationResponse = EnvironmentRunEndpointEnvironmentRunPost200
 

@@ -1,5 +1,5 @@
+import type { BodyKbRunEndpointKbRunPost } from './BodyKbRunEndpointKbRunPost.ts'
 import type { HTTPValidationError } from './HTTPValidationError.ts'
-import type { KBRunInput } from './KBRunInput.ts'
 import type { KBRunOutput } from './KBRunOutput.ts'
 
 /**
@@ -12,7 +12,7 @@ export type KbRunEndpointKbRunPost200 = KBRunOutput
  */
 export type KbRunEndpointKbRunPost422 = HTTPValidationError
 
-export type KbRunEndpointKbRunPostMutationRequest = KBRunInput
+export type KbRunEndpointKbRunPostMutationRequest = BodyKbRunEndpointKbRunPost
 
 export type KbRunEndpointKbRunPostMutationResponse = KbRunEndpointKbRunPost200
 

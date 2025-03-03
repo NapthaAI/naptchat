@@ -26,18 +26,35 @@ export type {
 export type { AgentRunInput } from './AgentRunInput.ts'
 export type { AgentRunOutput } from './AgentRunOutput.ts'
 export type { BaseModel } from './BaseModel.ts'
+export type { BodyAgentRunEndpointAgentRunPost } from './BodyAgentRunEndpointAgentRunPost.ts'
 export type { BodyCreateStorageObjectStorageStorageTypeCreatePathPost } from './BodyCreateStorageObjectStorageStorageTypeCreatePathPost.ts'
+export type { BodyEnvironmentRunEndpointEnvironmentRunPost } from './BodyEnvironmentRunEndpointEnvironmentRunPost.ts'
+export type { BodyKbRunEndpointKbRunPost } from './BodyKbRunEndpointKbRunPost.ts'
+export type { BodyMemoryRunEndpointMemoryRunPost } from './BodyMemoryRunEndpointMemoryRunPost.ts'
+export type { BodyOrchestratorRunEndpointOrchestratorRunPost } from './BodyOrchestratorRunEndpointOrchestratorRunPost.ts'
 export type { BodySearchStorageObjectsStorageStorageTypeSearchPost } from './BodySearchStorageObjectsStorageStorageTypeSearchPost.ts'
+export type { BodyToolRunEndpointToolRunPost } from './BodyToolRunEndpointToolRunPost.ts'
 export type { BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut } from './BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut.ts'
+export type { BodyUserSecretCreateEndpointUserSecretCreatePost } from './BodyUserSecretCreateEndpointUserSecretCreatePost.ts'
 export type { ChatCompletionRequest } from './ChatCompletionRequest.ts'
 export type {
-  ChatEndpointInferenceChatPost200,
-  ChatEndpointInferenceChatPost422,
-  ChatEndpointInferenceChatPostMutationRequest,
-  ChatEndpointInferenceChatPostMutationResponse,
-  ChatEndpointInferenceChatPostMutation,
-} from './ChatEndpointInferenceChatPost.ts'
+  ChatCompletionsEndpointInferenceChatCompletionsPostQueryParams,
+  ChatCompletionsEndpointInferenceChatCompletionsPost200,
+  ChatCompletionsEndpointInferenceChatCompletionsPost422,
+  ChatCompletionsEndpointInferenceChatCompletionsPostMutationRequest,
+  ChatCompletionsEndpointInferenceChatCompletionsPostMutationResponse,
+  ChatCompletionsEndpointInferenceChatCompletionsPostMutation,
+} from './ChatCompletionsEndpointInferenceChatCompletionsPost.ts'
 export type { ChatMessage } from './ChatMessage.ts'
+export type { CompletionRequest } from './CompletionRequest.ts'
+export type {
+  CompletionsEndpointInferenceCompletionsPostQueryParams,
+  CompletionsEndpointInferenceCompletionsPost200,
+  CompletionsEndpointInferenceCompletionsPost422,
+  CompletionsEndpointInferenceCompletionsPostMutationRequest,
+  CompletionsEndpointInferenceCompletionsPostMutationResponse,
+  CompletionsEndpointInferenceCompletionsPostMutation,
+} from './CompletionsEndpointInferenceCompletionsPost.ts'
 export type {
   CreateStorageObjectStorageStorageTypeCreatePathPostPathParams,
   CreateStorageObjectStorageStorageTypeCreatePathPost200,
@@ -56,6 +73,15 @@ export type {
   DeleteStorageObjectStorageStorageTypeDeletePathDeleteMutation,
 } from './DeleteStorageObjectStorageStorageTypeDeletePathDelete.ts'
 export type { DockerParams } from './DockerParams.ts'
+export type {
+  EmbeddingsEndpointInferenceEmbeddingsPostQueryParams,
+  EmbeddingsEndpointInferenceEmbeddingsPost200,
+  EmbeddingsEndpointInferenceEmbeddingsPost422,
+  EmbeddingsEndpointInferenceEmbeddingsPostMutationRequest,
+  EmbeddingsEndpointInferenceEmbeddingsPostMutationResponse,
+  EmbeddingsEndpointInferenceEmbeddingsPostMutation,
+} from './EmbeddingsEndpointInferenceEmbeddingsPost.ts'
+export type { EmbeddingsRequest } from './EmbeddingsRequest.ts'
 export type {
   EnvironmentCheckEndpointEnvironmentCheckPost200,
   EnvironmentCheckEndpointEnvironmentCheckPost422,
@@ -83,6 +109,11 @@ export type {
 } from './EnvironmentRunEndpointEnvironmentRunPost.ts'
 export type { EnvironmentRunInput } from './EnvironmentRunInput.ts'
 export type { EnvironmentRunOutput } from './EnvironmentRunOutput.ts'
+export type {
+  GetPublicKeyWellKnownJwksJsonGet200,
+  GetPublicKeyWellKnownJwksJsonGetQueryResponse,
+  GetPublicKeyWellKnownJwksJsonGetQuery,
+} from './GetPublicKeyWellKnownJwksJsonGet.ts'
 export type { HealthCheckHealthGet200, HealthCheckHealthGetQueryResponse, HealthCheckHealthGetQuery } from './HealthCheckHealthGet.ts'
 export type { HTTPValidationError } from './HTTPValidationError.ts'
 export type {
@@ -149,6 +180,13 @@ export type {
 } from './MemoryRunEndpointMemoryRunPost.ts'
 export type { MemoryRunInput } from './MemoryRunInput.ts'
 export type { MemoryRunOutput } from './MemoryRunOutput.ts'
+export type {
+  ModelsEndpointInferenceModelsGetQueryParams,
+  ModelsEndpointInferenceModelsGet200,
+  ModelsEndpointInferenceModelsGet422,
+  ModelsEndpointInferenceModelsGetQueryResponse,
+  ModelsEndpointInferenceModelsGetQuery,
+} from './ModelsEndpointInferenceModelsGet.ts'
 export type { Module } from './Module.ts'
 export type { ModuleExecutionTypeEnum, ModuleExecutionType } from './ModuleExecutionType.ts'
 export type { ModuleTypeEnum, ModuleType } from './ModuleType.ts'
@@ -198,6 +236,7 @@ export type {
   SearchStorageObjectsStorageStorageTypeSearchPostMutationResponse,
   SearchStorageObjectsStorageStorageTypeSearchPostMutation,
 } from './SearchStorageObjectsStorageStorageTypeSearchPost.ts'
+export type { SecretInput } from './SecretInput.ts'
 export type { StorageConfig } from './StorageConfig.ts'
 export type { StorageTypeEnum, StorageType } from './StorageType.ts'
 export type {
@@ -250,6 +289,14 @@ export type {
   UserRegisterEndpointUserRegisterPostMutationResponse,
   UserRegisterEndpointUserRegisterPostMutation,
 } from './UserRegisterEndpointUserRegisterPost.ts'
+export type {
+  UserSecretCreateEndpointUserSecretCreatePostQueryParams,
+  UserSecretCreateEndpointUserSecretCreatePost200,
+  UserSecretCreateEndpointUserSecretCreatePost422,
+  UserSecretCreateEndpointUserSecretCreatePostMutationRequest,
+  UserSecretCreateEndpointUserSecretCreatePostMutationResponse,
+  UserSecretCreateEndpointUserSecretCreatePostMutation,
+} from './UserSecretCreateEndpointUserSecretCreatePost.ts'
 export type { ValidationError } from './ValidationError.ts'
 export { LLMClientTypeEnum } from './LLMClientType.ts'
 export { moduleExecutionTypeEnum } from './ModuleExecutionType.ts'
