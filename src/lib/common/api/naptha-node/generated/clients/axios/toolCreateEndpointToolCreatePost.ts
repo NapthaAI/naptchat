@@ -1,14 +1,13 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  ToolCreateEndpointToolCreatePostMutationRequest,
-  ToolCreateEndpointToolCreatePostMutationResponse,
-  ToolCreateEndpointToolCreatePost422,
-} from '../../types/ToolCreateEndpointToolCreatePost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	ToolCreateEndpointToolCreatePostMutationRequest,
+	ToolCreateEndpointToolCreatePostMutationResponse,
+	ToolCreateEndpointToolCreatePost422,
+} from "../../types/ToolCreateEndpointToolCreatePost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getToolCreateEndpointToolCreatePostUrl() {
-  return `/tool/create` as const
+	return `/tool/create` as const;
 }
 
 /**
@@ -17,13 +16,14 @@ export function getToolCreateEndpointToolCreatePostUrl() {
  * {@link /tool/create}
  */
 export async function toolCreateEndpointToolCreatePost(
-  data: ToolCreateEndpointToolCreatePostMutationRequest,
-  config: Partial<RequestConfig<ToolCreateEndpointToolCreatePostMutationRequest>> = {},
+	data: ToolCreateEndpointToolCreatePostMutationRequest,
+	config: Partial<RequestConfig<ToolCreateEndpointToolCreatePostMutationRequest>> = {},
 ) {
-  const res = await client<
-    ToolCreateEndpointToolCreatePostMutationResponse,
-    ResponseErrorConfig<ToolCreateEndpointToolCreatePost422>,
-    ToolCreateEndpointToolCreatePostMutationRequest
-  >({ method: 'POST', url: getToolCreateEndpointToolCreatePostUrl().toString(), data, ...config })
-  return res
+	const res = await client<
+		ToolCreateEndpointToolCreatePostMutationResponse,
+		ResponseErrorConfig<ToolCreateEndpointToolCreatePost422>,
+		ToolCreateEndpointToolCreatePostMutationRequest
+	>({ method: "POST", url: getToolCreateEndpointToolCreatePostUrl().toString(), data, ...config });
+
+	return res;
 }

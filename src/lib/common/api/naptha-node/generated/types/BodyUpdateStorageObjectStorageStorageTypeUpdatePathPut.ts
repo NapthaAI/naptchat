@@ -1,3 +1,3 @@
 export type BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut = {
-  request_data?: string | null
-}
+	request_data?: string | null;
+};

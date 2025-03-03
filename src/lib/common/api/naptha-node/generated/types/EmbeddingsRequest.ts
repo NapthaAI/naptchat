@@ -1,7 +1,7 @@
 export type EmbeddingsRequest = {
-  /**
-   * @type string
-   */
-  model: string
-  input: string | string[]
-}
+	/**
+	 * @type string
+	 */
+	model: string;
+	input: string | string[];
+};

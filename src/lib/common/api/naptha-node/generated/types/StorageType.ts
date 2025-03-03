@@ -1,9 +1,9 @@
 export const storageTypeEnum = {
-  db: 'db',
-  fs: 'fs',
-  ipfs: 'ipfs',
-} as const
+	db: "db",
+	fs: "fs",
+	ipfs: "ipfs",
+} as const;
 
-export type StorageTypeEnum = (typeof storageTypeEnum)[keyof typeof storageTypeEnum]
+export type StorageTypeEnum = (typeof storageTypeEnum)[keyof typeof storageTypeEnum];
 
-export type StorageType = StorageTypeEnum
+export type StorageType = StorageTypeEnum;

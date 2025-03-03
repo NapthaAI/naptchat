@@ -1,44 +1,46 @@
-import type { BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut } from './BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut.ts'
-import type { HTTPValidationError } from './HTTPValidationError.ts'
-import type { StorageType } from './StorageType.ts'
+import type { BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut } from "./BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut.ts";
+import type { HTTPValidationError } from "./HTTPValidationError.ts";
+import type { StorageType } from "./StorageType.ts";
 
 export type UpdateStorageObjectStorageStorageTypeUpdatePathPutPathParams = {
-  /**
-   * @type string
-   */
-  storage_type: StorageType
-  /**
-   * @description Storage path/identifier
-   * @type string
-   */
-  path: string
-}
+	/**
+	 * @type string
+	 */
+	storage_type: StorageType;
+	/**
+	 * @description Storage path/identifier
+	 * @type string
+	 */
+	path: string;
+};
 
 export type UpdateStorageObjectStorageStorageTypeUpdatePathPutQueryParams = {
-  /**
-   * @description Update condition (JSON string)
-   */
-  condition?: string | null
-}
+	/**
+	 * @description Update condition (JSON string)
+	 */
+	condition?: string | null;
+};
 
 /**
  * @description Successful Response
  */
-export type UpdateStorageObjectStorageStorageTypeUpdatePathPut200 = any
+export type UpdateStorageObjectStorageStorageTypeUpdatePathPut200 = any;
 
 /**
  * @description Validation Error
  */
-export type UpdateStorageObjectStorageStorageTypeUpdatePathPut422 = HTTPValidationError
+export type UpdateStorageObjectStorageStorageTypeUpdatePathPut422 = HTTPValidationError;
 
-export type UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationRequest = BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut
+export type UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationRequest =
+	BodyUpdateStorageObjectStorageStorageTypeUpdatePathPut;
 
-export type UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationResponse = UpdateStorageObjectStorageStorageTypeUpdatePathPut200
+export type UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationResponse =
+	UpdateStorageObjectStorageStorageTypeUpdatePathPut200;
 
 export type UpdateStorageObjectStorageStorageTypeUpdatePathPutMutation = {
-  Response: UpdateStorageObjectStorageStorageTypeUpdatePathPut200
-  Request: UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationRequest
-  PathParams: UpdateStorageObjectStorageStorageTypeUpdatePathPutPathParams
-  QueryParams: UpdateStorageObjectStorageStorageTypeUpdatePathPutQueryParams
-  Errors: UpdateStorageObjectStorageStorageTypeUpdatePathPut422
-}
+	Response: UpdateStorageObjectStorageStorageTypeUpdatePathPut200;
+	Request: UpdateStorageObjectStorageStorageTypeUpdatePathPutMutationRequest;
+	PathParams: UpdateStorageObjectStorageStorageTypeUpdatePathPutPathParams;
+	QueryParams: UpdateStorageObjectStorageStorageTypeUpdatePathPutQueryParams;
+	Errors: UpdateStorageObjectStorageStorageTypeUpdatePathPut422;
+};

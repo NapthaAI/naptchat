@@ -1,23 +1,25 @@
-import type { BodyEnvironmentRunEndpointEnvironmentRunPost } from './BodyEnvironmentRunEndpointEnvironmentRunPost.ts'
-import type { EnvironmentRunOutput } from './EnvironmentRunOutput.ts'
-import type { HTTPValidationError } from './HTTPValidationError.ts'
+import type { BodyEnvironmentRunEndpointEnvironmentRunPost } from "./BodyEnvironmentRunEndpointEnvironmentRunPost.ts";
+import type { EnvironmentRunOutput } from "./EnvironmentRunOutput.ts";
+import type { HTTPValidationError } from "./HTTPValidationError.ts";
 
 /**
  * @description Successful Response
  */
-export type EnvironmentRunEndpointEnvironmentRunPost200 = EnvironmentRunOutput
+export type EnvironmentRunEndpointEnvironmentRunPost200 = EnvironmentRunOutput;
 
 /**
  * @description Validation Error
  */
-export type EnvironmentRunEndpointEnvironmentRunPost422 = HTTPValidationError
+export type EnvironmentRunEndpointEnvironmentRunPost422 = HTTPValidationError;
 
-export type EnvironmentRunEndpointEnvironmentRunPostMutationRequest = BodyEnvironmentRunEndpointEnvironmentRunPost
+export type EnvironmentRunEndpointEnvironmentRunPostMutationRequest =
+	BodyEnvironmentRunEndpointEnvironmentRunPost;
 
-export type EnvironmentRunEndpointEnvironmentRunPostMutationResponse = EnvironmentRunEndpointEnvironmentRunPost200
+export type EnvironmentRunEndpointEnvironmentRunPostMutationResponse =
+	EnvironmentRunEndpointEnvironmentRunPost200;
 
 export type EnvironmentRunEndpointEnvironmentRunPostMutation = {
-  Response: EnvironmentRunEndpointEnvironmentRunPost200
-  Request: EnvironmentRunEndpointEnvironmentRunPostMutationRequest
-  Errors: EnvironmentRunEndpointEnvironmentRunPost422
-}
+	Response: EnvironmentRunEndpointEnvironmentRunPost200;
+	Request: EnvironmentRunEndpointEnvironmentRunPostMutationRequest;
+	Errors: EnvironmentRunEndpointEnvironmentRunPost422;
+};

@@ -1,14 +1,13 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  MemoryRunEndpointMemoryRunPostMutationRequest,
-  MemoryRunEndpointMemoryRunPostMutationResponse,
-  MemoryRunEndpointMemoryRunPost422,
-} from '../../types/MemoryRunEndpointMemoryRunPost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	MemoryRunEndpointMemoryRunPostMutationRequest,
+	MemoryRunEndpointMemoryRunPostMutationResponse,
+	MemoryRunEndpointMemoryRunPost422,
+} from "../../types/MemoryRunEndpointMemoryRunPost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getMemoryRunEndpointMemoryRunPostUrl() {
-  return `/memory/run` as const
+	return `/memory/run` as const;
 }
 
 /**
@@ -17,13 +16,14 @@ export function getMemoryRunEndpointMemoryRunPostUrl() {
  * {@link /memory/run}
  */
 export async function memoryRunEndpointMemoryRunPost(
-  data: MemoryRunEndpointMemoryRunPostMutationRequest,
-  config: Partial<RequestConfig<MemoryRunEndpointMemoryRunPostMutationRequest>> = {},
+	data: MemoryRunEndpointMemoryRunPostMutationRequest,
+	config: Partial<RequestConfig<MemoryRunEndpointMemoryRunPostMutationRequest>> = {},
 ) {
-  const res = await client<
-    MemoryRunEndpointMemoryRunPostMutationResponse,
-    ResponseErrorConfig<MemoryRunEndpointMemoryRunPost422>,
-    MemoryRunEndpointMemoryRunPostMutationRequest
-  >({ method: 'POST', url: getMemoryRunEndpointMemoryRunPostUrl().toString(), data, ...config })
-  return res
+	const res = await client<
+		MemoryRunEndpointMemoryRunPostMutationResponse,
+		ResponseErrorConfig<MemoryRunEndpointMemoryRunPost422>,
+		MemoryRunEndpointMemoryRunPostMutationRequest
+	>({ method: "POST", url: getMemoryRunEndpointMemoryRunPostUrl().toString(), data, ...config });
+
+	return res;
 }

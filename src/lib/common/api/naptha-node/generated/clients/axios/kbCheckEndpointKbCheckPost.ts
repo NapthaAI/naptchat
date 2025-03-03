@@ -1,14 +1,13 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  KbCheckEndpointKbCheckPostMutationRequest,
-  KbCheckEndpointKbCheckPostMutationResponse,
-  KbCheckEndpointKbCheckPost422,
-} from '../../types/KbCheckEndpointKbCheckPost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	KbCheckEndpointKbCheckPostMutationRequest,
+	KbCheckEndpointKbCheckPostMutationResponse,
+	KbCheckEndpointKbCheckPost422,
+} from "../../types/KbCheckEndpointKbCheckPost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getKbCheckEndpointKbCheckPostUrl() {
-  return `/kb/check` as const
+	return `/kb/check` as const;
 }
 
 /**
@@ -17,13 +16,14 @@ export function getKbCheckEndpointKbCheckPostUrl() {
  * {@link /kb/check}
  */
 export async function kbCheckEndpointKbCheckPost(
-  data: KbCheckEndpointKbCheckPostMutationRequest,
-  config: Partial<RequestConfig<KbCheckEndpointKbCheckPostMutationRequest>> = {},
+	data: KbCheckEndpointKbCheckPostMutationRequest,
+	config: Partial<RequestConfig<KbCheckEndpointKbCheckPostMutationRequest>> = {},
 ) {
-  const res = await client<
-    KbCheckEndpointKbCheckPostMutationResponse,
-    ResponseErrorConfig<KbCheckEndpointKbCheckPost422>,
-    KbCheckEndpointKbCheckPostMutationRequest
-  >({ method: 'POST', url: getKbCheckEndpointKbCheckPostUrl().toString(), data, ...config })
-  return res
+	const res = await client<
+		KbCheckEndpointKbCheckPostMutationResponse,
+		ResponseErrorConfig<KbCheckEndpointKbCheckPost422>,
+		KbCheckEndpointKbCheckPostMutationRequest
+	>({ method: "POST", url: getKbCheckEndpointKbCheckPostUrl().toString(), data, ...config });
+
+	return res;
 }

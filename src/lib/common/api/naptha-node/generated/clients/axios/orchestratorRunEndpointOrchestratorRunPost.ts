@@ -1,14 +1,13 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  OrchestratorRunEndpointOrchestratorRunPostMutationRequest,
-  OrchestratorRunEndpointOrchestratorRunPostMutationResponse,
-  OrchestratorRunEndpointOrchestratorRunPost422,
-} from '../../types/OrchestratorRunEndpointOrchestratorRunPost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	OrchestratorRunEndpointOrchestratorRunPostMutationRequest,
+	OrchestratorRunEndpointOrchestratorRunPostMutationResponse,
+	OrchestratorRunEndpointOrchestratorRunPost422,
+} from "../../types/OrchestratorRunEndpointOrchestratorRunPost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getOrchestratorRunEndpointOrchestratorRunPostUrl() {
-  return `/orchestrator/run` as const
+	return `/orchestrator/run` as const;
 }
 
 /**
@@ -17,13 +16,19 @@ export function getOrchestratorRunEndpointOrchestratorRunPostUrl() {
  * {@link /orchestrator/run}
  */
 export async function orchestratorRunEndpointOrchestratorRunPost(
-  data: OrchestratorRunEndpointOrchestratorRunPostMutationRequest,
-  config: Partial<RequestConfig<OrchestratorRunEndpointOrchestratorRunPostMutationRequest>> = {},
+	data: OrchestratorRunEndpointOrchestratorRunPostMutationRequest,
+	config: Partial<RequestConfig<OrchestratorRunEndpointOrchestratorRunPostMutationRequest>> = {},
 ) {
-  const res = await client<
-    OrchestratorRunEndpointOrchestratorRunPostMutationResponse,
-    ResponseErrorConfig<OrchestratorRunEndpointOrchestratorRunPost422>,
-    OrchestratorRunEndpointOrchestratorRunPostMutationRequest
-  >({ method: 'POST', url: getOrchestratorRunEndpointOrchestratorRunPostUrl().toString(), data, ...config })
-  return res
+	const res = await client<
+		OrchestratorRunEndpointOrchestratorRunPostMutationResponse,
+		ResponseErrorConfig<OrchestratorRunEndpointOrchestratorRunPost422>,
+		OrchestratorRunEndpointOrchestratorRunPostMutationRequest
+	>({
+		method: "POST",
+		url: getOrchestratorRunEndpointOrchestratorRunPostUrl().toString(),
+		data,
+		...config,
+	});
+
+	return res;
 }

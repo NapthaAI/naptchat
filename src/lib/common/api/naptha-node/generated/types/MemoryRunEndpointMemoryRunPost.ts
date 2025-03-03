@@ -1,23 +1,23 @@
-import type { BodyMemoryRunEndpointMemoryRunPost } from './BodyMemoryRunEndpointMemoryRunPost.ts'
-import type { HTTPValidationError } from './HTTPValidationError.ts'
-import type { MemoryRunOutput } from './MemoryRunOutput.ts'
+import type { BodyMemoryRunEndpointMemoryRunPost } from "./BodyMemoryRunEndpointMemoryRunPost.ts";
+import type { HTTPValidationError } from "./HTTPValidationError.ts";
+import type { MemoryRunOutput } from "./MemoryRunOutput.ts";
 
 /**
  * @description Successful Response
  */
-export type MemoryRunEndpointMemoryRunPost200 = MemoryRunOutput
+export type MemoryRunEndpointMemoryRunPost200 = MemoryRunOutput;
 
 /**
  * @description Validation Error
  */
-export type MemoryRunEndpointMemoryRunPost422 = HTTPValidationError
+export type MemoryRunEndpointMemoryRunPost422 = HTTPValidationError;
 
-export type MemoryRunEndpointMemoryRunPostMutationRequest = BodyMemoryRunEndpointMemoryRunPost
+export type MemoryRunEndpointMemoryRunPostMutationRequest = BodyMemoryRunEndpointMemoryRunPost;
 
-export type MemoryRunEndpointMemoryRunPostMutationResponse = MemoryRunEndpointMemoryRunPost200
+export type MemoryRunEndpointMemoryRunPostMutationResponse = MemoryRunEndpointMemoryRunPost200;
 
 export type MemoryRunEndpointMemoryRunPostMutation = {
-  Response: MemoryRunEndpointMemoryRunPost200
-  Request: MemoryRunEndpointMemoryRunPostMutationRequest
-  Errors: MemoryRunEndpointMemoryRunPost422
-}
+	Response: MemoryRunEndpointMemoryRunPost200;
+	Request: MemoryRunEndpointMemoryRunPostMutationRequest;
+	Errors: MemoryRunEndpointMemoryRunPost422;
+};

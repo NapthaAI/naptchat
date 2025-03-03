@@ -1,14 +1,13 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest,
-  OrchestratorCreateEndpointOrchestratorCreatePostMutationResponse,
-  OrchestratorCreateEndpointOrchestratorCreatePost422,
-} from '../../types/OrchestratorCreateEndpointOrchestratorCreatePost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest,
+	OrchestratorCreateEndpointOrchestratorCreatePostMutationResponse,
+	OrchestratorCreateEndpointOrchestratorCreatePost422,
+} from "../../types/OrchestratorCreateEndpointOrchestratorCreatePost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getOrchestratorCreateEndpointOrchestratorCreatePostUrl() {
-  return `/orchestrator/create` as const
+	return `/orchestrator/create` as const;
 }
 
 /**
@@ -17,13 +16,21 @@ export function getOrchestratorCreateEndpointOrchestratorCreatePostUrl() {
  * {@link /orchestrator/create}
  */
 export async function orchestratorCreateEndpointOrchestratorCreatePost(
-  data: OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest,
-  config: Partial<RequestConfig<OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest>> = {},
+	data: OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest,
+	config: Partial<
+		RequestConfig<OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest>
+	> = {},
 ) {
-  const res = await client<
-    OrchestratorCreateEndpointOrchestratorCreatePostMutationResponse,
-    ResponseErrorConfig<OrchestratorCreateEndpointOrchestratorCreatePost422>,
-    OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest
-  >({ method: 'POST', url: getOrchestratorCreateEndpointOrchestratorCreatePostUrl().toString(), data, ...config })
-  return res
+	const res = await client<
+		OrchestratorCreateEndpointOrchestratorCreatePostMutationResponse,
+		ResponseErrorConfig<OrchestratorCreateEndpointOrchestratorCreatePost422>,
+		OrchestratorCreateEndpointOrchestratorCreatePostMutationRequest
+	>({
+		method: "POST",
+		url: getOrchestratorCreateEndpointOrchestratorCreatePostUrl().toString(),
+		data,
+		...config,
+	});
+
+	return res;
 }

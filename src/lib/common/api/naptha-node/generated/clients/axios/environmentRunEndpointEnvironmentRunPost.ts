@@ -1,14 +1,13 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  EnvironmentRunEndpointEnvironmentRunPostMutationRequest,
-  EnvironmentRunEndpointEnvironmentRunPostMutationResponse,
-  EnvironmentRunEndpointEnvironmentRunPost422,
-} from '../../types/EnvironmentRunEndpointEnvironmentRunPost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	EnvironmentRunEndpointEnvironmentRunPostMutationRequest,
+	EnvironmentRunEndpointEnvironmentRunPostMutationResponse,
+	EnvironmentRunEndpointEnvironmentRunPost422,
+} from "../../types/EnvironmentRunEndpointEnvironmentRunPost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getEnvironmentRunEndpointEnvironmentRunPostUrl() {
-  return `/environment/run` as const
+	return `/environment/run` as const;
 }
 
 /**
@@ -17,13 +16,19 @@ export function getEnvironmentRunEndpointEnvironmentRunPostUrl() {
  * {@link /environment/run}
  */
 export async function environmentRunEndpointEnvironmentRunPost(
-  data: EnvironmentRunEndpointEnvironmentRunPostMutationRequest,
-  config: Partial<RequestConfig<EnvironmentRunEndpointEnvironmentRunPostMutationRequest>> = {},
+	data: EnvironmentRunEndpointEnvironmentRunPostMutationRequest,
+	config: Partial<RequestConfig<EnvironmentRunEndpointEnvironmentRunPostMutationRequest>> = {},
 ) {
-  const res = await client<
-    EnvironmentRunEndpointEnvironmentRunPostMutationResponse,
-    ResponseErrorConfig<EnvironmentRunEndpointEnvironmentRunPost422>,
-    EnvironmentRunEndpointEnvironmentRunPostMutationRequest
-  >({ method: 'POST', url: getEnvironmentRunEndpointEnvironmentRunPostUrl().toString(), data, ...config })
-  return res
+	const res = await client<
+		EnvironmentRunEndpointEnvironmentRunPostMutationResponse,
+		ResponseErrorConfig<EnvironmentRunEndpointEnvironmentRunPost422>,
+		EnvironmentRunEndpointEnvironmentRunPostMutationRequest
+	>({
+		method: "POST",
+		url: getEnvironmentRunEndpointEnvironmentRunPostUrl().toString(),
+		data,
+		...config,
+	});
+
+	return res;
 }

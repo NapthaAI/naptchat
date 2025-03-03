@@ -1,15 +1,14 @@
-/* eslint-disable no-alert, no-console */
-import client from '@kubb/plugin-client/clients/axios'
+import client from "@kubb/plugin-client/clients/axios";
 import type {
-  UserSecretCreateEndpointUserSecretCreatePostMutationRequest,
-  UserSecretCreateEndpointUserSecretCreatePostMutationResponse,
-  UserSecretCreateEndpointUserSecretCreatePostQueryParams,
-  UserSecretCreateEndpointUserSecretCreatePost422,
-} from '../../types/UserSecretCreateEndpointUserSecretCreatePost.ts'
-import type { RequestConfig, ResponseErrorConfig } from '@kubb/plugin-client/clients/axios'
+	UserSecretCreateEndpointUserSecretCreatePostMutationRequest,
+	UserSecretCreateEndpointUserSecretCreatePostMutationResponse,
+	UserSecretCreateEndpointUserSecretCreatePostQueryParams,
+	UserSecretCreateEndpointUserSecretCreatePost422,
+} from "../../types/UserSecretCreateEndpointUserSecretCreatePost.ts";
+import type { RequestConfig, ResponseErrorConfig } from "@kubb/plugin-client/clients/axios";
 
 export function getUserSecretCreateEndpointUserSecretCreatePostUrl() {
-  return `/user/secret/create` as const
+	return `/user/secret/create` as const;
 }
 
 /**
@@ -17,14 +16,21 @@ export function getUserSecretCreateEndpointUserSecretCreatePostUrl() {
  * {@link /user/secret/create}
  */
 export async function userSecretCreateEndpointUserSecretCreatePost(
-  params: UserSecretCreateEndpointUserSecretCreatePostQueryParams,
-  data?: UserSecretCreateEndpointUserSecretCreatePostMutationRequest,
-  config: Partial<RequestConfig<UserSecretCreateEndpointUserSecretCreatePostMutationRequest>> = {},
+	params: UserSecretCreateEndpointUserSecretCreatePostQueryParams,
+	data?: UserSecretCreateEndpointUserSecretCreatePostMutationRequest,
+	config: Partial<RequestConfig<UserSecretCreateEndpointUserSecretCreatePostMutationRequest>> = {},
 ) {
-  const res = await client<
-    UserSecretCreateEndpointUserSecretCreatePostMutationResponse,
-    ResponseErrorConfig<UserSecretCreateEndpointUserSecretCreatePost422>,
-    UserSecretCreateEndpointUserSecretCreatePostMutationRequest
-  >({ method: 'POST', url: getUserSecretCreateEndpointUserSecretCreatePostUrl().toString(), params, data, ...config })
-  return res
+	const res = await client<
+		UserSecretCreateEndpointUserSecretCreatePostMutationResponse,
+		ResponseErrorConfig<UserSecretCreateEndpointUserSecretCreatePost422>,
+		UserSecretCreateEndpointUserSecretCreatePostMutationRequest
+	>({
+		method: "POST",
+		url: getUserSecretCreateEndpointUserSecretCreatePostUrl().toString(),
+		params,
+		data,
+		...config,
+	});
+
+	return res;
 }
