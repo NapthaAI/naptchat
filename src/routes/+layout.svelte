@@ -93,7 +93,9 @@
 		<Button class="bg-secondary text-secondary-foreground">💬 New Chat</Button>
 
 		{#if authenticatedUser?.id}
-			<span class="text-sm opacity-75">@{authenticatedUser.id}</span>
+			<span class="text-sm opacity-75 max-w-25 text-ellipsis overflow-clip"
+				>@{authenticatedUser.id}</span
+			>
 			<Button onClick={handleSignOut}>Sign Out</Button>
 		{:else}
 			<Button onClick={() => (isAuthModalOpen = true)}>Sign In</Button>
@@ -111,8 +113,8 @@
 		<div class="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
 			<h2 class="text-xl font-bold mb-4">Authentication</h2>
 
-			{#if authenticatedUser}
-				<div class="space-y-4">
+			<div flex="~ col" gap="4">
+				{#if authenticatedUser}
 					<div class="flex items-center gap-2">
 						<span class="text-sm opacity-75">Your public key:</span>
 						<input value={publicKeyFieldValue} class="bg-muted p-1 rounded text-sm" />
@@ -127,12 +129,18 @@
 					</div>
 
 					<Button class="w-full" onClick={handleSignIn}>
-						Sign In as @{authenticatedUser.id}
-					</Button>
-				</div>
-			{/if}
+						<span flex="inline" gap="1">
+							<span>Sign In as</span>
 
-			<Button class="w-full" onClick={handleSignUp}>Sign Up as new user</Button>
+							<span class="max-w-25 text-ellipsis overflow-clip">
+								@{authenticatedUser.id}
+							</span>
+						</span>
+					</Button>
+				{/if}
+
+				<Button class="w-full" onClick={handleSignUp}>Sign Up as new user</Button>
+			</div>
 		</div>
 	</dialog>
 {/if}

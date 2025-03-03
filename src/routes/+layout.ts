@@ -4,9 +4,13 @@ import { writable } from "svelte/store";
 import { napthaNodeClient, type User } from "$common/api/naptha-node";
 import type { ByPublicKey } from "$common/types";
 import type { OrchestratorRunOutput } from "$common/api/naptha-node";
-import { generateKeyPair, sign } from "$common/utils/crypto";
-
-// TODO: Use Web Crypto API private key storage instead on IndexedDB to mitigate security issues
+import {
+	generateKeyPair,
+	sign,
+	getSecurePrivateKey,
+	storeSecurePrivateKey,
+	clearSecurePrivateKey,
+} from "$common/utils/crypto";
 
 export const load: LayoutLoad = async () => {
 	const session = writable<User | null>(null);
@@ -37,31 +41,11 @@ export const load: LayoutLoad = async () => {
 
 		session.subscribe((sessionData) => {
 			if (sessionData !== null) {
-				// Try to get stored private key from IndexedDB
-				void new Promise<IDBDatabase>((resolve, reject) => {
-					const request = indexedDB.open("auth", 1);
-					request.onerror = () => reject(request.error);
-					request.onsuccess = () => resolve(request.result);
-
-					request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-						const db = (event.target as IDBOpenDBRequest).result;
-
-						if (!db.objectStoreNames.contains("keys")) {
-							db.createObjectStore("keys");
-						}
-					};
-				})
-					.then((db: IDBDatabase) => {
-						return new Promise<ArrayBuffer>((resolve, reject) => {
-							const transaction = db.transaction(["keys"], "readonly");
-							const request = transaction.objectStore("keys").get("private_key");
-							request.onsuccess = () => resolve(request.result);
-							request.onerror = () => reject(request.error);
-						});
-					})
-					.then((privKeyArrayBuffer) => {
-						if (privKeyArrayBuffer) {
-							return sign(sessionData.id, new Uint8Array(privKeyArrayBuffer)).then((signature) => {
+				// Try to get stored private key using Web Crypto API
+				void getSecurePrivateKey()
+					.then((privateKey) => {
+						if (privateKey) {
+							return sign(sessionData.id, privateKey).then((signature) => {
 								napthaNodeClient
 									.multiagentChatOrchestratorCheck({
 										userId: sessionData.id,
@@ -93,24 +77,10 @@ export const load: LayoutLoad = async () => {
 					.userRegister(publicKey)
 					.then(async ({ data }) => {
 						if (browser) {
-							void new Promise<IDBDatabase>((resolve, reject) => {
-								const request = indexedDB.open("auth", 1);
-								request.onerror = () => reject(request.error);
-								request.onsuccess = () => resolve(request.result);
-
-								request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-									const db = (event.target as IDBOpenDBRequest).result;
-
-									if (!db.objectStoreNames.contains("keys")) {
-										db.createObjectStore("keys");
-									}
-								};
-							})
-								.then((db: IDBDatabase) => {
-									const transaction = db.transaction(["keys"], "readwrite");
-									transaction.objectStore("keys").put(privKey, "private_key");
-								})
-								.catch((error: Error) => console.error("Failed to store private key:", error));
+							// Store private key securely using Web Crypto API
+							void storeSecurePrivateKey(privKey).catch((error: Error) =>
+								console.error("Failed to store private key securely:", error),
+							);
 						}
 
 						session.set(data);
@@ -120,29 +90,10 @@ export const load: LayoutLoad = async () => {
 
 			async signIn({ publicKey }: ByPublicKey) {
 				if (browser) {
-					return new Promise<IDBDatabase>((resolve, reject) => {
-						const request = indexedDB.open("auth", 1);
-						request.onerror = () => reject(request.error);
-						request.onsuccess = () => resolve(request.result);
-
-						request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-							const db = (event.target as IDBOpenDBRequest).result;
-
-							if (!db.objectStoreNames.contains("keys")) {
-								db.createObjectStore("keys");
-							}
-						};
-					})
-						.then((db: IDBDatabase) => {
-							return new Promise<ArrayBuffer>((resolve, reject) => {
-								const transaction = db.transaction(["keys"], "readonly");
-								const request = transaction.objectStore("keys").get("private_key");
-								request.onsuccess = () => resolve(request.result);
-								request.onerror = () => reject(request.error);
-							});
-						})
-						.then((privKeyData) => {
-							if (!privKeyData) return false;
+					// Retrieve private key securely using Web Crypto API
+					return getSecurePrivateKey()
+						.then((privateKey) => {
+							if (!privateKey) return false;
 
 							return napthaNodeClient
 								.userCheck({ publicKey })
@@ -176,32 +127,10 @@ export const load: LayoutLoad = async () => {
 					localStorage.removeItem("user:id");
 					localStorage.removeItem("user:public_key");
 
-					// Clear private key from IndexedDB
-					void new Promise<IDBDatabase>((resolve, reject) => {
-						const request = indexedDB.open("auth", 1);
-						request.onerror = () => reject(request.error);
-						request.onsuccess = () => resolve(request.result);
-
-						request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-							const db = (event.target as IDBOpenDBRequest).result;
-
-							if (!db.objectStoreNames.contains("keys")) {
-								db.createObjectStore("keys");
-							}
-						};
-					})
-						.then((db: IDBDatabase) => {
-							const transaction = db.transaction(["keys"], "readwrite");
-							const objectStore = transaction.objectStore("keys");
-							return new Promise<void>((resolve, reject) => {
-								const request = objectStore.delete("private_key");
-								request.onsuccess = () => resolve();
-								request.onerror = () => reject(request.error);
-							});
-						})
-						.catch((error: unknown) => {
-							console.error("Failed to clear secure storage:", error);
-						});
+					// Clear private key from secure storage
+					void clearSecurePrivateKey().catch((error: unknown) => {
+						console.error("Failed to clear secure storage:", error);
+					});
 				}
 			},
 		},
