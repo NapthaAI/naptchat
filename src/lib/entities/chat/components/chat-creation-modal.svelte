@@ -79,6 +79,8 @@
 						// At this point we know authenticatedUser is not null
 						userId: authenticatedUser!.id,
 						signature,
+
+						// TODO: Normalize values to match the BaseModel type
 						inputs: values,
 					});
 				})
