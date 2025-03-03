@@ -49,11 +49,13 @@
 		"vite-plugin-mkcert": "1.17.6"
 	},
 	"dependencies": {
+		"@felte/validator-zod": "^1.0.18",
 		"@noble/secp256k1": "^2.2.3",
 		"@unocss/reset": "^0.65.1",
 		"axios": "^1.7.9",
 		"bits-ui": "^0.22.0",
 		"dark-runes": "^0.1.6",
+		"felte": "^1.3.0",
 		"mode-watcher": "^0.5.0",
 		"surrealdb": "^1.1.0",
 		"uuid": "^11.0.3",

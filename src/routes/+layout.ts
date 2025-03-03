@@ -41,7 +41,6 @@ export const load: LayoutLoad = async () => {
 
 		session.subscribe((sessionData) => {
 			if (sessionData !== null) {
-				// Try to get stored private key using Web Crypto API
 				void getSecurePrivateKey()
 					.then((privateKey) => {
 						if (privateKey) {
@@ -90,7 +89,6 @@ export const load: LayoutLoad = async () => {
 
 			async signIn({ publicKey }: ByPublicKey) {
 				if (browser) {
-					// Retrieve private key securely using Web Crypto API
 					return getSecurePrivateKey()
 						.then((privateKey) => {
 							if (!privateKey) return false;
@@ -104,7 +102,8 @@ export const load: LayoutLoad = async () => {
 								});
 						})
 						.catch((error: Error) => {
-							console.error("Failed to access secure storage:", error);
+							console.error("Failed to sign in:", error);
+
 							return false;
 						});
 				}

@@ -6,11 +6,13 @@
 	import { Button } from "$common/ui/components";
 	import { fade } from "svelte/transition";
 	import type { User } from "$common/api/naptha-node";
+	import { ChatCreationModal } from "$entities/chat";
 
 	let { children, data } = $props();
 
 	let authenticatedUser = $state<User | null>(null);
 	let isAuthModalOpen = $state(false);
+	let isChatCreationModalOpen = $state(false);
 	let copySuccess = $state(false);
 	let publicKeyFieldValue = $state<string | undefined>();
 
@@ -90,7 +92,12 @@
 	<Button borderless href="/">🏠 Discover</Button>
 
 	<div flex="~ wrap" gap="4" items="center">
-		<Button class="bg-secondary text-secondary-foreground">💬 New Chat</Button>
+		<Button
+			class="bg-secondary text-secondary-foreground"
+			onClick={() => (isChatCreationModalOpen = true)}
+		>
+			💬 New Chat
+		</Button>
 
 		{#if authenticatedUser?.id}
 			<span class="text-sm opacity-75 max-w-25 text-ellipsis overflow-clip"
@@ -102,6 +109,12 @@
 		{/if}
 	</div>
 </nav>
+
+<ChatCreationModal
+	{data}
+	isOpen={isChatCreationModalOpen}
+	onClose={() => (isChatCreationModalOpen = false)}
+/>
 
 {#if isAuthModalOpen}
 	<dialog

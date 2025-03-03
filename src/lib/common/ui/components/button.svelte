@@ -7,6 +7,7 @@
 		disabled,
 		onClick,
 		href,
+		type = "button",
 		class: customClass,
 		children,
 	} = $props<{
@@ -14,6 +15,7 @@
 		disabled?: boolean;
 		onClick?: () => void;
 		href?: ButtonProps["href"];
+		type?: "button" | "submit" | "reset";
 		class?: string;
 		children?: any;
 	}>();
@@ -23,6 +25,7 @@
 	bind:disabled
 	on:click={onClick}
 	bind:href
+	{type}
 	class={cn(
 		"inline-flex h-12 items-center justify-center border-2 rounded-lg",
 		"px-5 text-lg font-semibold bg-background text-foreground",
