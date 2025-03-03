@@ -79,6 +79,7 @@
 						// At this point we know authenticatedUser is not null
 						userId: authenticatedUser!.id,
 						signature,
+						inputs: values,
 					});
 				})
 				.then((response) => {

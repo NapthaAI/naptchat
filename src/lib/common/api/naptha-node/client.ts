@@ -59,13 +59,18 @@ export const multiagentChatOrchestratorCheck = ({ userId, signature }: ByUserId 
 		REQUEST_CONFIG,
 	);
 
-export const multiagentChatOrchestratorRun = ({ userId, signature }: ByUserId & BySignature) =>
+export const multiagentChatOrchestratorRun = ({
+	userId,
+	signature,
+	inputs,
+}: ByUserId & BySignature & { inputs?: object }) =>
 	orchestratorRunEndpointOrchestratorRunPost(
 		{
 			orchestrator_run_input: {
 				consumer_id: userId,
 				signature,
 				deployment: ORCHESTRATOR_DEPLOYMENT_CONFIG,
+				inputs,
 			},
 		},
 
