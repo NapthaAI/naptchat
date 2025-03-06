@@ -14,9 +14,14 @@ export default defineConfig({
 		path: "./src/lib/common/api/naptha-node/generated",
 	},
 
+	hooks: {
+		done: "bun format",
+	},
+
 	plugins: [
 		pluginOas(),
 		pluginTs(),
+
 		pluginClient({
 			pathParamsType: "object",
 			dataReturnType: "full",
