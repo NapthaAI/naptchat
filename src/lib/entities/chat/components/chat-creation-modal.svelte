@@ -118,6 +118,7 @@
 					<form use:formAction class="flex flex-col gap-4">
 						<div flex="~ col" gap="2">
 							<label for="topic" text="sm" font="medium">Chat Topic</label>
+
 							<input
 								id="topic"
 								name="topic"
@@ -130,6 +131,7 @@
 								class="placeholder:text-gray-400"
 								disabled={isPending}
 							/>
+
 							{#if errors.topic}
 								<p text="sm red-500">{errors.topic[0]}</p>
 							{/if}
@@ -137,6 +139,7 @@
 
 						<div flex="~ col" gap="2">
 							<label for="groupSize" text="sm" font="medium">Group Size</label>
+
 							<input
 								id="groupSize"
 								name="groupSize"
@@ -149,6 +152,7 @@
 								w="full"
 								disabled={isPending}
 							/>
+
 							{#if errors.groupSize}
 								<p text="sm red-500">{errors.groupSize[0]}</p>
 							{/if}
@@ -156,6 +160,7 @@
 
 						<div flex="~ col" gap="2">
 							<label for="maxRounds" text="sm" font="medium">Max Rounds</label>
+
 							<input
 								id="maxRounds"
 								name="maxRounds"
@@ -168,6 +173,7 @@
 								w="full"
 								disabled={isPending}
 							/>
+
 							{#if errors.maxRounds}
 								<p text="sm red-500">{errors.maxRounds[0]}</p>
 							{/if}
@@ -175,6 +181,7 @@
 
 						<div flex="~ col" gap="2">
 							<label for="subRounds" text="sm" font="medium">Sub Rounds</label>
+
 							<input
 								id="subRounds"
 								name="subRounds"
@@ -187,6 +194,7 @@
 								w="full"
 								disabled={isPending}
 							/>
+
 							{#if errors.subRounds}
 								<p text="sm red-500">{errors.subRounds[0]}</p>
 							{/if}
