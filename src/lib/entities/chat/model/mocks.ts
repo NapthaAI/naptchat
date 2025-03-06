@@ -3,7 +3,7 @@ import type { Chat } from "./schemas";
 const FAKE_CHATS = [
 	{
 		id: 1,
-		topic: "Human agency in AI-generated art",
+		topic: "Mock: Human agency in AI-generated art",
 		groupSize: 4,
 		maxRounds: 10,
 		subRounds: 7,
@@ -11,7 +11,7 @@ const FAKE_CHATS = [
 
 	{
 		id: 2,
-		topic: "AI-driven deep cryptocurrency market analysis",
+		topic: "Mock: AI-driven deep cryptocurrency market analysis",
 		groupSize: 10,
 		maxRounds: 5,
 		subRounds: 10,
