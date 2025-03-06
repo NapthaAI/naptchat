@@ -108,7 +108,7 @@
 		>
 			<div flex="~ row" justify="between" items="center" mb="4">
 				<h2 class="text-xl font-bold">Create New Chat</h2>
-				<Button borderless onClick={handleClose} class="text-muted-foreground">✕</Button>
+				<Button variant="ghost" on:click={handleClose} class="text-muted-foreground">✕</Button>
 			</div>
 
 			<div flex="~ col" gap="4">
@@ -210,7 +210,7 @@
 
 						<Button
 							type="submit"
-							disabled={!isValid || isPending}
+							disabled={!$isValid || isPending}
 							class="w-full bg-primary text-primary-foreground"
 						>
 							{#if isPending}

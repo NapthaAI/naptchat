@@ -5,4 +5,4 @@
 	const { id, topic }: Pick<Chat, "id" | "topic"> = $props();
 </script>
 
-<Button href={`/chats/${id}`} class="border-none h-fit py-2">{topic}</Button>
+<Button href={`/chats/${id}`} variant="link">{topic}</Button>

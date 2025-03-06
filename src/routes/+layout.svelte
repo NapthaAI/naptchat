@@ -89,23 +89,19 @@
 	p="6"
 	gap="4"
 >
-	<Button borderless href="/">🏠 Discover</Button>
+	<Button variant="ghost" href="/">🏠 Discover</Button>
 
 	<div flex="~ wrap" gap="4" items="center">
-		<Button
-			class="bg-secondary text-secondary-foreground"
-			onClick={() => (isChatCreationModalOpen = true)}
-		>
-			💬 New Chat
-		</Button>
+		<Button on:click={() => (isChatCreationModalOpen = true)}>💬 New Chat</Button>
 
 		{#if authenticatedUser?.id}
-			<span class="text-sm opacity-75 max-w-25 text-ellipsis overflow-clip"
-				>@{authenticatedUser.id}</span
-			>
-			<Button onClick={handleSignOut}>Sign Out</Button>
+			<span class="text-sm opacity-75 max-w-25 text-ellipsis overflow-clip">
+				{`@${authenticatedUser.id}`}
+			</span>
+
+			<Button variant="secondary" on:click={handleSignOut}>Sign Out</Button>
 		{:else}
-			<Button onClick={() => (isAuthModalOpen = true)}>Sign In</Button>
+			<Button variant="secondary" on:click={() => (isAuthModalOpen = true)}>Sign In</Button>
 		{/if}
 	</div>
 </nav>
@@ -132,7 +128,7 @@
 						<span class="text-sm opacity-75">Your public key:</span>
 						<input value={publicKeyFieldValue} class="bg-muted p-1 rounded text-sm" />
 
-						<Button class="ml-auto" onClick={copyToClipboard} disabled={copySuccess}>
+						<Button class="ml-auto" on:click={copyToClipboard} disabled={copySuccess}>
 							{#if copySuccess}
 								✓
 							{:else}
@@ -141,7 +137,7 @@
 						</Button>
 					</div>
 
-					<Button class="w-full" onClick={handleSignIn}>
+					<Button class="w-full" on:click={handleSignIn}>
 						<span flex="inline" gap="1">
 							<span>Sign In as</span>
 
@@ -152,7 +148,7 @@
 					</Button>
 				{/if}
 
-				<Button class="w-full" onClick={handleSignUp}>Sign Up as new user</Button>
+				<Button class="w-full" on:click={handleSignUp}>Sign Up as new user</Button>
 			</div>
 		</div>
 	</dialog>
