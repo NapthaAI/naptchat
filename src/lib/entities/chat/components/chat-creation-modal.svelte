@@ -78,19 +78,34 @@
 		},
 	});
 
-	function handleClose() {
+	const handleClose = () => {
 		onClose?.();
-	}
+	};
 </script>
 
 {#if isOpen}
 	<dialog
-		class="fixed inset-0 bg-black/50 flex items-center justify-center"
+		class="inset-0"
+		position="fixed"
+		flex="~"
+		items="center"
+		justify="center"
+		bg="black/60"
+		w="full"
+		h="full"
 		transition:fade
 		open={isOpen}
 		onclose={handleClose}
 	>
-		<div class="bg-background p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+		<div
+			class="max-w-md"
+			bg="background"
+			p="6"
+			w="full"
+			rounded="lg"
+			shadow="lg"
+			border="1 foreground"
+		>
 			<div flex="~ row" justify="between" items="center" mb="4">
 				<h2 class="text-xl font-bold">Create New Chat</h2>
 				<Button borderless onClick={handleClose} class="text-muted-foreground">✕</Button>
