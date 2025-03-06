@@ -17,3 +17,10 @@ export interface ByUserId {
 export interface BySignature {
 	signature: UserSignature;
 }
+
+/**
+ * https://github.com/NapthaAI/multiagent_chat/blob/0c62f86fc01cbbf0cbb4b072c35a356b6675a271/multiagent_chat/schemas.py
+ */
+export type MultiagentChatInputs = {
+	title: string;
+};

@@ -6,7 +6,7 @@ import {
 	userRegisterEndpointUserRegisterPost,
 	type OrchestratorDeploymentInput,
 } from "./generated/index.ts";
-import type { BySignature, ByUserId, User } from "./types";
+import type { BySignature, ByUserId, MultiagentChatInputs, User } from "./types";
 import type { ResponseConfig } from "@kubb/plugin-client/clients/axios";
 import type { ByPublicKey } from "$common/types";
 import {
@@ -63,7 +63,7 @@ export const multiagentChatOrchestratorRun = ({
 	userId,
 	signature,
 	inputs,
-}: ByUserId & BySignature & { inputs?: object }) =>
+}: ByUserId & BySignature & { inputs?: MultiagentChatInputs }) =>
 	orchestratorRunEndpointOrchestratorRunPost(
 		{
 			orchestrator_run_input: {

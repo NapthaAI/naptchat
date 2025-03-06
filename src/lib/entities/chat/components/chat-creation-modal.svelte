@@ -2,11 +2,10 @@
 	import { Button } from "$common/ui/components";
 	import { createForm } from "felte";
 	import { validator } from "@felte/validator-zod";
-	import { napthaNodeClient } from "$common/api/naptha-node";
-	import { getSecurePrivateKey, sign } from "$common/utils/crypto";
 	import type { User } from "$common/api/naptha-node";
-	import { chatCreationSchema, type ChatCreationData } from "../model/schemas";
+	import { chatCreationDefaults, chatCreationSchema } from "../model/schemas";
 	import { fade } from "svelte/transition";
+	import { createChat } from "../model/effects";
 
 	let {
 		data,
@@ -23,7 +22,7 @@
 	}>();
 
 	let authenticatedUser = $state<User | null>(null);
-	let isCreating = $state(false);
+	let isPending = $state(false);
 	let error = $state<string | null>(null);
 	let success = $state<boolean>(false);
 
@@ -33,14 +32,11 @@
 				authenticatedUser = user;
 			});
 		}
-	});
 
-	const defaultValues: ChatCreationData = {
-		topic: "",
-		groupSize: 3,
-		maxRounds: 3,
-		subRounds: 2,
-	};
+		if (error !== null) {
+			console.error(error);
+		}
+	});
 
 	const {
 		form: formAction,
@@ -49,55 +45,36 @@
 		reset,
 		data: formData,
 	} = createForm({
-		initialValues: defaultValues,
+		initialValues: chatCreationDefaults,
 		extend: validator({ schema: chatCreationSchema }) as any,
+
 		onSubmit: (values) => {
-			isCreating = true;
+			isPending = true;
 			error = null;
 			success = false;
 
-			return getSecurePrivateKey()
-				.then((privateKey) => {
-					// Check authentication first
-					if (!authenticatedUser) {
-						error = "You must be signed in to create a chat";
-						isCreating = false;
-						throw new Error("You must be signed in to create a chat");
-					}
-
-					// Then check if we have a private key
-					if (!privateKey) {
-						error = "Failed to access your private key";
-						isCreating = false;
-						throw new Error("Failed to access your private key");
-					}
-
-					return sign(authenticatedUser.id, privateKey);
+			if (authenticatedUser === null) {
+				error = "You must be signed in to create a chat";
+				isPending = false;
+			} else {
+				return createChat({
+					user: authenticatedUser,
+					inputs: values,
 				})
-				.then((signature) => {
-					return napthaNodeClient.multiagentChatOrchestratorRun({
-						// At this point we know authenticatedUser is not null
-						userId: authenticatedUser!.id,
-						signature,
+					.then((response) => {
+						console.log("Chat created:", response.data);
+						success = true;
 
-						// TODO: Normalize values to match the BaseModel type
-						inputs: values,
+						reset();
+						onClose?.();
+					})
+					.catch((err) => {
+						error = `Failed to create chat: ${err instanceof Error ? err.message : err}`;
+					})
+					.finally(() => {
+						isPending = false;
 					});
-				})
-				.then((response) => {
-					console.log("Chat created:", response.data);
-					success = true;
-
-					reset();
-					onClose?.();
-				})
-				.catch((err) => {
-					console.error("Error creating chat:", err);
-					error = err instanceof Error ? err.message : "Failed to create chat";
-				})
-				.finally(() => {
-					isCreating = false;
-				});
+			}
 		},
 	});
 
@@ -136,7 +113,7 @@
 								p="x-4 y-2"
 								w="full"
 								class="placeholder:text-gray-400"
-								disabled={isCreating}
+								disabled={isPending}
 							/>
 							{#if errors.topic}
 								<p text="sm red-500">{errors.topic[0]}</p>
@@ -155,7 +132,7 @@
 								border="2 rounded-lg"
 								p="x-4 y-2"
 								w="full"
-								disabled={isCreating}
+								disabled={isPending}
 							/>
 							{#if errors.groupSize}
 								<p text="sm red-500">{errors.groupSize[0]}</p>
@@ -174,7 +151,7 @@
 								border="2 rounded-lg"
 								p="x-4 y-2"
 								w="full"
-								disabled={isCreating}
+								disabled={isPending}
 							/>
 							{#if errors.maxRounds}
 								<p text="sm red-500">{errors.maxRounds[0]}</p>
@@ -193,7 +170,7 @@
 								border="2 rounded-lg"
 								p="x-4 y-2"
 								w="full"
-								disabled={isCreating}
+								disabled={isPending}
 							/>
 							{#if errors.subRounds}
 								<p text="sm red-500">{errors.subRounds[0]}</p>
@@ -210,10 +187,10 @@
 
 						<Button
 							type="submit"
-							disabled={!isValid || isCreating}
+							disabled={!isValid || isPending}
 							class="w-full bg-primary text-primary-foreground"
 						>
-							{#if isCreating}
+							{#if isPending}
 								Creating...
 							{:else}
 								Create Chat
