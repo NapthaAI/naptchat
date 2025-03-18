@@ -47,15 +47,14 @@
 		}),
 	);
 
-	// Handle sort
-	function handleSort(key: string) {
+	const handleSort = (key: string) => {
 		if (sortKey === key) {
 			sortDirection = sortDirection === "asc" ? "desc" : "asc";
 		} else {
 			sortKey = key;
 			sortDirection = "asc";
 		}
-	}
+	};
 </script>
 
 <div overflow="x-auto" rounded="lg" border="border" pb="4" class={customClass}>
