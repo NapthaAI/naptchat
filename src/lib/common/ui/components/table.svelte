@@ -71,8 +71,8 @@
 						font="medium"
 					>
 						<Button
-							borderless
-							onClick={() => handleSort(column.key)}
+							variant="ghost"
+							on:click={() => handleSort(column.key)}
 							class="bg-secondary text-primary-foreground hover:bg-dark/95"
 						>
 							{column.label}
